@@ -1,0 +1,51 @@
+name: 内容问题
+description: 报告章节中的事实、代码、链接或表达问题。
+title: "[内容] "
+labels:
+  - needs-triage
+body:
+  - type: input
+    id: page
+    attributes:
+      label: 页面
+      description: 填写页面路径或完整网址。
+      placeholder: /guide/part-01/01-toolchain
+    validations:
+      required: true
+  - type: dropdown
+    id: problem
+    attributes:
+      label: 问题类型
+      options:
+        - 事实或版本不准确
+        - 代码无法运行
+        - 讲解不清楚
+        - 链接或资源失效
+        - 错别字或排版
+        - 其他
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: 问题说明
+      description: 写清原文、现象和复现步骤；涉及命令或报错时请保留原始文本。
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 建议改法
+      description: 可选。若有权威来源，请附链接和查阅日期。
+  - type: input
+    id: version
+    attributes:
+      label: Flutter 与 Dart 版本
+      placeholder: Flutter 3.47.0 / Dart 3.13.0
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: 提交前检查
+      options:
+        - label: 我已确认这不是重复 Issue，且没有附带账号、密钥或其他敏感信息。
+          required: true

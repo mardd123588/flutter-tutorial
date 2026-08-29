@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">Flutter 框架教程套准标记</title>
+  <rect width="64" height="64" fill="#f2ebdd"/>
+  <rect x="13" y="13" width="25" height="25" fill="none" stroke="#183b56" stroke-width="4"/>
+  <rect x="26" y="26" width="25" height="25" fill="none" stroke="#d94b3d" stroke-width="4"/>
+  <circle cx="32" cy="32" r="8" fill="none" stroke="#167a7c" stroke-width="3"/>
+  <path d="M32 3v15M32 46v15M3 32h15M46 32h15" stroke="#b77908" stroke-width="3"/>
+</svg>
+

@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-30T00:00:00+08:00",
+  "title": "Design System: Flutter 框架教程",
+  "extensions": {
+    "colorMeta": {
+      "paper": { "role": "neutral", "displayName": "暖纸", "canonical": "#f2ebdd", "tonalRamp": ["#2b2925", "#4c4840", "#70695c", "#968c7a", "#b9ad98", "#d6cbb8", "#e9dfcd", "#f8f3e9"] },
+      "navy-ink": { "role": "primary", "displayName": "校样蓝墨", "canonical": "#183b56", "tonalRamp": ["#07131d", "#0d2232", "#183b56", "#285b80", "#4c7d9f", "#80a5bd", "#b8cedb", "#edf4f7"] },
+      "vermillion-ink": { "role": "secondary", "displayName": "朱红行动墨", "canonical": "#d94b3d", "tonalRamp": ["#2d0907", "#5b1712", "#8f2924", "#b6372f", "#d94b3d", "#e98276", "#f2b9b1", "#fbecea"] },
+      "teal-ink": { "role": "tertiary", "displayName": "青绿关系墨", "canonical": "#167a7c", "tonalRamp": ["#062122", "#0c3d3e", "#125c5e", "#167a7c", "#3b999a", "#73b9b9", "#aed9d8", "#e7f4f3"] },
+      "gold-ink": { "role": "tertiary", "displayName": "金色校准墨", "canonical": "#b77908", "tonalRamp": ["#2c1b01", "#543604", "#805406", "#b77908", "#d99d2b", "#e9bb62", "#f2d699", "#fbf1d7"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "平台中文衬线展示字", "purpose": "首页主标题和章节标题，不下载字体文件。" },
+      "body": { "displayName": "平台中文无衬线正文", "purpose": "长篇技术阅读。" },
+      "label": { "displayName": "等宽校样标签", "purpose": "概念 ID、版本和状态。" }
+    },
+    "shadows": [
+      { "name": "route-sheet", "value": "0 16px 38px rgba(23, 44, 61, 0.12)", "purpose": "首页路线纸页。" },
+      { "name": "code-block", "value": "0 12px 28px rgba(23, 44, 61, 0.08)", "purpose": "正文中的源码块。" }
+    ],
+    "motion": [
+      { "name": "paper-lift", "value": "360ms cubic-bezier(0.2, 0.9, 0.2, 1)", "purpose": "路线纸页 hover 与键盘焦点；减少动画时停用。" }
+    ],
+    "breakpoints": [
+      { "name": "phone", "value": "640px" },
+      { "name": "single-column", "value": "1100px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Solid Action",
+      "kind": "button",
+      "refersTo": "action-solid",
+      "description": "第一章入口等首要行动。",
+      "html": "<a class=\"ds-action-solid\" href=\"#\">从第一章开始 →</a>",
+      "css": ".ds-action-solid { display:inline-flex; min-height:48px; align-items:center; padding:0 20px; color:#f8f3e9; background:#d94b3d; font-weight:760; text-decoration:none; transition:background-color 180ms ease-out, transform 180ms ease-out; } .ds-action-solid:hover { background:#183b56; transform:translateY(-2px); } .ds-action-solid:focus-visible { outline:3px solid #b77908; outline-offset:4px; }"
+    },
+    {
+      "name": "Outline Action",
+      "kind": "button",
+      "refersTo": "action-outline",
+      "description": "知识索引和项目状态等次要入口。",
+      "html": "<a class=\"ds-action-outline\" href=\"#\">按知识点复习</a>",
+      "css": ".ds-action-outline { display:inline-flex; min-height:48px; align-items:center; padding:0 20px; border:1px solid #183b56; color:#183b56; background:transparent; font-weight:700; text-decoration:none; transition:background-color 180ms ease-out, color 180ms ease-out, transform 180ms ease-out; } .ds-action-outline:hover { color:#f8f3e9; background:#183b56; transform:translateY(-2px); } .ds-action-outline:focus-visible { outline:3px solid #b77908; outline-offset:4px; }"
+    },
+    {
+      "name": "Route Sheet",
+      "kind": "card",
+      "refersTo": "route-sheet",
+      "description": "可点击的学习部分纸页。",
+      "html": "<a class=\"ds-route-sheet\" href=\"#\"><span>02</span><strong>组件、布局与输入</strong><small>规划 7 章</small></a>",
+      "css": ".ds-route-sheet { display:grid; grid-template-columns:42px 1fr; gap:12px; align-items:center; min-height:68px; padding:10px 22px; color:#d94b3d; background:#f8f3e9; box-shadow:inset 0 0 0 1px rgba(217,75,61,.42),0 16px 38px rgba(23,44,61,.12); text-decoration:none; transition:transform 360ms cubic-bezier(.2,.9,.2,1); } .ds-route-sheet strong,.ds-route-sheet small { display:block; grid-column:2; } .ds-route-sheet:hover { transform:translate(-8px,-3px); } .ds-route-sheet:focus-visible { outline:3px solid #b77908; outline-offset:4px; }"
+    },
+    {
+      "name": "Concept Stamp",
+      "kind": "card",
+      "description": "章节开头的类型和知识依赖印章。",
+      "html": "<div class=\"ds-stamp\"><span>第 1 部分</span><strong>概念章节</strong></div>",
+      "css": ".ds-stamp { display:flex; min-height:86px; flex-direction:column; justify-content:center; padding:14px; color:#f8f3e9; background:#183b56; } .ds-stamp span { font:700 .72rem Cascadia Code,Consolas,monospace; } .ds-stamp strong { margin-top:8px; }"
+    },
+    {
+      "name": "Navigation Link",
+      "kind": "nav",
+      "description": "站点主导航中的文字入口。",
+      "html": "<a class=\"ds-nav-link\" href=\"#\">学习路线</a>",
+      "css": ".ds-nav-link { color:#172c3d; font-weight:650; text-decoration:none; text-underline-offset:.18em; } .ds-nav-link:hover { color:#b6372f; } .ds-nav-link:focus-visible { outline:3px solid #b77908; outline-offset:4px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "套色校样册",
+    "overview": "站点把知识依赖表现为正在校准的印刷层。暖纸负责长时间阅读，四色专墨只用于路线、关系和行动；正文页保持安静。",
+    "keyCharacteristics": ["暖纸底与四色专墨", "首页表达路线，正文服务阅读", "实心墨只用于行动或选中状态", "不加载或打包第三方字体"],
+    "rules": [
+      { "name": "Solid Ink Rule", "body": "实心色块必须可点击或表示当前选中状态。", "section": "colors" },
+      { "name": "Local Type Rule", "body": "不为视觉一致性引入远程或打包字体。", "section": "typography" }
+    ],
+    "dos": ["Do 明确区分当前内容与首版规划。", "Do 同时检查 390、768、1440 宽度和键盘焦点。"],
+    "donts": ["Don't 用实心 navy 包装不可操作的版本信息。", "Don't 把示例项目做成共享 UI 换皮。"]
+  }
+}

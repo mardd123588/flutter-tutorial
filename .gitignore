@@ -1,0 +1,14 @@
+.dart_tool/
+.idea/
+.vscode/
+.impeccable/review/
+.impeccable/questions/
+.scratch/
+node_modules/
+site/.vitepress/cache/
+site/.vitepress/dist/
+coverage/
+build/
+**/build/
+**/.flutter-plugins
+**/.flutter-plugins-dependencies

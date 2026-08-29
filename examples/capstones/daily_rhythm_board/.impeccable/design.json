@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-30T00:00:00+08:00",
+  "title": "Design System: 今日节奏板",
+  "extensions": {
+    "colorMeta": {
+      "sand": { "role": "neutral", "displayName": "日照沙纸", "canonical": "#f4e9d1", "tonalRamp": ["#2d281e", "#514835", "#76694d", "#9b8a67", "#bdac88", "#d9c9a7", "#eadbbe", "#fff9ed"] },
+      "botanical-ink": { "role": "primary", "displayName": "植物墨", "canonical": "#22352c", "tonalRamp": ["#08110d", "#132019", "#22352c", "#3c5548", "#627568", "#8f9c91", "#bec7bf", "#eef1ed"] },
+      "terracotta": { "role": "secondary", "displayName": "陶土影针", "canonical": "#c95436", "tonalRamp": ["#2c0e07", "#552013", "#843721", "#b34a30", "#c95436", "#df816b", "#edb5a7", "#fae9e3"] },
+      "sun-brass": { "role": "tertiary", "displayName": "日光黄铜", "canonical": "#d99b18", "tonalRamp": ["#2e1e02", "#593c05", "#875d09", "#b87f0f", "#d99b18", "#e7b853", "#f0d28e", "#fbefd0"] },
+      "water-blue": { "role": "tertiary", "displayName": "停顿水蓝", "canonical": "#54767a", "tonalRamp": ["#0e1d1f", "#20383b", "#36565a", "#54767a", "#769598", "#9db5b7", "#c6d5d5", "#eef5f5"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "平台无衬线大标题", "purpose": "页面标题。" },
+      "headline": { "displayName": "节奏标题", "purpose": "列表与当前选择。" },
+      "body": { "displayName": "说明正文", "purpose": "任务说明和行动提示。" }
+    },
+    "shadows": [
+      { "name": "sundial-paper", "value": "0 18px 38px rgba(34, 53, 44, 0.12)", "purpose": "唯一承载主图形的纸面。" }
+    ],
+    "motion": [
+      { "name": "selection", "value": "state-driven, no required animation", "purpose": "选择后同步更新影针、行和说明；减少动画不影响结果。" }
+    ],
+    "breakpoints": [
+      { "name": "wide", "value": "980px" }
+    ]
+  },
+  "components": [
+    { "name": "Date Stamp", "kind": "chip", "refersTo": "date-stamp", "description": "固定示例日期。", "html": "<div class=\"ds-date-stamp\">八月二十九日 · 星期六</div>", "css": ".ds-date-stamp { display:inline-block; padding:12px 18px; color:#fff9ed; background:#22352c; font:700 15px sans-serif; letter-spacing:.8px; }" },
+    { "name": "Rhythm Row", "kind": "button", "description": "未选中的时间落点。", "html": "<button class=\"ds-rhythm-row\"><b>08:10</b><span>晨间校准</span><small>25 分</small></button>", "css": ".ds-rhythm-row { display:grid; grid-template-columns:70px 1fr auto; width:100%; align-items:center; padding:16px 18px; border:1px solid rgba(34,53,44,.28); color:#22352c; background:transparent; text-align:left; } .ds-rhythm-row b { color:#d99b18; } .ds-rhythm-row:hover { border-color:#22352c; } .ds-rhythm-row:focus-visible { outline:3px solid #d99b18; outline-offset:3px; }" },
+    { "name": "Selected Rhythm Row", "kind": "button", "refersTo": "rhythm-selected", "description": "当前选择的时间落点。", "html": "<button class=\"ds-rhythm-selected\" aria-pressed=\"true\"><b>09:00</b><span>第一段专注</span><small>90 分</small></button>", "css": ".ds-rhythm-selected { display:grid; grid-template-columns:70px 1fr auto; width:100%; align-items:center; padding:16px 18px; border:0; color:#fff9ed; background:#22352c; text-align:left; } .ds-rhythm-selected:focus-visible { outline:3px solid #d99b18; outline-offset:3px; }" },
+    { "name": "Sundial Panel", "kind": "custom", "description": "承载日晷的唯一抬升纸面。", "html": "<div class=\"ds-sundial\"><span>日光　停顿</span><div></div></div>", "css": ".ds-sundial { aspect-ratio:1.18; padding:28px; color:#22352c; background:#fff9ed; border:1px solid rgba(34,53,44,.18); box-shadow:0 18px 38px rgba(34,53,44,.12); } .ds-sundial div { width:80%; aspect-ratio:2; margin:28% auto 0; border:2px solid #d99b18; border-bottom-color:#d99b18; border-radius:999px 999px 0 0; }" },
+    { "name": "Selected Entry", "kind": "card", "description": "当前节奏的时间、标题和提示。", "html": "<div class=\"ds-selected-entry\"><strong>09:00 · 第一段专注</strong><span>关闭消息提醒，只处理需要完整上下文的任务。</span></div>", "css": ".ds-selected-entry { display:flex; justify-content:space-between; gap:24px; padding:24px 26px; color:#fff9ed; background:#22352c; font-family:sans-serif; } .ds-selected-entry strong { font-size:24px; } @media(max-width:600px){.ds-selected-entry{flex-direction:column;}}" }
+  ],
+  "narrative": {
+    "northStar": "日晷记录页",
+    "overview": "界面像一张放在桌面的日照记录。半圆日晷是唯一主图形，五个时间落点和底部说明共同响应选择。",
+    "keyCharacteristics": ["半圆日晷主图形", "方正信息条", "植物墨选中状态", "980px 以下单栏"],
+    "rules": [
+      { "name": "One Selection Rule", "body": "同一时刻只有一个节奏条使用实心植物墨。", "section": "colors" }
+    ],
+    "dos": ["Do 让日晷影针、选中行和底部说明由同一数据驱动。", "Do 保持日期和测试数据固定。"],
+    "donts": ["Don't 加入生产力仪表盘组件。", "Don't 把这套 UI 复用到其他项目。"]
+  }
+}

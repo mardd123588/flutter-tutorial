@@ -1,0 +1,21 @@
+name: daily_rhythm_board
+description: 第一部分统筹项目：用日晷式界面复习 Widget 组合、基础布局、主题与测试。
+publish_to: none
+version: 0.1.0+1
+resolution: workspace
+
+environment:
+  sdk: ^3.13.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  integration_test:
+    sdk: flutter
+  flutter_lints: 6.0.0
+
+flutter:
