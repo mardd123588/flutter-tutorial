@@ -60,6 +60,19 @@ export default defineConfig({
             { text: '项目：小型展览编辑器', link: '/guide/part-02/07-micro-gallery-editor' },
           ],
         },
+        {
+          text: '第三部分 · 状态、生命周期与动画',
+          collapsed: false,
+          items: [
+            { text: '状态放在哪里', link: '/guide/part-03/01-state-ownership' },
+            { text: '生命周期与副作用', link: '/guide/part-03/02-lifecycle-and-effects' },
+            { text: 'Element 身份、Key 与重排', link: '/guide/part-03/03-keys-and-reordering' },
+            { text: 'Listenable、ChangeNotifier 与 InheritedWidget', link: '/guide/part-03/04-listenable-inherited-notifier' },
+            { text: '隐式动画', link: '/guide/part-03/05-implicit-animations' },
+            { text: '显式动画与过渡', link: '/guide/part-03/06-explicit-animations' },
+            { text: '项目：植物照护台', link: '/guide/part-03/07-plant-care-desk' },
+          ],
+        },
       ],
       '/reference/': [
         {

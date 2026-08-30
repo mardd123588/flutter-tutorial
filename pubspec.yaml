@@ -7,4 +7,6 @@ environment:
 workspace:
   - examples/capstones/daily_rhythm_board
   - examples/capstones/micro_gallery_editor
+  - examples/capstones/plant_care_desk
+  - examples/focus/sortable_duty_board
   - examples/focus/ticket_layout_studio

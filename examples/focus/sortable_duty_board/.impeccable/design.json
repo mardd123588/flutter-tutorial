@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-30T10:00:32.8224270+08:00",
+  "title": "Design System: 可排序值班板",
+  "extensions": {
+    "colorMeta": {
+      "stone": { "role": "neutral", "displayName": "Composing Stone", "canonical": "#2E322E", "tonalRamp": ["#151815", "#252925", "#383D38", "#505650", "#6D746D", "#969C96", "#C6C9C6", "#F1F2F1"] },
+      "stone-deep": { "role": "neutral", "displayName": "Deep Ink Stone", "canonical": "#171A18", "tonalRamp": ["#0E100F", "#1B1E1C", "#2C302D", "#454A46", "#646A65", "#8E938F", "#C2C5C2", "#F0F1F0"] },
+      "zinc": { "role": "neutral", "displayName": "Work Zinc", "canonical": "#C9C8BF", "tonalRamp": ["#282824", "#41413B", "#5D5C55", "#7C7B73", "#9E9D94", "#C1C0B7", "#DFDED6", "#F6F5EF"] },
+      "zinc-light": { "role": "neutral", "displayName": "Fresh Zinc", "canonical": "#E2E0D7", "tonalRamp": ["#2B2A26", "#46443F", "#626059", "#848178", "#A7A49A", "#CAC7BD", "#E4E1D8", "#F8F6F0"] },
+      "zinc-dark": { "role": "neutral", "displayName": "Zinc Groove", "canonical": "#686B65", "tonalRamp": ["#181A18", "#292B28", "#3D403C", "#565954", "#71746E", "#969994", "#C3C5C2", "#F0F1EF"] },
+      "proof-paper": { "role": "neutral", "displayName": "Proof Paper", "canonical": "#F2EBD9", "tonalRamp": ["#302B20", "#4D4534", "#6A6049", "#8D8062", "#B2A382", "#D5C8A8", "#EEE5D2", "#FFF9EA"] },
+      "ink": { "role": "neutral", "displayName": "Press Ink", "canonical": "#1A1D1A", "tonalRamp": ["#0F110F", "#1D201D", "#303430", "#494E49", "#686E68", "#939893", "#C5C8C5", "#F2F3F2"] },
+      "oxide": { "role": "primary", "displayName": "Oxide Mark", "canonical": "#A43C2B", "tonalRamp": ["#35120C", "#5A1F16", "#7D2C20", "#A43C2B", "#C85D49", "#E38B79", "#F2BEB1", "#FCEEEA"] },
+      "proof-blue": { "role": "secondary", "displayName": "Proof Blue", "canonical": "#2C6670", "tonalRamp": ["#0D2226", "#173A40", "#22535B", "#2C6670", "#488894", "#73AAB3", "#AACDD2", "#E8F2F3"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Specimen Display", "purpose": "项目名与装版标题。" },
+      "title": { "displayName": "Member Title", "purpose": "成员姓名。" },
+      "body": { "displayName": "Proof Body", "purpose": "说明、状态与输入内容。" },
+      "measurement": { "displayName": "Measurement", "purpose": "API、序号与计数。" }
+    },
+    "shadows": [
+      { "name": "ink-impression", "value": "2px 3px 5px rgba(0,0,0,0.53)", "purpose": "只用于项目名的压印深度。" }
+    ],
+    "motion": [],
+    "breakpoints": [
+      { "name": "narrow-page", "value": "480px" },
+      { "name": "slug-columns", "value": "690px" },
+      { "name": "galley-split", "value": "980px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Move Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "校样蓝的主要移动操作。",
+      "html": "<button class=\"ds-duty-primary\">下移</button>",
+      "css": ".ds-duty-primary{background:#2C6670;color:#fff;border:0;border-radius:0;padding:10px 16px;font-weight:800}.ds-duty-primary:hover{background:#22535B}.ds-duty-primary:focus-visible{outline:2px solid #A43C2B;outline-offset:2px}"
+    },
+    {
+      "name": "Secondary Move Button",
+      "kind": "button",
+      "description": "校样纸上的次要移动操作。",
+      "html": "<button class=\"ds-duty-secondary\">上移</button>",
+      "css": ".ds-duty-secondary{background:#F2EBD9;color:#1A1D1A;border:1px solid #686B65;border-radius:0;padding:9px 16px;font-weight:700}.ds-duty-secondary:hover{background:#E2E0D7}.ds-duty-secondary:focus-visible{outline:2px solid #2C6670;outline-offset:2px}"
+    },
+    {
+      "name": "Proof Input",
+      "kind": "input",
+      "refersTo": "input-proof",
+      "description": "写在校样纸上的交接备注。",
+      "html": "<input class=\"ds-proof-input\" value=\"钥匙留在北侧抽屉\" />",
+      "css": ".ds-proof-input{background:#F8F3E6;color:#1A1D1A;border:1px solid #686B65;border-radius:0;padding:12px;width:260px}.ds-proof-input:hover{border-color:#2C6670}.ds-proof-input:focus-visible{outline:2px solid #2C6670;outline-offset:0}"
+    },
+    {
+      "name": "Proof Sheet",
+      "kind": "card",
+      "description": "承载说明和可编辑内容的暖纸面。",
+      "html": "<article class=\"ds-proof-sheet\">把成员当作可移动铅字。</article>",
+      "css": ".ds-proof-sheet{background:#F2EBD9;color:#1A1D1A;border-radius:0;padding:18px;border-top:1px solid rgba(104,107,101,.28);font:16px/1.55 system-ui,sans-serif}"
+    },
+    {
+      "name": "Zinc Slug",
+      "kind": "custom",
+      "description": "金属字条包住成员校样纸。",
+      "html": "<div class=\"ds-zinc-slug\"><span>01</span><strong>安岚</strong></div>",
+      "css": ".ds-zinc-slug{display:flex;gap:12px;align-items:center;background:linear-gradient(#E2E0D7,#C9C8BF,#686B65);border-left:8px solid #A43C2B;border-radius:0;padding:10px;color:#1A1D1A}.ds-zinc-slug span{background:#1A1D1A;color:#F2EBD9;padding:10px;font-family:monospace}.ds-zinc-slug:focus-within{outline:2px solid #2C6670}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Movable-Type Dispatch Galley",
+    "overview": "界面是一张仍在工作的活字装版台。深色石台承接页面，锌制装版框固定列表，成员资料落在校样纸上；排序改变的是字条位置，不是字条里的身份与状态。视觉信息必须帮助读者看见列表身份。",
+    "keyCharacteristics": ["深色石台与浅色校样纸形成明确读写层。", "方角、金属沟槽和紧固件保持装版台的机械感。", "姓名用衬线标题字，API 与序号只在测量角色中使用等宽字。"],
+    "rules": [
+      { "name": "The Sparse Mark Rule", "body": "氧化红只标记状态或定位，不铺成大面积背景。", "section": "colors" },
+      { "name": "The Measurement Only Rule", "body": "等宽字不装饰正文，只表示代码、计数或装版标号。", "section": "typography" },
+      { "name": "The Assembly Order Rule", "body": "石台、金属、纸张的层级不能颠倒，也不要给纸张补通用悬浮卡片阴影。", "section": "elevation" }
+    ],
+    "dos": ["Do 让材质层级对应组件所有权与列表身份。", "Do 把氧化红留给状态、定位和教学边界。", "Do 在 320px 与 200% 字号下保持单列读写顺序。"],
+    "donts": ["Don't 把成员行改回通用圆角任务卡。", "Don't 用等宽字包装所有正文。", "Don't 引入外部纸纹图片或第三方字体。"]
+  }
+}

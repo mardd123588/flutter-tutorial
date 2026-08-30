@@ -30,3 +30,15 @@ description: 按概念查找首次讲解、复习章节、项目和常见错误�
 | `input.text`、`input.form`、`input.validation`、`state.local-basic` | [文本输入、表单与验证](/guide/part-02/05-text-input-and-forms) | controller 生命周期、同步 validator |
 | `input.gesture`、`input.focus`、`input.keyboard`、`a11y.semantics-basic` | [手势、焦点、键盘与语义](/guide/part-02/06-gestures-focus-keyboard-semantics) | gesture arena、Shortcuts/Actions、live region |
 | `project.micro-gallery-editor` | [项目：小型展览编辑器](/guide/part-02/07-micro-gallery-editor) | 筛选、新增、验证、保存、删除完整流程 |
+
+## 第三部分
+
+| 概念 ID | 首次讲解 | 复习或错误入口 |
+| --- | --- | --- |
+| `state.ownership`、`state.set-state`、`state.derived` | [状态放在哪里](/guide/part-03/01-state-ownership) | 最近共同拥有者、源状态与派生值、`setState` 范围 |
+| `state.lifecycle`、`runtime.mounted`、`runtime.side-effect` | [生命周期与副作用](/guide/part-03/02-lifecycle-and-effects) | 三段式订阅、异步后的 context、取消与释放 |
+| `runtime.element-identity`、`runtime.keys`、`list.reorder` | [Element 身份、Key 与重排](/guide/part-03/03-keys-and-reordering) | 可排序值班板、行内状态串位、3.47 `onReorderItem` |
+| `state.listenable`、`state.change-notifier`、`state.inherited` | [Listenable、ChangeNotifier 与 InheritedWidget](/guide/part-03/04-listenable-inherited-notifier) | 通知、传播、所有权和 `InheritedNotifier` |
+| `animation.implicit`、`animation.tween`、`animation.curve` | [隐式动画](/guide/part-03/05-implicit-animations) | 起点、中点、终点和属性成本 |
+| `animation.controller`、`animation.transition`、`animation.reduced-motion` | [显式动画与过渡](/guide/part-03/06-explicit-animations) | Ticker、`didUpdateWidget`、Interval、减少动画 |
+| `project.plant-care-desk` | [项目：植物照护台](/guide/part-03/07-plant-care-desk) | 筛选、浇水、重排、撤销和两类动画完整流程 |

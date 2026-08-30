@@ -3,8 +3,8 @@ import { withBase } from 'vitepress'
 
 const parts = [
   { number: '01', title: '起步与 Flutter 所需 Dart', detail: '7 章 · 当前可学', href: '/guide/part-01/01-toolchain', ink: 'navy', available: true },
-  { number: '02', title: '组件、布局与输入', detail: '规划 7 章', href: '/reference/roadmap#part-02', ink: 'vermillion' },
-  { number: '03', title: '状态、生命周期与动画', detail: '规划 7 章', href: '/reference/roadmap#part-03', ink: 'teal' },
+  { number: '02', title: '组件、布局与输入', detail: '7 章 · 当前可学', href: '/guide/part-02/01-constraints', ink: 'vermillion', available: true },
+  { number: '03', title: '状态、生命周期与动画', detail: '7 章 · 当前可学', href: '/guide/part-03/01-state-ownership', ink: 'teal', available: true },
   { number: '04', title: '异步、网络与本地数据', detail: '规划 8 章', href: '/reference/roadmap#part-04', ink: 'gold' },
   { number: '05', title: '导航、自适应、可访问性与国际化', detail: '规划 7 章', href: '/reference/roadmap#part-05', ink: 'navy' },
   { number: '06', title: '应用架构与生态主方案', detail: '规划 8 章', href: '/reference/roadmap#part-06', ink: 'vermillion' },
@@ -41,7 +41,7 @@ const parts = [
               <strong>{{ part.title }}</strong>
               <small>{{ part.detail }}</small>
             </span>
-            <span v-if="part.available" class="plate__action">从第一章开始 <span aria-hidden="true">→</span></span>
+            <span v-if="part.available" class="plate__action">进入本部分 <span aria-hidden="true">→</span></span>
             <span class="plate__overprint" aria-hidden="true"></span>
           </a>
         </li>
