@@ -3,6 +3,8 @@
 .vscode/
 .impeccable/review/
 .impeccable/questions/
+**/.impeccable/review/
+**/.impeccable/questions/
 .scratch/
 node_modules/
 site/.vitepress/cache/
