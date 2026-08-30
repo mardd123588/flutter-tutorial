@@ -1,0 +1,191 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-30T15:45:00+08:00",
+  "title": "Design System: 路线分享卡",
+  "extensions": {
+    "colorMeta": {
+      "asphalt": {
+        "role": "neutral",
+        "displayName": "Asphalt Work Surface",
+        "canonical": "#171B1D",
+        "tonalRamp": ["#0C0E0F", "#171B1D", "#293033", "#465054", "#687377", "#929B9E", "#C4C9CB", "#F1F3F3"]
+      },
+      "asphalt-light": {
+        "role": "neutral",
+        "displayName": "Road Mark Surface",
+        "canonical": "#272D30",
+        "tonalRamp": ["#0D1011", "#1B2022", "#272D30", "#444D51", "#657075", "#90999D", "#C2C8CA", "#F1F3F4"]
+      },
+      "sheet": {
+        "role": "neutral",
+        "displayName": "Waterproof Route Stock",
+        "canonical": "#F2E9CC",
+        "tonalRamp": ["#292516", "#4A432A", "#6D6340", "#91855A", "#B7AA79", "#D7C99C", "#F2E9CC", "#FFF9E8"]
+      },
+      "sheet-bright": {
+        "role": "neutral",
+        "displayName": "Bright Cue Sheet",
+        "canonical": "#FFF9E8",
+        "tonalRamp": ["#2B281E", "#4D4837", "#716A50", "#978E6D", "#BEB58F", "#DED5AE", "#F2E9CC", "#FFF9E8"]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Route Ink",
+        "canonical": "#171B1D",
+        "tonalRamp": ["#0C0E0F", "#171B1D", "#293033", "#465054", "#687377", "#929B9E", "#C4C9CB", "#F1F3F3"]
+      },
+      "muted-ink": {
+        "role": "neutral",
+        "displayName": "Quiet Instruction Ink",
+        "canonical": "#4B514F",
+        "tonalRamp": ["#111413", "#292E2C", "#4B514F", "#68706D", "#858E8A", "#A7AEA9", "#CDD2CF", "#F3F5F4"]
+      },
+      "safety-yellow": {
+        "role": "secondary",
+        "displayName": "Safety Manifest Yellow",
+        "canonical": "#F2D229",
+        "tonalRamp": ["#2C2502", "#504305", "#756309", "#9D8610", "#C5AA1A", "#E1C536", "#F2D96A", "#FFF5C4"]
+      },
+      "cobalt": {
+        "role": "primary",
+        "displayName": "Cobalt Route Line",
+        "canonical": "#1747D1",
+        "tonalRamp": ["#061034", "#0B2060", "#10318F", "#1747D1", "#4269E1", "#7791EC", "#B1C0F5", "#EEF1FE"]
+      },
+      "error-red": {
+        "role": "secondary",
+        "displayName": "Invalid Link Red",
+        "canonical": "#B7352B",
+        "tonalRamp": ["#350B08", "#591611", "#81241D", "#B7352B", "#D45B50", "#E78980", "#F4BAB5", "#FDEBE9"]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Manifest Display",
+        "purpose": "路线目录页标题。"
+      },
+      "title": {
+        "displayName": "Route Title",
+        "purpose": "路线名、面板名和错误标题。"
+      },
+      "body": {
+        "displayName": "Route Instruction",
+        "purpose": "路线摘要、操作说明和错误恢复建议。"
+      },
+      "telemetry": {
+        "displayName": "Route Telemetry",
+        "purpose": "稳定路线 ID、模式、时长、距离和站点数量。"
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "route-change",
+        "value": "280ms ease-out",
+        "purpose": "行进模式变化时替换路线示意。"
+      },
+      {
+        "name": "reduced-motion",
+        "value": "0ms",
+        "purpose": "系统请求减少动画时直接显示终态。"
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "manifest-row-stack",
+        "value": "680px"
+      },
+      {
+        "name": "detail-panel-split",
+        "value": "940px"
+      },
+      {
+        "name": "detail-max-width",
+        "value": "1240px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Route Action",
+      "kind": "button",
+      "refersTo": "primary-action",
+      "description": "打开路线、复制链接或返回安全入口的主要操作。",
+      "html": "<button class=\"ds-primary-action\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71\"/><path d=\"M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71\"/></svg>复制完整链接</button>",
+      "css": ".ds-primary-action{display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:10px 16px;border:0;border-radius:0;background:#1747D1;color:#fff;font:800 14px system-ui,sans-serif}.ds-primary-action svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2}.ds-primary-action:hover{background:#1038AC}.ds-primary-action:active{transform:translateY(1px)}.ds-primary-action:focus-visible{outline:3px solid #F2D229;outline-offset:3px}"
+    },
+    {
+      "name": "Selected Route Mode",
+      "kind": "button",
+      "refersTo": "selected-mode",
+      "description": "表示当前 URL 中行进模式的方角按钮。",
+      "html": "<button class=\"ds-selected-mode\" aria-pressed=\"true\">安静</button>",
+      "css": ".ds-selected-mode{min-height:48px;padding:10px 18px;border:1px solid #F2D229;border-radius:0;background:#F2D229;color:#171B1D;font:800 14px system-ui,sans-serif}.ds-selected-mode:hover{background:#FFE251}.ds-selected-mode:active{transform:translateY(1px)}.ds-selected-mode:focus-visible{outline:3px solid #FFF9E8;outline-offset:3px}"
+    },
+    {
+      "name": "Route Start Field",
+      "kind": "input",
+      "description": "把自定义起点写回 query 的纸色输入框。",
+      "html": "<label class=\"ds-start-wrap\"><span>自定义起点</span><input class=\"ds-start-field\" value=\"旧仓库入口\"></label>",
+      "css": ".ds-start-wrap{display:grid;gap:8px;color:#fff;font:800 14px system-ui,sans-serif}.ds-start-field{min-height:48px;padding:0 14px;border:1px solid #171B1D;border-radius:0;background:#FFF9E8;color:#171B1D;font:16px system-ui,sans-serif}.ds-start-field:hover{border-color:#F2D229}.ds-start-field:focus-visible{outline:3px solid #F2D229;outline-offset:2px}"
+    },
+    {
+      "name": "Cue Stop",
+      "kind": "custom",
+      "description": "把站点编号、连接线和当前起点合成可扫描的路线步骤。",
+      "html": "<div class=\"ds-cue-stop\"><span class=\"ds-stop-number\">1</span><strong>旧仓库入口</strong><span class=\"ds-stop-start\">起点</span></div>",
+      "css": ".ds-cue-stop{display:flex;align-items:flex-start;gap:12px;min-height:48px;color:#171B1D;font:16px system-ui,sans-serif}.ds-stop-number{display:grid;place-items:center;width:28px;height:28px;background:#F2D229;color:#171B1D;font:900 14px monospace}.ds-stop-start{margin-left:auto;padding:5px 8px;background:#F2D229;color:#171B1D;font:900 13px system-ui,sans-serif}.ds-cue-stop:focus-within{outline:3px solid #1747D1;outline-offset:3px}"
+    },
+    {
+      "name": "Route Manifest Row",
+      "kind": "card",
+      "description": "路线目录中的整行可操作清单。",
+      "html": "<article class=\"ds-manifest-row\"><span class=\"ds-manifest-number\">01</span><div><h3>博物馆环线</h3><p>从旧仓库出发，沿展馆和修复室绕回中庭。</p><code>75 MIN · 2.4 KM · 5 STOPS</code></div></article>",
+      "css": ".ds-manifest-row{display:flex;gap:18px;padding:18px;border:0;border-radius:0;background:#FFF9E8;color:#171B1D}.ds-manifest-number{display:grid;place-items:center;width:50px;height:50px;flex:none;background:#1747D1;color:#fff;font:900 19px monospace}.ds-manifest-row h3{margin:0 0 7px;font:900 25px/1.05 system-ui,sans-serif}.ds-manifest-row p{margin:0 0 10px;color:#4B514F;font:15px/1.45 system-ui,sans-serif}.ds-manifest-row code{color:#1747D1;font:900 14px monospace}.ds-manifest-row:hover{background:#F2E9CC}.ds-manifest-row:focus-within{outline:3px solid #F2D229;outline-offset:3px}"
+    },
+    {
+      "name": "Invalid Link Notice",
+      "kind": "custom",
+      "description": "说明链接无法恢复并提供安全返回动作。",
+      "html": "<section class=\"ds-link-error\"><strong>链接无法恢复</strong><h3>行进模式“unknown”无效</h3><p>mode 只能是 balanced、quiet 或 fast。</p></section>",
+      "css": ".ds-link-error{padding:24px;border-radius:0;background:#FFF9E8;color:#171B1D}.ds-link-error>strong{display:block;padding:14px;background:#B7352B;color:#fff;font:900 14px system-ui,sans-serif}.ds-link-error h3{margin:22px 0 10px;font:900 30px/1.05 system-ui,sans-serif}.ds-link-error p{margin:0;color:#4B514F;font:16px/1.5 system-ui,sans-serif}.ds-link-error:focus-within{outline:3px solid #F2D229;outline-offset:3px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "防水骑行路线清单",
+    "overview": "界面借用骑行活动的防水 cue sheet：安全黄负责发车与当前选择，沥青黑是使用环境，钴蓝路线把站点连成可执行顺序。每个操作都对应 URL 中的一段事实。路线列表不是通用卡片网格，而是三条编号清单。详情页把路线示意、站点序列和偏好面板放在同一张工作面上，复制反馈留在原位置，不弹出只靠时间消失的提示。",
+    "keyCharacteristics": [
+      "安全黄发车单、沥青工作面和钴蓝路线。",
+      "方角按钮、编号站点和折页式内容节奏。",
+      "路线图只作摘要，真实站点列表承担阅读和操作。",
+      "280ms 路线切换；减少动画时直接显示终态。"
+    ],
+    "rules": [
+      {
+        "name": "The Safety Rule",
+        "body": "黄色只表示当前选择、起点或必须先读的发车信息，不拿来填充普通说明。",
+        "section": "colors"
+      },
+      {
+        "name": "The Telemetry Rule",
+        "body": "等宽体只表示稳定 ID、枚举和测量值，不用于中文说明。",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat Sheet Rule",
+        "body": "页面层级靠色块、间距和一像素分隔线表达，不给按钮、面板或路线纸叠加投影。",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do 让安全黄只表示当前选择、起点和先读信息。",
+      "Do 用标题、说明和动作表达错误，颜色只作辅助。",
+      "Do 保持路线图与站点列表的蓝线、方形标记和编号关系。"
+    ],
+    "donts": [
+      "Don't 把路线清单改成圆角卡片、指标卡或地图图钉墙。",
+      "Don't 给方角面板叠加阴影、渐变或发光边缘。",
+      "Don't 让自绘路线代替可聚焦、可朗读的真实站点列表。"
+    ]
+  }
+}

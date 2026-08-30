@@ -87,6 +87,19 @@ export default defineConfig({
             { text: '项目：城市活动雷达', link: '/guide/part-04/08-city-event-radar' },
           ],
         },
+        {
+          text: '第五部分 · 导航、适应、可访问性与国际化',
+          collapsed: false,
+          items: [
+            { text: 'Navigator 与页面栈', link: '/guide/part-05/01-navigator-page-stack' },
+            { text: 'Router、URL 与 go_router', link: '/guide/part-05/02-router-url-go-router' },
+            { text: '深链接与路线分享卡', link: '/guide/part-05/03-deep-links-route-share-card' },
+            { text: '响应式与平台适应', link: '/guide/part-05/04-responsive-adaptive' },
+            { text: '可访问性作为功能', link: '/guide/part-05/05-accessibility-as-feature' },
+            { text: '国际化与本地化', link: '/guide/part-05/06-internationalization-localization' },
+            { text: '项目：场馆导览册', link: '/guide/part-05/07-venue-guidebook' },
+          ],
+        },
       ],
       '/reference/': [
         {

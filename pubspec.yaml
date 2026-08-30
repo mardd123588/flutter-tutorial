@@ -9,6 +9,8 @@ workspace:
   - examples/capstones/micro_gallery_editor
   - examples/capstones/plant_care_desk
   - examples/capstones/city_event_radar
+  - examples/capstones/venue_guidebook
   - examples/focus/instant_book_search
   - examples/focus/sortable_duty_board
   - examples/focus/ticket_layout_studio
+  - examples/focus/route_share_card

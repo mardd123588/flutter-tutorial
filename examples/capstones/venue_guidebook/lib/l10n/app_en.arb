@@ -1,0 +1,156 @@
+{
+  "@@locale": "en",
+  "appTitle": "Venue Guidebook",
+  "appSubtitle": "Floors, places, and routes in one field guide",
+  "venuesDestination": "Places",
+  "routesDestination": "Routes",
+  "aboutDestination": "About",
+  "openNavigation": "Open navigation",
+  "closeNavigation": "Close navigation",
+  "languageLabel": "Interface language",
+  "switchToChinese": "切换为中文",
+  "switchToEnglish": "Switch to English",
+  "searchLabel": "Search places",
+  "searchHint": "Enter a gallery, facility, or tag",
+  "searchShortcutHint": "Press / to focus search",
+  "clearSearch": "Clear search",
+  "resultCount": "{count, plural, =0{No matching places} =1{1 place found} other{{count} places found}}",
+  "@resultCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "noResultsTitle": "No places found",
+  "noResultsBody": "Try another place name, floor, or tag.",
+  "browseAll": "Show all places",
+  "featuredGuide": "Today's guide index",
+  "updatedOn": "Guide date: {date}",
+  "@updatedOn": {
+    "placeholders": {
+      "date": {"type": "DateTime", "format": "yMMMMd"}
+    }
+  },
+  "viewVenue": "View place",
+  "venueItemLabel": "{name}, {floor}, {tags}",
+  "@venueItemLabel": {
+    "placeholders": {
+      "name": {"type": "String"},
+      "floor": {"type": "String"},
+      "tags": {"type": "String"}
+    }
+  },
+  "floorLabel": "Floor {floor}",
+  "@floorLabel": {
+    "placeholders": {
+      "floor": {"type": "int"}
+    }
+  },
+  "floorShortLabel": "F{floor}",
+  "@floorShortLabel": {
+    "placeholders": {
+      "floor": {"type": "int"}
+    }
+  },
+  "allFloors": "All floors",
+  "filterByFloor": "Filter by floor",
+  "filterByTag": "Filter by tag",
+  "clearTag": "All tags",
+  "quietTag": "Quiet",
+  "accessibleTag": "Accessible",
+  "familyTag": "Family",
+  "studioTag": "Studio",
+  "selectedState": "Selected",
+  "venueDetails": "Place details",
+  "backToVenues": "Back to places",
+  "openHours": "Open hours",
+  "openPeriod": "{start}–{end}",
+  "@openPeriod": {
+    "placeholders": {
+      "start": {"type": "String"},
+      "end": {"type": "String"}
+    }
+  },
+  "currentFloor": "Current floor",
+  "floorPlanTitle": "Floor diagram",
+  "floorPlanSummary": "Floor {floor} diagram summary: {rooms}",
+  "@floorPlanSummary": {
+    "placeholders": {
+      "floor": {"type": "int"},
+      "rooms": {"type": "String"}
+    }
+  },
+  "placesOnFloor": "Places on this floor",
+  "routeIndexTitle": "Three indoor routes",
+  "routeIndexBody": "Routes use fixed local data. Check the stop order, then walk at your own pace.",
+  "routeStopCount": "{count, plural, =1{1 stop} other{{count} stops}}",
+  "@routeStopCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "aboutTitle": "How this guidebook works",
+  "aboutBody": "A stable place ID lives in the path. Floor and tag live in the query. Switching languages keeps the current address and place.",
+  "keyboardTitle": "Keyboard",
+  "keyboardBody": "Press / to focus place search. Press Escape to close temporary layers such as the drawer. While typing, / remains a normal character.",
+  "accessibilityTitle": "The diagram is only a summary",
+  "accessibilityBody": "The floor diagram has no controls. Screen readers receive a summary, while keyboard and touch actions live in the real place list.",
+  "linkErrorTitle": "This place link cannot open",
+  "unmatchedTitle": "No page matches this address",
+  "unknownVenueError": "The place “{venueId}” does not exist.",
+  "@unknownVenueError": {
+    "placeholders": {
+      "venueId": {"type": "String"}
+    }
+  },
+  "invalidFloorError": "floor must be an integer.",
+  "unavailableFloorError": "This place is not on floor {floor}.",
+  "@unavailableFloorError": {
+    "placeholders": {
+      "floor": {"type": "int"}
+    }
+  },
+  "invalidTagError": "The tag “{tag}” does not apply to this place.",
+  "@invalidTagError": {
+    "placeholders": {
+      "tag": {"type": "String"}
+    }
+  },
+  "duplicateParameterError": "The parameter “{parameter}” appears more than once.",
+  "@duplicateParameterError": {
+    "placeholders": {
+      "parameter": {"type": "String"}
+    }
+  },
+  "unsupportedParameterError": "The parameter “{parameter}” is not supported.",
+  "@unsupportedParameterError": {
+    "placeholders": {
+      "parameter": {"type": "String"}
+    }
+  },
+  "repairLink": "Return to places",
+  "unmatchedBody": "This address has no content. Re-enter from Places, Routes, or About.",
+  "atriumName": "Central Atrium",
+  "atriumSummary": "The clearest orientation point, linking the main entry, galleries, and second-floor bridge.",
+  "materialHallName": "Materials Hall",
+  "materialHallSummary": "Repair samples in wood, paper, metal, and textile, arranged for close comparison.",
+  "soundLabName": "Sound Lab",
+  "soundLabSummary": "A bookable quiet space for collection recordings and soundscape works.",
+  "roofStudioName": "Roof Studio",
+  "roofStudioSummary": "A hands-on area for families and groups, with a terrace in good weather.",
+  "informationDesk": "Information desk",
+  "mainGallery": "Main gallery",
+  "quietAlcove": "Quiet alcove",
+  "bridge": "Bridge",
+  "materialsArchive": "Materials archive",
+  "sampleTables": "Sample tables",
+  "listeningRoom": "Listening room",
+  "recordingBooth": "Recording booth",
+  "workbench": "Workbench",
+  "terrace": "Terrace",
+  "orientationRoute": "First visit",
+  "orientationRouteBody": "Orient in the atrium, then visit Materials Hall and the Sound Lab.",
+  "quietRoute": "Quiet route",
+  "quietRouteBody": "Avoid studio hours and pass the quiet alcove, materials archive, and listening room.",
+  "familyRoute": "Family route",
+  "familyRouteBody": "Collect an activity sheet at the desk and finish a piece in the Roof Studio."
+}

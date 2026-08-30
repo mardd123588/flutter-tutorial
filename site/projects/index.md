@@ -18,14 +18,14 @@ description: 8 个统筹项目和 5 个重点项目的实现与测试状态。
 | 植物照护台 | 统筹 | 03-07 | `passing` |
 | 即时书目检索 | 重点 | 04-04 | `passing` |
 | 城市活动雷达 | 统筹 | 04-08 | `passing` |
-| 路线分享卡 | 重点 | 05-03 | `not-started` |
-| 场馆导览册 | 统筹 | 05-07 | `not-started` |
+| 路线分享卡 | 重点 | 05-03 | `passing` |
+| 场馆导览册 | 统筹 | 05-07 | `passing` |
 | 社区工坊排期台 | 统筹 | 06-08 | `not-started` |
 | 长卷时间轴 | 重点 | 07-06 | `not-started` |
 | 数字档案浏览器 | 统筹 | 07-07 | `not-started` |
 | 邻里资源交换站 | 统筹 | 08-07 | `not-started` |
 
-`passing` 表示项目已有可运行实现，且当前适用的发布检查全部通过。当前完成到第四部分，共有七个项目达到这个状态。
+`passing` 表示项目已有可运行实现，且当前适用的发布检查全部通过。当前完成到第五部分，共有九个项目达到这个状态。
 
 ## 今日节奏板验收状态
 
@@ -83,6 +83,22 @@ Unit 与 Widget 共 11 项；Chrome 关键流程验证慢请求不能覆盖较�
 
 Unit 与 Widget 共 14 项；Chrome 关键流程完成搜索、收藏，并在断网后读取 Drift 中的完整 feed 缓存。浏览器检查覆盖 320×720、768×900、1440×900；Drift Web 的 Wasm 与 Worker 随 release 产物构建。720ms 雷达入场动画在系统要求减少动画时切换为零时长。`Visual` 为 `not-applicable`：首版规格不要求该项目维护 golden。
 
-其余 6 个项目的验收列目前均为 `not-started`。
+## 路线分享卡验收状态
+
+| Analyze | Unit | Widget | Integration | Release Web | Keyboard | Semantics | Responsive | Text scale | Motion | Visual |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `passing` | `passing` | `passing` | `passing` | `passing` | `passing` | `passing` | `passing` | `passing` | `passing` | `not-applicable` |
+
+Unit 与 Widget 共 10 项；Chrome 关键流程打开路线并把偏好写入 URL。浏览器检查覆盖深链接直达、刷新、Back、Forward、复制到新标签，以及 Unicode、重复参数和非法枚举。320×720、200% 文本与减少动画有独立 Widget 测试。`Visual` 为 `not-applicable`：首版规格不要求该项目维护 golden。
+
+## 场馆导览册验收状态
+
+| Analyze | Unit | Widget | Integration | Release Web | Keyboard | Semantics | Responsive | Text scale | Motion | Visual |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `passing` | `passing` | `passing` | `passing` | `passing` | `passing` | `passing` | `passing` | `passing` | `passing` | `passing` |
+
+Unit 与 Widget / golden 共 18 项；Chrome 关键流程完成搜索、地点详情、楼层切换和语言切换。测试覆盖 320×720、768×900、1440×900、200% 文本、RTL 测试壳、减少动画、URL 错误分支和两张 deterministic golden；真实浏览器另行检查直达、刷新、Back、Forward 与键盘输入边界。
+
+其余 4 个项目的验收列目前均为 `not-started`。
 
 完整项目任务、风险和浏览器关键流程见 [首版规格 #1](https://github.com/mardd123588/flutter-tutorial/issues/1)。

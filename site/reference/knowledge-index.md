@@ -55,3 +55,15 @@ description: 按概念查找首次讲解、复习章节、项目和常见错误�
 | `storage.preferences`、`data.cache`、`offline.fallback` | [偏好、缓存与离线回退](/guide/part-04/06-preferences-cache-offline) | SharedPreferencesAsync、三类缓存、freshness 与回退来源 |
 | `storage.relational`、`storage.drift`、`storage.migration`、`storage.web-boundary` | [关系数据、Drift 与迁移](/guide/part-04/07-drift-relational-data) | 事务、查询 Stream、v1→v2、Wasm、Worker 与 MIME |
 | `project.city-event-radar` | [项目：城市活动雷达](/guide/part-04/08-city-event-radar) | HTTP、搜索竞态、偏好、缓存、离线回退和收藏关系完整流程 |
+
+## 第五部分
+
+| 概念 ID | 首次讲解 | 复习或错误入口 |
+| --- | --- | --- |
+| `navigation.navigator-stack`、`navigation.route-result`、`navigation.pop-scope` | [Navigator 与页面栈](/guide/part-05/01-navigator-page-stack) | push/pop 返回值、异步 context、嵌套栈、dialog 与离开确认 |
+| `navigation.router`、`navigation.url-state`、`navigation.go-router`、`navigation.shell-route` | [Router、URL 与 go_router](/guide/part-05/02-router-url-go-router) | Router 与 Navigator 分工、go/push、redirect、onExit、ShellRoute 与错误页 |
+| `navigation.deep-link`、`navigation.url-validation`、`deployment.hash-url`、`project.route-share-card` | [深链接与路线分享卡](/guide/part-05/03-deep-links-route-share-card) | 稳定 ID、Uri 编码、非法参数、hash、base href 与新标签恢复 |
+| `layout.responsive`、`layout.content-breakpoint`、`navigation.adaptive-shell`、`input.adaptive` | [响应式与平台适应](/guide/part-05/04-responsive-adaptive) | LayoutBuilder、MediaQuery、Drawer/Rail、hover、键盘与平台惯例 |
+| `a11y.semantics`、`a11y.keyboard-flow`、`a11y.text-scale`、`a11y.error-feedback`、`a11y.motion-preference` | [可访问性作为功能](/guide/part-05/05-accessibility-as-feature) | 语义分工、完整键盘流程、200% 文本、对比度、错误与减少动画 |
+| `i18n.gen-l10n`、`i18n.arb`、`i18n.format`、`i18n.locale`、`i18n.directionality` | [国际化与本地化](/guide/part-05/06-internationalization-localization) | ARB placeholder/plural、intl、稳定路由与 RTL 测试边界 |
+| `project.venue-guidebook` | [项目：场馆导览册](/guide/part-05/07-venue-guidebook) | ShellRoute、深链接、响应式导航、键盘、语义、本地化与 golden 完整流程 |

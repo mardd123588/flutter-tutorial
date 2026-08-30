@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-30T16:53:20+08:00",
+  "title": "Design System: 场馆导览册",
+  "extensions": {
+    "colorMeta": {
+      "cobalt": {"role": "primary", "displayName": "Guide Cobalt", "canonical": "#1238C7", "tonalRamp": ["#050D35", "#09206F", "#1238C7", "#3B5CDA", "#6C84E7", "#A0AFF1", "#CFD7F8", "#F2F4FE"]},
+      "cobalt-deep": {"role": "primary", "displayName": "Deep Directory Blue", "canonical": "#08227F", "tonalRamp": ["#03091F", "#061548", "#08227F", "#24439C", "#5169B7", "#8495D1", "#BCC5E9", "#F0F2FB"]},
+      "chartreuse": {"role": "secondary", "displayName": "Fluorescent Floor Tab", "canonical": "#D8FF3E", "tonalRamp": ["#232B02", "#445304", "#687D09", "#8FAB12", "#B7D923", "#D8FF3E", "#E8FF8C", "#F8FFD8"]},
+      "paper": {"role": "neutral", "displayName": "Directory Paper", "canonical": "#F4EDCF", "tonalRamp": ["#2B2718", "#4D4630", "#706748", "#958A65", "#B9AE84", "#D8CDA7", "#F4EDCF", "#FFFBEA"]},
+      "paper-bright": {"role": "neutral", "displayName": "Bright Directory Paper", "canonical": "#FFF9E7", "tonalRamp": ["#2D291E", "#504A38", "#756C51", "#9C916F", "#C2B78F", "#E2D8B4", "#F6EFD4", "#FFF9E7"]},
+      "ink": {"role": "neutral", "displayName": "Guide Ink", "canonical": "#111827", "tonalRamp": ["#090C13", "#111827", "#263044", "#465064", "#697286", "#969DAD", "#C7CBD3", "#F2F3F5"]},
+      "muted-ink": {"role": "neutral", "displayName": "Muted Guide Ink", "canonical": "#4B5363", "tonalRamp": ["#111419", "#282D37", "#4B5363", "#687181", "#8991A0", "#ADB3BE", "#D1D5DC", "#F4F5F7"]},
+      "rule": {"role": "neutral", "displayName": "Fold Rule", "canonical": "#B8B08F", "tonalRamp": ["#252217", "#423E2C", "#625C43", "#827B5C", "#A39B76", "#B8B08F", "#D8D2BA", "#F6F3E7"]},
+      "error": {"role": "tertiary", "displayName": "Link Error Red", "canonical": "#B6322A", "tonalRamp": ["#340B08", "#591511", "#81231D", "#B6322A", "#D4584F", "#E6877F", "#F3B9B4", "#FDEBE9"]}
+    },
+    "typographyMeta": {
+      "display": {"displayName": "Guide Cover Display", "purpose": "应用封面和顶层页面标题。"},
+      "title": {"displayName": "Directory Title", "purpose": "地点名、路线名和面板标题。"},
+      "body": {"displayName": "Guide Copy", "purpose": "地点摘要、说明和错误恢复建议。"},
+      "index": {"displayName": "Floor Index", "purpose": "编号、楼层、日期和数量。"}
+    },
+    "shadows": [],
+    "motion": [
+      {"name": "floor-change", "value": "260ms ease-out", "purpose": "切换楼层时替换楼层图。"},
+      {"name": "reduced-motion", "value": "0ms", "purpose": "系统请求减少动画时直接显示终态。"}
+    ],
+    "breakpoints": [
+      {"name": "navigation-rail", "value": "900px"},
+      {"name": "detail-split", "value": "980px"},
+      {"name": "content-max", "value": "1240px"}
+    ]
+  },
+  "components": [
+    {
+      "name": "Selected Floor Filter",
+      "kind": "chip",
+      "refersTo": "selected-filter",
+      "description": "表示当前楼层或标签的方角筛选按钮。",
+      "html": "<button class=\"ds-selected-filter\" aria-pressed=\"true\">F2</button>",
+      "css": ".ds-selected-filter{min-height:48px;padding:10px 18px;border:1px solid #D8FF3E;border-radius:0;background:#D8FF3E;color:#111827;font:900 14px monospace}.ds-selected-filter:hover{background:#E4FF70}.ds-selected-filter:active{transform:translateY(1px)}.ds-selected-filter:focus-visible{outline:3px solid #FFF9E7;outline-offset:3px}"
+    },
+    {
+      "name": "Guide Search Field",
+      "kind": "input",
+      "refersTo": "search-field",
+      "description": "地点、楼层和标签共用的搜索输入框。",
+      "html": "<label class=\"ds-search-wrap\"><span>搜索地点</span><input class=\"ds-search-field\" placeholder=\"输入展厅、设施或标签\"></label>",
+      "css": ".ds-search-wrap{display:grid;gap:8px;color:#DCE4FF;font:800 14px system-ui,sans-serif}.ds-search-field{min-height:48px;padding:0 14px;border:1px solid #111827;border-radius:0;background:#FFF9E7;color:#111827;font:16px system-ui,sans-serif}.ds-search-field:hover{border-color:#D8FF3E}.ds-search-field:focus-visible{outline:3px solid #D8FF3E;outline-offset:2px}"
+    },
+    {
+      "name": "Venue Index Row",
+      "kind": "card",
+      "refersTo": "venue-row",
+      "description": "地点目录中的整行入口。",
+      "html": "<article class=\"ds-venue-row\"><span class=\"ds-venue-number\">01</span><div><h3>中央中庭</h3><p>连接主入口、展厅与二层连桥。</p><span class=\"ds-floor-tab\">F1</span></div></article>",
+      "css": ".ds-venue-row{display:flex;gap:18px;padding:18px;border-radius:0;background:#FFF9E7;color:#111827}.ds-venue-number{display:grid;place-items:center;width:54px;height:54px;flex:none;background:#1238C7;color:#fff;font:900 19px monospace}.ds-venue-row h3{margin:0 0 7px;font:900 25px/1.05 system-ui,sans-serif}.ds-venue-row p{margin:0 0 10px;color:#4B5363;font:15px/1.45 system-ui,sans-serif}.ds-floor-tab{padding:5px 8px;background:#D8FF3E;color:#111827;font:900 13px monospace}.ds-venue-row:hover{background:#F4EDCF}.ds-venue-row:focus-within{outline:3px solid #D8FF3E;outline-offset:3px}"
+    },
+    {
+      "name": "Wide Guide Navigation",
+      "kind": "nav",
+      "description": "桌面端的深蓝导航与黄绿色当前目的地。",
+      "html": "<nav class=\"ds-guide-nav\"><a class=\"ds-nav-active\" href=\"#\">地点</a><a href=\"#\">路线</a><a href=\"#\">关于</a></nav>",
+      "css": ".ds-guide-nav{display:grid;gap:8px;width:104px;padding:18px 8px;background:#08227F;font:800 14px system-ui,sans-serif}.ds-guide-nav a{display:grid;place-items:center;min-height:48px;color:#fff;text-decoration:none}.ds-guide-nav a:hover{background:#1238C7}.ds-guide-nav .ds-nav-active{background:#D8FF3E;color:#111827}.ds-guide-nav a:focus-visible{outline:3px solid #D8FF3E;outline-offset:2px}"
+    },
+    {
+      "name": "Focusable Room Row",
+      "kind": "custom",
+      "description": "替代楼层图隐藏操作的真实房间列表项。",
+      "html": "<button class=\"ds-room-row\"><span>01</span><strong>安静角</strong><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M4 4h16v16H4z\"/></svg></button>",
+      "css": ".ds-room-row{display:flex;align-items:center;gap:12px;width:100%;min-height:56px;padding:10px 14px;border:0;border-radius:0;background:#F4EDCF;color:#111827;text-align:left;font:16px system-ui,sans-serif}.ds-room-row span{display:grid;place-items:center;width:36px;height:36px;background:#D8FF3E;font:900 13px monospace}.ds-room-row strong{flex:1}.ds-room-row svg{width:20px;height:20px;fill:none;stroke:#1238C7;stroke-width:2}.ds-room-row:hover{background:#E7DFC0}.ds-room-row:focus-visible{outline:3px solid #1238C7;outline-offset:3px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "折页式公共导视手册",
+    "overview": "界面像入口处可随手取用的导览册：钴蓝封面负责方向和导航，荧光黄绿标签标出当前楼层、筛选与日期，暖纸色承载需要细读的地点信息。建筑分隔线贯穿页面，列表使用清楚的编号与稳定顺序。地点查找是页面的主要任务。搜索、楼层和标签放在同一块深蓝操作面上；结果紧接其后。详情页把楼层图和真实房间列表并排，窄屏时按同样的阅读顺序改为上下排列。",
+    "keyCharacteristics": ["钴蓝封面、暖纸目录和荧光黄绿索引标签", "方角导航、筛选、地点行与房间行", "建筑平面线条与折页分隔，不使用地图图钉墙", "自绘图只做摘要，真实列表承担操作和语义"],
+    "rules": [
+      {"name": "The Fluorescent Tab Rule", "body": "黄绿色只表示当前选择、楼层编号、日期或键盘焦点，不填充普通说明面板。", "section": "colors"},
+      {"name": "The Index Type Rule", "body": "等宽体只表示稳定编号、楼层、日期和数量，不用于正文说明。", "section": "typography"},
+      {"name": "The Flat Guide Rule", "body": "面板、按钮、地点行和导航保持平面，不添加玻璃、发光或通用卡片投影。", "section": "elevation"}
+    ],
+    "dos": ["Do 在每个断点保留同一目的地、URL 和任务顺序。", "Do 让楼层图摘要与房间列表使用相同的房间名称和楼层。", "Do 同时用文字、形状和语义状态说明当前选择。"],
+    "donts": ["Don't 用地图图钉、圆角卡片或指标网格替代导览目录。", "Don't 让黄绿色成为普通装饰底色。", "Don't 把自绘楼层图变成唯一操作入口。"]
+  }
+}

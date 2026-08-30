@@ -1,0 +1,156 @@
+{
+  "@@locale": "zh",
+  "appTitle": "场馆导览册",
+  "appSubtitle": "一册看清楼层、地点与参观路线",
+  "venuesDestination": "地点",
+  "routesDestination": "路线",
+  "aboutDestination": "关于",
+  "openNavigation": "打开导航",
+  "closeNavigation": "关闭导航",
+  "languageLabel": "界面语言",
+  "switchToChinese": "切换为中文",
+  "switchToEnglish": "Switch to English",
+  "searchLabel": "搜索地点",
+  "searchHint": "输入展厅、设施或标签",
+  "searchShortcutHint": "按 / 聚焦搜索",
+  "clearSearch": "清空搜索",
+  "resultCount": "{count, plural, =0{没有匹配地点} =1{找到 1 个地点} other{找到 {count} 个地点}}",
+  "@resultCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "noResultsTitle": "没有找到地点",
+  "noResultsBody": "换一个地点名、楼层或标签试试。",
+  "browseAll": "查看全部地点",
+  "featuredGuide": "今日导览索引",
+  "updatedOn": "资料日期：{date}",
+  "@updatedOn": {
+    "placeholders": {
+      "date": {"type": "DateTime", "format": "yMMMMd"}
+    }
+  },
+  "viewVenue": "查看地点",
+  "venueItemLabel": "{name}，{floor}，{tags}",
+  "@venueItemLabel": {
+    "placeholders": {
+      "name": {"type": "String"},
+      "floor": {"type": "String"},
+      "tags": {"type": "String"}
+    }
+  },
+  "floorLabel": "{floor} 层",
+  "@floorLabel": {
+    "placeholders": {
+      "floor": {"type": "int"}
+    }
+  },
+  "floorShortLabel": "F{floor}",
+  "@floorShortLabel": {
+    "placeholders": {
+      "floor": {"type": "int"}
+    }
+  },
+  "allFloors": "全部楼层",
+  "filterByFloor": "按楼层查看",
+  "filterByTag": "按标签查看",
+  "clearTag": "全部标签",
+  "quietTag": "安静",
+  "accessibleTag": "无障碍",
+  "familyTag": "亲子",
+  "studioTag": "工坊",
+  "selectedState": "已选择",
+  "venueDetails": "地点详情",
+  "backToVenues": "返回地点列表",
+  "openHours": "开放时段",
+  "openPeriod": "{start}–{end}",
+  "@openPeriod": {
+    "placeholders": {
+      "start": {"type": "String"},
+      "end": {"type": "String"}
+    }
+  },
+  "currentFloor": "当前楼层",
+  "floorPlanTitle": "楼层示意",
+  "floorPlanSummary": "{floor} 层平面摘要：{rooms}",
+  "@floorPlanSummary": {
+    "placeholders": {
+      "floor": {"type": "int"},
+      "rooms": {"type": "String"}
+    }
+  },
+  "placesOnFloor": "本层地点",
+  "routeIndexTitle": "三条馆内路线",
+  "routeIndexBody": "路线使用本地固定数据。先看停靠顺序，再按自己的节奏行走。",
+  "routeStopCount": "{count, plural, =1{1 个停靠点} other{{count} 个停靠点}}",
+  "@routeStopCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "aboutTitle": "这本导览册如何工作",
+  "aboutBody": "地点身份写在 path，楼层和标签写在 query。切换语言不会改变当前地址，也不会丢掉正在查看的地点。",
+  "keyboardTitle": "键盘操作",
+  "keyboardBody": "按 / 聚焦地点搜索；按 Escape 关闭抽屉等临时层。焦点在输入框里时，/ 仍会正常输入。",
+  "accessibilityTitle": "图形只是摘要",
+  "accessibilityBody": "楼层图不承担操作。屏幕阅读器会读出摘要，键盘和触屏操作都在真实地点列表中完成。",
+  "linkErrorTitle": "这个地点链接无法打开",
+  "unmatchedTitle": "没有匹配的页面",
+  "unknownVenueError": "地点“{venueId}”不存在。",
+  "@unknownVenueError": {
+    "placeholders": {
+      "venueId": {"type": "String"}
+    }
+  },
+  "invalidFloorError": "floor 必须是整数。",
+  "unavailableFloorError": "这个地点不在 {floor} 层。",
+  "@unavailableFloorError": {
+    "placeholders": {
+      "floor": {"type": "int"}
+    }
+  },
+  "invalidTagError": "标签“{tag}”不适用于这个地点。",
+  "@invalidTagError": {
+    "placeholders": {
+      "tag": {"type": "String"}
+    }
+  },
+  "duplicateParameterError": "参数“{parameter}”重复出现。",
+  "@duplicateParameterError": {
+    "placeholders": {
+      "parameter": {"type": "String"}
+    }
+  },
+  "unsupportedParameterError": "参数“{parameter}”不受支持。",
+  "@unsupportedParameterError": {
+    "placeholders": {
+      "parameter": {"type": "String"}
+    }
+  },
+  "repairLink": "返回地点列表",
+  "unmatchedBody": "地址没有对应内容。请从地点、路线或关于页重新进入。",
+  "atriumName": "中央中庭",
+  "atriumSummary": "连接主入口、展厅与二层连桥，是最容易确认方向的位置。",
+  "materialHallName": "材料展厅",
+  "materialHallSummary": "展示木、纸、金属和织物的修复样本，可近距离比较工艺。",
+  "soundLabName": "声音实验室",
+  "soundLabSummary": "一间可预约试听的安静空间，展示馆藏录音与声景作品。",
+  "roofStudioName": "屋顶工坊",
+  "roofStudioSummary": "面向家庭和小组的动手区域，天气良好时开放露台。",
+  "informationDesk": "服务台",
+  "mainGallery": "主展厅",
+  "quietAlcove": "安静角",
+  "bridge": "连桥",
+  "materialsArchive": "材料档案",
+  "sampleTables": "样本台",
+  "listeningRoom": "试听室",
+  "recordingBooth": "录音间",
+  "workbench": "工作台",
+  "terrace": "露台",
+  "orientationRoute": "首次到访",
+  "orientationRouteBody": "从中庭确认方向，再到材料展厅和声音实验室。",
+  "quietRoute": "安静路线",
+  "quietRouteBody": "避开工坊时段，经过安静角、材料档案和试听室。",
+  "familyRoute": "亲子路线",
+  "familyRouteBody": "从服务台领取任务纸，最后到屋顶工坊完成作品。"
+}
