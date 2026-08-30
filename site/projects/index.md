@@ -16,8 +16,8 @@ description: 8 个统筹项目和 5 个重点项目的实现与测试状态。
 | 小型展览编辑器 | 统筹 | 02-07 | `passing` |
 | 可排序值班板 | 重点 | 03-03 | `passing` |
 | 植物照护台 | 统筹 | 03-07 | `passing` |
-| 即时书目检索 | 重点 | 04-04 | `not-started` |
-| 城市活动雷达 | 统筹 | 04-08 | `not-started` |
+| 即时书目检索 | 重点 | 04-04 | `passing` |
+| 城市活动雷达 | 统筹 | 04-08 | `passing` |
 | 路线分享卡 | 重点 | 05-03 | `not-started` |
 | 场馆导览册 | 统筹 | 05-07 | `not-started` |
 | 社区工坊排期台 | 统筹 | 06-08 | `not-started` |
@@ -25,7 +25,7 @@ description: 8 个统筹项目和 5 个重点项目的实现与测试状态。
 | 数字档案浏览器 | 统筹 | 07-07 | `not-started` |
 | 邻里资源交换站 | 统筹 | 08-07 | `not-started` |
 
-`passing` 表示项目已有可运行实现，且当前适用的发布检查全部通过。当前完成到第三部分，共有五个项目达到这个状态。
+`passing` 表示项目已有可运行实现，且当前适用的发布检查全部通过。当前完成到第四部分，共有七个项目达到这个状态。
 
 ## 今日节奏板验收状态
 
@@ -67,6 +67,22 @@ Unit 与 Widget 共 7 项；Chrome 关键流程验证备注跟随同一成员完
 
 Unit 与 Widget 共 10 项；Chrome 关键流程完成筛选、浇水和撤销。浏览器检查覆盖 320×720、768×900、1440×900，语义测试覆盖植物读数与 live region；动画测试精确推进起点、中点和终点，并验证 reduced motion 直接呈现终态。`Visual` 为 `not-applicable`：首版规格不要求该项目维护 golden。
 
-其余 8 个项目的验收列目前均为 `not-started`。
+## 即时书目检索验收状态
+
+| Analyze | Unit | Widget | Integration | Release Web | Keyboard | Semantics | Responsive | Text scale | Motion | Visual |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `passing` | `passing` | `passing` | `passing` | `passing` | `passing` | `passing` | `passing` | `passing` | `passing` | `not-applicable` |
+
+Unit 与 Widget 共 11 项；Chrome 关键流程验证慢请求不能覆盖较新的查询。浏览器检查覆盖 320×720、768×900、1440×900，Widget 测试另行覆盖 320px 与 200% 文本缩放。结果区使用 240ms `AnimatedSwitcher`，系统要求减少动画时切换为零时长。`Visual` 为 `not-applicable`：首版规格不要求该项目维护 golden。
+
+## 城市活动雷达验收状态
+
+| Analyze | Unit | Widget | Integration | Release Web | Keyboard | Semantics | Responsive | Text scale | Motion | Visual |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `passing` | `passing` | `passing` | `passing` | `passing` | `passing` | `passing` | `passing` | `passing` | `passing` | `not-applicable` |
+
+Unit 与 Widget 共 14 项；Chrome 关键流程完成搜索、收藏，并在断网后读取 Drift 中的完整 feed 缓存。浏览器检查覆盖 320×720、768×900、1440×900；Drift Web 的 Wasm 与 Worker 随 release 产物构建。720ms 雷达入场动画在系统要求减少动画时切换为零时长。`Visual` 为 `not-applicable`：首版规格不要求该项目维护 golden。
+
+其余 6 个项目的验收列目前均为 `not-started`。
 
 完整项目任务、风险和浏览器关键流程见 [首版规格 #1](https://github.com/mardd123588/flutter-tutorial/issues/1)。

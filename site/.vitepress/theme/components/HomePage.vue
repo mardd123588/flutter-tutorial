@@ -5,7 +5,7 @@ const parts = [
   { number: '01', title: '起步与 Flutter 所需 Dart', detail: '7 章 · 当前可学', href: '/guide/part-01/01-toolchain', ink: 'navy', available: true },
   { number: '02', title: '组件、布局与输入', detail: '7 章 · 当前可学', href: '/guide/part-02/01-constraints', ink: 'vermillion', available: true },
   { number: '03', title: '状态、生命周期与动画', detail: '7 章 · 当前可学', href: '/guide/part-03/01-state-ownership', ink: 'teal', available: true },
-  { number: '04', title: '异步、网络与本地数据', detail: '规划 8 章', href: '/reference/roadmap#part-04', ink: 'gold' },
+  { number: '04', title: '异步、网络与本地数据', detail: '8 章 · 当前可学', href: '/guide/part-04/01-async-ui-state', ink: 'gold', available: true },
   { number: '05', title: '导航、自适应、可访问性与国际化', detail: '规划 7 章', href: '/reference/roadmap#part-05', ink: 'navy' },
   { number: '06', title: '应用架构与生态主方案', detail: '规划 8 章', href: '/reference/roadmap#part-06', ink: 'vermillion' },
   { number: '07', title: '测试、调试、渲染与性能', detail: '规划 7 章', href: '/reference/roadmap#part-07', ink: 'teal' },
@@ -19,7 +19,7 @@ const parts = [
       <div class="proof-hero__copy">
         <p class="proof-meta">
           <span>Flutter 3.47 · Dart 3.13</span>
-          <span>当前内容：7 章 · 1 个 Web 验收项目</span>
+          <span>当前内容：29 章 · 7 个 Web 验收项目</span>
           <span>首版规划：58 章 · 13 个项目</span>
         </p>
         <h1 id="home-title">把 Flutter 学成一套能解释、能验证的框架知识</h1>

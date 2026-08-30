@@ -73,6 +73,20 @@ export default defineConfig({
             { text: '项目：植物照护台', link: '/guide/part-03/07-plant-care-desk' },
           ],
         },
+        {
+          text: '第四部分 · 异步、网络与本地数据',
+          collapsed: false,
+          items: [
+            { text: '把 Future 与 Stream 变成界面状态', link: '/guide/part-04/01-async-ui-state' },
+            { text: 'HTTP Service 与错误边界', link: '/guide/part-04/02-http-service' },
+            { text: '手写 JSON 模型', link: '/guide/part-04/03-hand-written-json' },
+            { text: '防抖、竞态与即时书目检索', link: '/guide/part-04/04-search-race' },
+            { text: 'json_serializable 与生成代码', link: '/guide/part-04/05-json-serializable' },
+            { text: '偏好、缓存与离线回退', link: '/guide/part-04/06-preferences-cache-offline' },
+            { text: '关系数据、Drift 与迁移', link: '/guide/part-04/07-drift-relational-data' },
+            { text: '项目：城市活动雷达', link: '/guide/part-04/08-city-event-radar' },
+          ],
+        },
       ],
       '/reference/': [
         {

@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-30T13:13:14.7951771+08:00",
+  "title": "Design System: 即时书目检索",
+  "extensions": {
+    "colorMeta": {
+      "paper": { "role": "neutral", "displayName": "Warm Proof Stock", "canonical": "#F2EBDD", "tonalRamp": ["#2B271F", "#4B4438", "#6D6352", "#918572", "#B7AA95", "#D7CDBB", "#F2EBDD", "#FFF9ED"] },
+      "paper-bright": { "role": "neutral", "displayName": "Accepted Proof White", "canonical": "#FFFBF2", "tonalRamp": ["#2D2A24", "#4E493F", "#71695C", "#968C7B", "#BCB19F", "#DED5C5", "#F2EBDD", "#FFFBF2"] },
+      "ink": { "role": "neutral", "displayName": "Compositor Ink", "canonical": "#1C211F", "tonalRamp": ["#0D100F", "#1C211F", "#303735", "#4A5350", "#69736F", "#929A96", "#C2C8C5", "#F1F3F2"] },
+      "quiet-ink": { "role": "neutral", "displayName": "Quiet Annotation", "canonical": "#4F5753", "tonalRamp": ["#111514", "#29302D", "#4F5753", "#68716D", "#858E89", "#A7AEAA", "#CDD2CF", "#F3F5F4"] },
+      "proof-red": { "role": "primary", "displayName": "Vermilion Proof", "canonical": "#B9362B", "tonalRamp": ["#350B08", "#5B1611", "#84251D", "#B9362B", "#D65B4F", "#E98A80", "#F5BBB5", "#FDECE9"] },
+      "pencil-blue": { "role": "primary", "displayName": "Blue Pencil", "canonical": "#285C7C", "tonalRamp": ["#081A25", "#11334A", "#1B4B68", "#285C7C", "#4B7D98", "#78A2B7", "#AECDD9", "#EDF5F7"] },
+      "signal-gold": { "role": "secondary", "displayName": "Status Gold", "canonical": "#D6A739", "tonalRamp": ["#2D2105", "#513C0A", "#765A12", "#9F7B20", "#C49A30", "#DDB95B", "#EED99A", "#FFF5D8"] },
+      "rule": { "role": "neutral", "displayName": "Compositor Rule", "canonical": "#B9B1A3", "tonalRamp": ["#24211D", "#403B34", "#5F584E", "#81786C", "#A0988B", "#B9B1A3", "#D9D3C9", "#F7F4EF"] },
+      "proof-grid": { "role": "neutral", "displayName": "Proof Grid", "canonical": "#313735", "tonalRamp": ["#0E1110", "#202523", "#313735", "#4A5250", "#68716E", "#909895", "#C0C6C3", "#EFF2F1"] },
+      "field-hint": { "role": "neutral", "displayName": "Field Hint", "canonical": "#676D69", "tonalRamp": ["#171918", "#2D312F", "#474C49", "#676D69", "#838A86", "#A5ABA7", "#CDD1CF", "#F3F5F4"] },
+      "register-label": { "role": "neutral", "displayName": "Register Label", "canonical": "#D9E5EB", "tonalRamp": ["#1C272C", "#35454C", "#50636C", "#71858E", "#94A8B1", "#B8CAD2", "#D9E5EB", "#F4F9FB"] },
+      "register-note": { "role": "neutral", "displayName": "Register Note", "canonical": "#E4EDF2", "tonalRamp": ["#20292E", "#3C4950", "#596871", "#7B8A93", "#9DADB6", "#C1D0D8", "#E4EDF2", "#F7FAFC"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Masthead", "purpose": "朱红页头中的应用名称。" },
+      "section-title": { "displayName": "Proof Section", "purpose": "检索校样与登记簿标题。" },
+      "record-title": { "displayName": "Record Title", "purpose": "书名和状态消息标题。" },
+      "body": { "displayName": "Editorial Body", "purpose": "说明、反馈和书目摘要。" },
+      "register": { "displayName": "Request Register", "purpose": "请求状态、编号和书目元数据。" },
+      "stamp-label": { "displayName": "Stamp Label", "purpose": "状态章中的短英文标签。" }
+    },
+    "shadows": [
+      { "name": "masthead-lift", "value": "0 10px 24px rgba(0,0,0,0.40)", "purpose": "朱红页头离开网格底场。" },
+      { "name": "proof-lift", "value": "0 12px 30px rgba(0,0,0,0.27)", "purpose": "主校样纸的单层投影。" }
+    ],
+    "motion": [
+      { "name": "proof-change", "value": "240ms cubic-bezier(0.33,1,0.68,1)", "purpose": "结果状态进入时的切换。" },
+      { "name": "reduced-motion", "value": "0ms", "purpose": "系统要求减少动画时直接显示结果。" }
+    ],
+    "breakpoints": [
+      { "name": "book-row-stack", "value": "520px" },
+      { "name": "proof-register-split", "value": "900px" },
+      { "name": "desk-max-width", "value": "1240px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Race Demo Button",
+      "kind": "button",
+      "refersTo": "button-race",
+      "description": "启动固定延迟竞态演示的主操作。",
+      "html": "<button class=\"ds-race-button\">↔ 运行竞态演示</button>",
+      "css": ".ds-race-button{min-height:48px;padding:12px 16px;border:1px solid #1C211F;border-radius:0;background:#1C211F;color:#FFFBF2;font:800 14px system-ui,sans-serif}.ds-race-button:hover{background:#313735}.ds-race-button:active{transform:translateY(1px)}.ds-race-button:focus-visible{outline:3px solid #D6A739;outline-offset:3px}"
+    },
+    {
+      "name": "Query Shortcut Button",
+      "kind": "button",
+      "refersTo": "button-shortcut",
+      "description": "进入空结果或失败状态的辅助操作。",
+      "html": "<button class=\"ds-query-shortcut\">失败后重试</button>",
+      "css": ".ds-query-shortcut{min-height:48px;padding:12px 16px;border:1px solid #1C211F;border-radius:0;background:#F2EBDD;color:#1C211F;font:700 14px system-ui,sans-serif}.ds-query-shortcut:hover{background:#FFFBF2}.ds-query-shortcut:active{background:#E4DDD0}.ds-query-shortcut:focus-visible{outline:3px solid #B9362B;outline-offset:3px}"
+    },
+    {
+      "name": "Search Field",
+      "kind": "input",
+      "refersTo": "search-field",
+      "description": "带蓝铅笔搜索符号的方角检索输入框。",
+      "html": "<label class=\"ds-search-wrap\"><svg class=\"ds-search-icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><circle cx=\"11\" cy=\"11\" r=\"7\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><path d=\"m16.5 16.5 4 4\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/></svg><input class=\"ds-search-input\" placeholder=\"书名、作者或主题\"></label>",
+      "css": ".ds-search-wrap{display:flex;align-items:center;gap:10px;min-height:50px;padding:0 14px;border:1px solid #1C211F;border-radius:0;background:#FFFBF2;color:#285C7C}.ds-search-wrap:focus-within{border:3px solid #B9362B;padding:0 12px}.ds-search-icon{width:20px;height:20px;flex:none}.ds-search-input{min-width:0;flex:1;border:0;outline:0;background:transparent;color:#1C211F;font:16px system-ui,sans-serif}.ds-search-input::placeholder{color:#676D69}"
+    },
+    {
+      "name": "Proof Message",
+      "kind": "card",
+      "refersTo": "proof-message",
+      "description": "在校样纸中说明等待、空数据或失败状态。",
+      "html": "<article class=\"ds-proof-message\"><span class=\"ds-proof-mark\">待校</span><h3 class=\"ds-proof-title\">先写一个查询</h3><p class=\"ds-proof-copy\">结果区会展示当前检索状态。</p></article>",
+      "css": ".ds-proof-message{padding:18px;border:1px solid #B9B1A3;border-radius:0;background:#F2EBDD;color:#1C211F}.ds-proof-message:hover{border-color:#4F5753}.ds-proof-message:focus-within{outline:3px solid #D6A739;outline-offset:3px}.ds-proof-mark{display:inline-block;padding:5px 9px;border:1px solid #B9362B;color:#B9362B;font:900 14px monospace;transform:rotate(-2deg)}.ds-proof-title{margin:14px 0 6px;font:900 20px system-ui,sans-serif}.ds-proof-copy{margin:0;color:#4F5753;font:16px/1.45 system-ui,sans-serif}"
+    },
+    {
+      "name": "Book Proof Row",
+      "kind": "card",
+      "refersTo": "book-proof-row",
+      "description": "把书目摘要与蓝色元数据块并置的校样记录。",
+      "html": "<article class=\"ds-book-row\"><div class=\"ds-book-copy\"><h3 class=\"ds-book-title\">河流的夜航</h3><p class=\"ds-book-note\">关于城市水系、夜间交通与公共空间的观察。</p></div><code class=\"ds-book-meta\">林舟<br>2024<br>架位 C-17</code></article>",
+      "css": ".ds-book-row{display:flex;gap:20px;align-items:flex-start;padding:16px;border:1px solid #B9B1A3;border-radius:0;background:#F2EBDD;color:#1C211F}.ds-book-copy{flex:1}.ds-book-title{margin:0 0 8px;font:900 22px/1.1 serif}.ds-book-note{margin:0;color:#4F5753;font:15px/1.45 system-ui,sans-serif}.ds-book-meta{min-width:118px;padding:10px;background:#285C7C;color:#FFFBF2;font:800 14px/1.5 monospace}.ds-book-row:hover{border-color:#285C7C}.ds-book-row:focus-within{outline:3px solid #D6A739;outline-offset:3px}@media(max-width:520px){.ds-book-row{flex-direction:column}.ds-book-meta{align-self:stretch}}"
+    },
+    {
+      "name": "Request Stamp",
+      "kind": "custom",
+      "refersTo": "request-stamp",
+      "description": "在页头或登记簿中显示当前请求与阶段。",
+      "html": "<div class=\"ds-request-stamp\"><small class=\"ds-stamp-label\">STATE</small><strong class=\"ds-stamp-value\">WAITING</strong></div>",
+      "css": ".ds-request-stamp{display:inline-grid;gap:2px;padding:10px 12px;border:1px solid #D6A739;border-radius:0;background:#285C7C;color:#FFFBF2}.ds-request-stamp:hover{border-color:#FFFBF2}.ds-request-stamp:focus-within{outline:3px solid #D6A739;outline-offset:3px}.ds-stamp-label{font:800 11px/1.2 monospace}.ds-stamp-value{font:900 20px/1.2 monospace}"
+    },
+    {
+      "name": "Request Register",
+      "kind": "custom",
+      "description": "并列当前查询、已结算查询与忽略计数的蓝色登记簿。",
+      "html": "<section class=\"ds-register\"><h3 class=\"ds-register-title\">请求登记簿</h3><dl class=\"ds-register-list\"><div class=\"ds-register-row\"><dt>当前查询</dt><dd>河</dd></div><div class=\"ds-register-row\"><dt>忽略的旧响应</dt><dd class=\"ds-register-alert\">1</dd></div></dl></section>",
+      "css": ".ds-register{padding:18px;border-radius:0;background:#285C7C;color:#FFFBF2}.ds-register-title{margin:0 0 14px;font:900 26px/1.1 serif}.ds-register-list{margin:0}.ds-register-row{display:flex;gap:12px;padding:10px 0}.ds-register-row dt{flex:1;color:#D9E5EB;font:14px system-ui,sans-serif}.ds-register-row dd{margin:0;color:#FFFBF2;font:900 17px monospace}.ds-register-alert{text-decoration:underline 2px #D6A739;text-underline-offset:3px}.ds-register:hover{background:#245470}.ds-register:focus-within{outline:3px solid #D6A739;outline-offset:3px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "编辑部校样请求队列",
+    "overview": "界面把每次搜索当作一份带编号的校样请求。暖纸色承载已接纳的结果，蓝色登记簿记录查询状态，朱红色标出需要处理的动作和退回状态。用户首先读取检索校样，再核对请求登记簿。窄屏也保持这个顺序，让竞态演示的结果先于诊断数据出现。",
+    "keyCharacteristics": ["方角纸面、细规则线和校对印章", "朱红页头、暖色校样与蓝色登记簿", "等宽字只表示请求编号、状态和书目元数据", "金色只出现在状态边框、选区和异常计数下划线"],
+    "rules": [
+      { "name": "The Gold Mark Rule", "body": "金色只用于边框、选区和下划线，不作小号文字或大面积填色。", "section": "colors" },
+      { "name": "The Proof Type Rule", "body": "等宽字只进入编号、状态与元数据；中文说明和书目摘要保持正文排版。", "section": "typography" },
+      { "name": "The Two Sheet Rule", "body": "只有页头与主校样纸可以离开底场，其余层级由色块、边框和间距区分。", "section": "elevation" }
+    ],
+    "dos": ["Do 让主结果在所有宽度下先于请求登记簿。", "Do 同时显示当前查询、已结算查询和被忽略响应数。", "Do 在 320、768、1440 宽度、键盘操作和减少动画模式下检查五种状态。"],
+    "donts": ["Don't 用圆角搜索卡片和结果网格替代校样与登记簿。", "Don't 用新响应之外的旧请求覆盖当前结果。", "Don't 把金色用于小号文字，或把蓝色元数据文字改成低对比灰色。"]
+  }
+}

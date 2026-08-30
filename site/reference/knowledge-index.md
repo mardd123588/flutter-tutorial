@@ -42,3 +42,16 @@ description: 按概念查找首次讲解、复习章节、项目和常见错误�
 | `animation.implicit`、`animation.tween`、`animation.curve` | [隐式动画](/guide/part-03/05-implicit-animations) | 起点、中点、终点和属性成本 |
 | `animation.controller`、`animation.transition`、`animation.reduced-motion` | [显式动画与过渡](/guide/part-03/06-explicit-animations) | Ticker、`didUpdateWidget`、Interval、减少动画 |
 | `project.plant-care-desk` | [项目：植物照护台](/guide/part-03/07-plant-care-desk) | 筛选、浇水、重排、撤销和两类动画完整流程 |
+
+## 第四部分
+
+| 概念 ID | 首次讲解 | 复习或错误入口 |
+| --- | --- | --- |
+| `async.ui-state`、`async.future-builder`、`async.stream-builder`、`async.stale-result` | [把 Future 与 Stream 变成界面状态](/guide/part-04/01-async-ui-state) | 一次结果与持续事件、Builder 创建时机、过期结果身份 |
+| `data.http-client`、`data.service`、`error.network`、`test.http-client` | [HTTP Service 与错误边界](/guide/part-04/02-http-service) | Client 注入、状态码、超时、传输错误、CORS 与 MockClient 边界 |
+| `data.json`、`model.immutable`、`error.decode` | [手写 JSON 模型](/guide/part-04/03-hand-written-json) | 容器检查、缺失与 null、未知字段、条目定位 |
+| `async.debounce`、`async.race`、`async.cancellation-boundary` | [防抖、竞态与即时书目检索](/guide/part-04/04-search-race) | Timer 取消、generation、保留旧结果、可控完成顺序 |
+| `codegen.json-serializable`、`tool.build-runner` | [json_serializable 与生成代码](/guide/part-04/05-json-serializable) | annotation、part 文件、默认宽松映射与手写 envelope |
+| `storage.preferences`、`data.cache`、`offline.fallback` | [偏好、缓存与离线回退](/guide/part-04/06-preferences-cache-offline) | SharedPreferencesAsync、三类缓存、freshness 与回退来源 |
+| `storage.relational`、`storage.drift`、`storage.migration`、`storage.web-boundary` | [关系数据、Drift 与迁移](/guide/part-04/07-drift-relational-data) | 事务、查询 Stream、v1→v2、Wasm、Worker 与 MIME |
+| `project.city-event-radar` | [项目：城市活动雷达](/guide/part-04/08-city-event-radar) | HTTP、搜索竞态、偏好、缓存、离线回退和收藏关系完整流程 |

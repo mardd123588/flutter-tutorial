@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-30T13:13:14.7951771+08:00",
+  "title": "Design System: 城市活动雷达",
+  "extensions": {
+    "colorMeta": {
+      "night": { "role": "primary", "displayName": "Asphalt Night", "canonical": "#102326", "tonalRamp": ["#071113", "#102326", "#203A3D", "#365458", "#527176", "#769398", "#AAB9BC", "#EBF0F1"] },
+      "night-deep": { "role": "neutral", "displayName": "Night Shift Deep", "canonical": "#081416", "tonalRamp": ["#040A0B", "#081416", "#15282B", "#2A4043", "#475D60", "#708386", "#A7B4B6", "#EAF0F1"] },
+      "survey": { "role": "primary", "displayName": "Survey Green", "canonical": "#9FC7B5", "tonalRamp": ["#183028", "#2D5043", "#477161", "#659281", "#83AD9B", "#9FC7B5", "#C5DED3", "#EFF7F3"] },
+      "cyan": { "role": "secondary", "displayName": "Range Cyan", "canonical": "#68B7C4", "tonalRamp": ["#0D2C32", "#1D4D57", "#326F7B", "#4A919E", "#68B7C4", "#91CFD8", "#BCE5E9", "#EFFAFA"] },
+      "sodium": { "role": "secondary", "displayName": "Sodium Signal", "canonical": "#E39A36", "tonalRamp": ["#351D04", "#5B3509", "#824F11", "#AB6C1D", "#CF882C", "#E9AA55", "#F3CE96", "#FFF2D9"] },
+      "paper": { "role": "neutral", "displayName": "Dispatch Paper", "canonical": "#F1E8CF", "tonalRamp": ["#2C271C", "#4B4332", "#6C624A", "#90836A", "#B4A88B", "#D4C8AA", "#F1E8CF", "#FFF9E9"] },
+      "paper-muted": { "role": "neutral", "displayName": "Aged Paper Rule", "canonical": "#D8CFB8", "tonalRamp": ["#28231A", "#453D2F", "#645A47", "#867A63", "#AA9E83", "#C7BCA2", "#D8CFB8", "#F8F3E7"] },
+      "ink": { "role": "neutral", "displayName": "Dispatch Ink", "canonical": "#182120", "tonalRamp": ["#0A0F0E", "#182120", "#2B3937", "#445250", "#626F6C", "#89938F", "#BDC4C1", "#EEF1F0"] },
+      "danger": { "role": "tertiary", "displayName": "Fallback Red", "canonical": "#C94A3D", "tonalRamp": ["#3A100C", "#622019", "#8C3026", "#B84135", "#D65E50", "#E98B80", "#F4BBB5", "#FDEBE8"] },
+      "danger-ink": { "role": "tertiary", "displayName": "Paper Danger Ink", "canonical": "#8F2F27", "tonalRamp": ["#2C0A07", "#51140F", "#751F18", "#8F2F27", "#B34F45", "#D07A71", "#E8AEA8", "#F9E7E4"] },
+      "warning-text": { "role": "neutral", "displayName": "Warning White", "canonical": "#FFFFFF", "tonalRamp": ["#292929", "#494949", "#696969", "#8B8B8B", "#ADADAD", "#CECECE", "#ECECEC", "#FFFFFF"] },
+      "night-hint": { "role": "neutral", "displayName": "Night Field Hint", "canonical": "#B9C7C2", "tonalRamp": ["#1E2A26", "#374740", "#52655D", "#71847C", "#91A49D", "#B9C7C2", "#D6DFDC", "#F3F7F5"] },
+      "paper-quiet": { "role": "neutral", "displayName": "Paper Quiet Text", "canonical": "#46504D", "tonalRamp": ["#101413", "#252C2A", "#46504D", "#626C69", "#808986", "#A3AAA7", "#CBD0CE", "#F2F4F3"] },
+      "ledger-label": { "role": "neutral", "displayName": "Ledger Label", "canonical": "#4B5552", "tonalRamp": ["#111514", "#282F2D", "#4B5552", "#66706D", "#838C89", "#A5ACA9", "#CDD1CF", "#F3F5F4"] },
+      "dispatch-paper": { "role": "neutral", "displayName": "Fresh Dispatch Sheet", "canonical": "#F8F1DE", "tonalRamp": ["#2E291E", "#4D4535", "#6E644D", "#93866C", "#B9AC8E", "#D9CEB2", "#F0E6CF", "#FFF9E9"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Survey Masthead", "purpose": "测绘绿页头中的应用名称。" },
+      "section-title": { "displayName": "Atlas Section", "purpose": "扫描面、值班簿和调度单标题。" },
+      "event-title": { "displayName": "Event Dispatch Title", "purpose": "活动名称。" },
+      "body": { "displayName": "Dispatch Body", "purpose": "任务说明、活动摘要和故障消息。" },
+      "telemetry": { "displayName": "Municipal Telemetry", "purpose": "来源、时间、日期、信号、标签与计数。" }
+    },
+    "shadows": [],
+    "motion": [
+      { "name": "radar-sweep", "value": "720ms cubic-bezier(0.33,1,0.68,1)", "purpose": "数据变化后展开扫描扇区与活动信号。" },
+      { "name": "reduced-motion", "value": "0ms", "purpose": "系统要求减少动画时直接显示完整雷达。" }
+    ],
+    "breakpoints": [
+      { "name": "event-row-stack", "value": "640px" },
+      { "name": "scan-ledger-split", "value": "980px" },
+      { "name": "desk-max-width", "value": "1320px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Network Switch",
+      "kind": "button",
+      "description": "在本地 fixture 的在线与模拟离线模式之间切换。",
+      "html": "<button class=\"ds-network-switch\" role=\"switch\" aria-checked=\"true\"><span class=\"ds-network-label\">在线 fixture</span><span class=\"ds-switch-track\"><span class=\"ds-switch-thumb\"></span></span></button>",
+      "css": ".ds-network-switch{display:inline-flex;align-items:center;gap:10px;padding:8px 12px;border:0;border-radius:0;background:#102326;color:#F1E8CF;font:800 14px monospace}.ds-network-switch:hover{background:#183034}.ds-network-switch:focus-visible{outline:3px solid #E39A36;outline-offset:3px}.ds-network-label{white-space:nowrap}.ds-switch-track{display:flex;justify-content:flex-end;width:52px;height:28px;padding:3px;border-radius:18px;background:#E39A36}.ds-switch-thumb{width:22px;height:22px;border-radius:50%;background:#102326}.ds-network-switch[aria-checked=\"false\"] .ds-switch-track{justify-content:flex-start;background:#C94A3D}.ds-network-switch:active .ds-switch-thumb{transform:scale(.92)}"
+    },
+    {
+      "name": "Event Search Field",
+      "kind": "input",
+      "refersTo": "search-field",
+      "description": "在夜色控制台中搜索活动、场地或标签。",
+      "html": "<label class=\"ds-event-search\"><svg class=\"ds-radar-icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"8\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><circle cx=\"12\" cy=\"12\" r=\"4\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><path d=\"M12 12 19 7\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/></svg><input class=\"ds-event-input\" placeholder=\"搜索活动、场地或标签\"></label>",
+      "css": ".ds-event-search{display:flex;align-items:center;gap:10px;min-height:50px;padding:0 14px;border:1px solid #68B7C4;border-radius:0;background:#081416;color:#68B7C4}.ds-event-search:focus-within{border:3px solid #E39A36;padding:0 12px}.ds-radar-icon{width:21px;height:21px;flex:none}.ds-event-input{min-width:0;flex:1;border:0;outline:0;background:transparent;color:#F1E8CF;font:16px system-ui,sans-serif}.ds-event-input::placeholder{color:#B9C7C2}"
+    },
+    {
+      "name": "District Button",
+      "kind": "button",
+      "refersTo": "district-button",
+      "description": "未选中的城市分区筛选。",
+      "html": "<button class=\"ds-district-button\" aria-pressed=\"false\">东岸</button>",
+      "css": ".ds-district-button{min-width:72px;min-height:48px;padding:12px 16px;border:1px solid #D8CFB8;border-radius:0;background:#081416;color:#F1E8CF;font:700 14px system-ui,sans-serif}.ds-district-button:hover{border-color:#68B7C4}.ds-district-button:active{background:#102326}.ds-district-button:focus-visible{outline:3px solid #E39A36;outline-offset:3px}"
+    },
+    {
+      "name": "Selected District Button",
+      "kind": "button",
+      "refersTo": "district-button-selected",
+      "description": "当前城市分区筛选。",
+      "html": "<button class=\"ds-district-selected\" aria-pressed=\"true\">全部</button>",
+      "css": ".ds-district-selected{min-width:72px;min-height:48px;padding:12px 16px;border:1px solid #E39A36;border-radius:0;background:#E39A36;color:#182120;font:800 14px system-ui,sans-serif}.ds-district-selected:hover{background:#E9AA55}.ds-district-selected:active{background:#CF882C}.ds-district-selected:focus-visible{outline:3px solid #F1E8CF;outline-offset:3px}"
+    },
+    {
+      "name": "Radar Scan",
+      "kind": "custom",
+      "description": "同心范围线、城市路径、扫描扇区和活动信号组成的扫描面。",
+      "html": "<div class=\"ds-radar-scan\" role=\"img\" aria-label=\"雷达示意图，显示 4 个活动信号\"><span class=\"ds-radar-ring ds-radar-ring-one\"></span><span class=\"ds-radar-ring ds-radar-ring-two\"></span><span class=\"ds-radar-cross\"></span><span class=\"ds-radar-sweep\"></span><i class=\"ds-radar-signal ds-radar-signal-one\"></i><i class=\"ds-radar-signal ds-radar-signal-two\"></i><i class=\"ds-radar-signal ds-radar-signal-three\"></i></div>",
+      "css": ".ds-radar-scan{position:relative;width:420px;max-width:100%;aspect-ratio:1.65;overflow:hidden;background:#102326}.ds-radar-ring{position:absolute;left:53%;top:50%;border:1px solid rgba(104,183,196,.42);border-radius:50%;transform:translate(-50%,-50%)}.ds-radar-ring-one{width:42%;aspect-ratio:1}.ds-radar-ring-two{width:72%;aspect-ratio:1}.ds-radar-cross{position:absolute;inset:0;background:linear-gradient(transparent 49.8%,rgba(104,183,196,.42) 50%,transparent 50.2%),linear-gradient(90deg,transparent 52.8%,rgba(104,183,196,.42) 53%,transparent 53.2%)}.ds-radar-sweep{position:absolute;left:53%;top:50%;width:35%;height:70%;transform-origin:left top;background:rgba(227,154,54,.20);clip-path:polygon(0 50%,100% 0,100% 100%)}.ds-radar-signal{position:absolute;width:10px;height:10px;border:3px solid rgba(227,154,54,.45);border-radius:50%;background:#E39A36;box-shadow:0 0 0 5px rgba(227,154,54,.12)}.ds-radar-signal-one{left:32%;top:48%}.ds-radar-signal-two{left:60%;top:31%}.ds-radar-signal-three{left:66%;top:68%}.ds-radar-scan:hover .ds-radar-sweep{transform:rotate(16deg);transition:transform 720ms cubic-bezier(.33,1,.68,1)}.ds-radar-scan:focus-visible{outline:3px solid #E39A36;outline-offset:3px}"
+    },
+    {
+      "name": "Compact Provenance",
+      "kind": "custom",
+      "description": "窄屏在扫描面之前显示的数据来源与更新时间摘要。",
+      "html": "<aside class=\"ds-provenance\"><strong class=\"ds-provenance-item\">来源&nbsp; 网络 fixture</strong><strong class=\"ds-provenance-item\">更新时间&nbsp; 刚刚更新</strong></aside>",
+      "css": ".ds-provenance{display:flex;flex-wrap:wrap;gap:8px 22px;padding:12px 16px;border-radius:0;background:#F1E8CF;color:#182120}.ds-provenance:hover{background:#F8F1DE}.ds-provenance:focus-within{outline:3px solid #E39A36;outline-offset:3px}.ds-provenance-item{font:900 14px/1.45 monospace}"
+    },
+    {
+      "name": "Dispatch Ledger",
+      "kind": "card",
+      "description": "记录数据来源、缓存时间、活动数量和本地收藏的纸面值班簿。",
+      "html": "<section class=\"ds-ledger\"><h3 class=\"ds-ledger-title\">数据值班簿</h3><dl class=\"ds-ledger-list\"><div class=\"ds-ledger-row\"><dt>来源</dt><dd>网络 fixture</dd></div><div class=\"ds-ledger-row\"><dt>忽略旧响应</dt><dd class=\"ds-ledger-danger\">1</dd></div></dl><button class=\"ds-ledger-refresh\">刷新当前查询</button></section>",
+      "css": ".ds-ledger{padding:16px;border-radius:0;background:#F1E8CF;color:#182120}.ds-ledger-title{margin:0 0 14px;font:900 26px/1.1 serif}.ds-ledger-list{margin:0 0 12px}.ds-ledger-row{display:flex;gap:12px;padding:11px 0;border-bottom:1px solid #D8CFB8}.ds-ledger-row dt{flex:1;color:#4B5552;font:14px system-ui,sans-serif}.ds-ledger-row dd{margin:0;text-align:right;font:900 14px monospace}.ds-ledger-danger{color:#8F2F27}.ds-ledger-refresh{width:100%;min-height:48px;padding:12px 16px;border:0;border-radius:0;background:#182120;color:#F1E8CF;font-weight:800}.ds-ledger-refresh:hover{background:#2B3937}.ds-ledger-refresh:active{transform:translateY(1px)}.ds-ledger-refresh:focus-visible{outline:3px solid #E39A36;outline-offset:3px}"
+    },
+    {
+      "name": "Event Dispatch Row",
+      "kind": "card",
+      "refersTo": "event-row",
+      "description": "并列日期、活动详情、信号值和本地收藏的调度记录。",
+      "html": "<article class=\"ds-event-row\"><time class=\"ds-event-date\">09.12<br>19:30</time><div class=\"ds-event-copy\"><h3 class=\"ds-event-title\">河岸夜间放映</h3><strong class=\"ds-event-place\">堤岸仓库 · 东岸 · 免费</strong><p class=\"ds-event-summary\">一场面向社区的户外短片放映。</p><span class=\"ds-event-tag\">#夜间</span></div><button class=\"ds-save-event\" aria-label=\"收藏 河岸夜间放映\">◇</button></article>",
+      "css": ".ds-event-row{display:flex;gap:18px;align-items:flex-start;padding:14px;border:1px solid #D8CFB8;border-radius:0;background:#F8F1DE;color:#182120}.ds-event-date{width:64px;padding:9px;background:#102326;color:#F1E8CF;font:900 16px/1.45 monospace}.ds-event-copy{flex:1}.ds-event-title{margin:0 0 7px;font:900 22px/1.1 serif}.ds-event-place{font:800 14px system-ui,sans-serif}.ds-event-summary{margin:7px 0 10px;color:#46504D;font:14px/1.45 system-ui,sans-serif}.ds-event-tag{color:#8F2F27;font:800 14px monospace}.ds-save-event{width:48px;height:48px;border:0;border-radius:0;background:#102326;color:#F1E8CF;font-size:22px}.ds-save-event:hover{background:#E39A36;color:#182120}.ds-save-event:active{background:#CF882C}.ds-save-event:focus-visible{outline:3px solid #E39A36;outline-offset:3px}@media(max-width:640px){.ds-event-row{display:grid;grid-template-columns:1fr auto}.ds-event-copy{grid-column:1/-1;grid-row:2}.ds-save-event{grid-column:2;grid-row:1}}"
+    },
+    {
+      "name": "Fallback Notice",
+      "kind": "custom",
+      "refersTo": "warning-notice",
+      "description": "网络失败后说明缓存或内置 fixture 回退的 live region。",
+      "html": "<div class=\"ds-fallback-notice\" role=\"status\"><span class=\"ds-fallback-icon\" aria-hidden=\"true\">×</span><strong class=\"ds-fallback-copy\">网络不可用，当前显示过期缓存。</strong></div>",
+      "css": ".ds-fallback-notice{display:flex;align-items:center;gap:12px;padding:14px;border-radius:0;background:#C94A3D;color:#FFFFFF}.ds-fallback-notice:hover{background:#B84135}.ds-fallback-notice:focus-within{outline:3px solid #E39A36;outline-offset:3px}.ds-fallback-icon{display:grid;place-items:center;width:24px;height:24px;border:2px solid currentColor;border-radius:50%;font:900 16px monospace}.ds-fallback-copy{font:800 14px/1.4 system-ui,sans-serif}"
+    }
+  ],
+  "narrative": {
+    "northStar": "夜班市政调度图",
+    "overview": "界面把活动列表组织成一张夜班值守用的城市图。沥青色扫描面承载活动信号，测绘绿页头说明任务，钠灯橙标出当前筛选、收藏和雷达信号，纸色值班簿记录数据来源。数据来源必须和活动本身一样容易找到。窄屏先显示来源与更新时间摘要，再进入扫描面；完整值班簿随后提供数量、忽略响应和刷新操作。",
+    "keyCharacteristics": ["沥青黑底场、测绘绿页头和纸色调度单", "青色扫描范围、测绘绿分区线与钠灯橙信号", "数据来源、新鲜度和本地收藏始终可见", "方角控件与纸面清单，不使用地图图钉墙或指标卡网格"],
+    "rules": [
+      { "name": "The Paper Danger Rule", "body": "红色实心通知使用白字；纸面上的 danger 文本使用 Danger Ink，不能直接复用 Fallback Red。", "section": "colors" },
+      { "name": "The Dispatch Type Rule", "body": "等宽字只表示来源、时间、日期、信号、标签和计数，不用于活动摘要或故障说明。", "section": "typography" },
+      { "name": "The Flat Atlas Rule", "body": "页面容器保持平面，透明度与重叠只用于雷达数据层，不能扩散成发光卡片或玻璃面板。", "section": "elevation" }
+    ],
+    "dos": ["Do 在任何宽度下都让来源与更新时间先于扫描面或与扫描面同时可见。", "Do 让离线回退、缓存年龄、筛选和本地收藏保持可区分。", "Do 在 320、768、1440 宽度、键盘操作和减少动画模式下检查在线、离线与空结果。"],
+    "donts": ["Don't 用地图图钉壁纸或指标卡网格替代调度图与值班簿。", "Don't 用颜色作为来源、收藏或故障状态的唯一提示。", "Don't 在纸面上直接复用 Fallback Red 作为小号 danger 文本。"]
+  }
+}
