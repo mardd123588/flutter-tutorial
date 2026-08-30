@@ -6,4 +6,5 @@ environment:
 
 workspace:
   - examples/capstones/daily_rhythm_board
-
+  - examples/capstones/micro_gallery_editor
+  - examples/focus/ticket_layout_studio

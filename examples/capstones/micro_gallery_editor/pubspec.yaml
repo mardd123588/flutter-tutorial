@@ -1,0 +1,22 @@
+name: micro_gallery_editor
+description: 第二部分统筹项目：用可移动展签工作台复习布局、滚动、组件、表单和可访问输入。
+publish_to: none
+version: 0.1.0+1
+resolution: workspace
+
+environment:
+  sdk: ^3.13.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  integration_test:
+    sdk: flutter
+  flutter_lints: 6.0.0
+
+flutter:
+  uses-material-design: true

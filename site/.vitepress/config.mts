@@ -47,6 +47,19 @@ export default defineConfig({
             { text: '项目：今日节奏板', link: '/guide/part-01/07-daily-rhythm-board' },
           ],
         },
+        {
+          text: '第二部分 · 组件、布局与输入',
+          collapsed: false,
+          items: [
+            { text: '约束如何决定尺寸', link: '/guide/part-02/01-constraints' },
+            { text: 'Flex、Wrap、Stack 的选择', link: '/guide/part-02/02-flex-wrap-stack' },
+            { text: '滚动、列表与网格', link: '/guide/part-02/03-scrolling-lists-grids' },
+            { text: '可复用组件的接口', link: '/guide/part-02/04-component-interfaces' },
+            { text: '文本输入、表单与验证', link: '/guide/part-02/05-text-input-and-forms' },
+            { text: '手势、焦点、键盘与语义', link: '/guide/part-02/06-gestures-focus-keyboard-semantics' },
+            { text: '项目：小型展览编辑器', link: '/guide/part-02/07-micro-gallery-editor' },
+          ],
+        },
       ],
       '/reference/': [
         {

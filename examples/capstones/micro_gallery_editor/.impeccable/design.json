@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-30T00:00:00+08:00",
+  "title": "Design System: 小型展览编辑器",
+  "extensions": {
+    "colorMeta": {
+      "deep-blue": { "role": "primary", "displayName": "深蓝背景", "canonical": "#0A1E4B", "tonalRamp": ["#050B1B", "#0A1E4B", "#17376B", "#34558A", "#5B76A6", "#889CBD", "#BBC7D8", "#EFF2F7"] },
+      "wall-blue": { "role": "primary", "displayName": "展墙蓝", "canonical": "#153A8A", "tonalRamp": ["#071329", "#0D285F", "#153A8A", "#3158A3", "#5C7CB9", "#8FA3CE", "#C1CDE1", "#EFF3FA"] },
+      "label-paper": { "role": "neutral", "displayName": "展签纸", "canonical": "#F3E9D0", "tonalRamp": ["#29251D", "#514936", "#776C50", "#9F9170", "#C3B591", "#DED1B4", "#EEE2C8", "#FFF9EC"] },
+      "field-paper": { "role": "neutral", "displayName": "字段纸", "canonical": "#FFFBF1", "tonalRamp": ["#2A2925", "#555149", "#807A6D", "#AAA394", "#D2CABA", "#EAE3D5", "#F7F1E7", "#FFFBF1"] },
+      "brass": { "role": "secondary", "displayName": "黄铜挂轨色", "canonical": "#D8B55B", "tonalRamp": ["#291F08", "#554310", "#80671B", "#A98D32", "#D8B55B", "#E4CA86", "#EFDFB5", "#FBF4E1"] },
+      "coral": { "role": "secondary", "displayName": "珊瑚校对色", "canonical": "#FF6F61", "tonalRamp": ["#32100D", "#67231D", "#9D382F", "#D34F43", "#FF6F61", "#FF9B91", "#FFC5BE", "#FFF0ED"] },
+      "ink": { "role": "neutral", "displayName": "主墨色", "canonical": "#172039", "tonalRamp": ["#080B14", "#172039", "#313B55", "#525E75", "#778195", "#A1A8B6", "#CFD3DB", "#F4F5F7"] },
+      "quiet-ink": { "role": "neutral", "displayName": "安静墨色", "canonical": "#596078", "tonalRamp": ["#10131A", "#2E3342", "#596078", "#747C91", "#939AAB", "#B5BAC6", "#D8DBE1", "#F5F6F8"] },
+      "status-paper": { "role": "tertiary", "displayName": "状态纸", "canonical": "#FFD5CD", "tonalRamp": ["#321A16", "#67362E", "#9A554A", "#C97A6E", "#EAA69C", "#FFD5CD", "#FFE6E1", "#FFF6F4"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "应用标题", "purpose": "工作台名称。" },
+      "headline": { "displayName": "区域标题", "purpose": "展墙和编辑台。" },
+      "title": { "displayName": "展品标题", "purpose": "展签中的作品名称。" },
+      "body": { "displayName": "工作正文", "purpose": "字段、说明和状态消息。" }
+    },
+    "shadows": [],
+    "motion": [],
+    "breakpoints": [
+      { "name": "workbench-columns", "value": "980px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "New Exhibit Button",
+      "kind": "button",
+      "description": "开始空白展签的次要操作。",
+      "html": "<button class=\"ds-new-button\">新建 · Ctrl+N</button>",
+      "css": ".ds-new-button { padding:12px 18px; border:1px solid #D8B55B; border-radius:0; color:white; background:#0A1E4B; font-weight:700; } .ds-new-button:hover { background:#153A8A; } .ds-new-button:focus-visible { outline:3px solid #D8B55B; outline-offset:3px; }"
+    },
+    {
+      "name": "Save Exhibit Button",
+      "kind": "button",
+      "refersTo": "button-save",
+      "description": "保存展签的主要操作。",
+      "html": "<button class=\"ds-save-button\">保存 · Ctrl+S</button>",
+      "css": ".ds-save-button { padding:12px 18px; border:0; border-radius:0; color:#172039; background:#FF6F61; font-weight:700; } .ds-save-button:hover { background:#FF8B80; } .ds-save-button:focus-visible { outline:3px solid #D8B55B; outline-offset:3px; }"
+    },
+    {
+      "name": "Editor Input",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "展签字段与筛选共用的方角纸面输入。",
+      "html": "<label class=\"ds-field\">标题<input value=\"潮汐练习\"></label>",
+      "css": ".ds-field { display:grid; gap:5px; color:#596078; font-size:12px; } .ds-field input { min-height:46px; padding:0 14px; border:1px solid #596078; border-radius:0; color:#172039; background:#FFFBF1; font:16px system-ui,sans-serif; } .ds-field input:focus-visible { outline:2px solid #153A8A; outline-offset:0; border-color:#153A8A; }"
+    },
+    {
+      "name": "Exhibit Label",
+      "kind": "card",
+      "refersTo": "exhibit-label",
+      "description": "展墙上的可选择纸质展签。",
+      "html": "<button class=\"ds-exhibit-label\"><span>01　　2024</span><strong>潮汐练习</strong><small>林岚</small><b>纸本与矿物颜料</b></button>",
+      "css": ".ds-exhibit-label { display:grid; gap:8px; width:226px; padding:14px 16px 18px; border:1px solid #D8B55B; border-radius:0; color:#172039; background:#F3E9D0; text-align:left; } .ds-exhibit-label strong { margin-top:20px; font-size:22px; } .ds-exhibit-label small { color:#596078; } .ds-exhibit-label:hover { border-color:#FF6F61; } .ds-exhibit-label:focus-visible { outline:3px solid #FF6F61; outline-offset:3px; }"
+    },
+    {
+      "name": "Editor Status",
+      "kind": "custom",
+      "description": "保存、删除和验证结果的 live region。",
+      "html": "<p class=\"ds-editor-status\">已载入 3 件展品</p>",
+      "css": ".ds-editor-status { margin:0; padding:12px; color:#172039; background:#FFD5CD; font-weight:700; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "可移动展签轨道",
+    "overview": "界面像一面正在布展的蓝色展墙。纸色展签可以被选择、筛选和重新编排，右侧编辑台则像策展人的登记簿。黄铜分隔提供展陈秩序，珊瑚色只用于当前选择和主要提交动作。这是工作界面，视觉辨识度不能妨碍输入。字段、焦点、错误和 disabled 状态沿用 Material 交互合同，同时保持方角纸张与展墙色域。",
+    "keyCharacteristics": ["深蓝展墙、纸色展签和黄铜分隔", "方角输入与纸张边缘", "珊瑚色表示当前选择或提交动作", "展墙和编辑台按可用宽度并排或顺排"],
+    "rules": [
+      { "name": "The Coral Proof Rule", "body": "珊瑚色只表示选中、提交或需要修正的状态，不作背景铺色。", "section": "colors" },
+      { "name": "The Flat Wall Rule", "body": "展墙上的纸张保持平贴；层级来自选择状态，不来自卡片阴影。", "section": "elevation" }
+    ],
+    "dos": ["Do 让筛选、选择和编辑在同一视口关系中清楚可见。", "Do 同时验证鼠标、Tab、Enter 和 Ctrl/Cmd 快捷键。", "Do 在 320、768、1440 宽度和 200% 文本缩放下检查字段与展签。"],
+    "donts": ["Don't 用阴影、圆角和渐变把展签改成通用卡片。", "Don't 在新建动作后立刻显示整表错误。", "Don't 让 hover 成为唯一可见的可操作提示。"]
+  }
+}
+

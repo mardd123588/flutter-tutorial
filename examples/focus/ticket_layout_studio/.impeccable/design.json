@@ -1,0 +1,82 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-30T00:00:00+08:00",
+  "title": "Design System: 票券排版器",
+  "extensions": {
+    "colorMeta": {
+      "scanner-blue": { "role": "primary", "displayName": "扫描台蓝", "canonical": "#0D2B4A", "tonalRamp": ["#06121F", "#0A2138", "#0D2B4A", "#194668", "#356581", "#668BA2", "#A6BFCC", "#EAF1F4"] },
+      "route-blue": { "role": "primary", "displayName": "路线蓝", "canonical": "#1646A0", "tonalRamp": ["#061331", "#0C2862", "#1646A0", "#3766B7", "#6488CA", "#97ACDC", "#C7D3EB", "#EEF2FA"] },
+      "signal-yellow": { "role": "secondary", "displayName": "信号黄", "canonical": "#F4C64E", "tonalRamp": ["#2A2005", "#55420B", "#816813", "#AE901F", "#D6B53A", "#F4C64E", "#F8D985", "#FFF4D6"] },
+      "ticket-paper": { "role": "neutral", "displayName": "票纸", "canonical": "#F7F0DD", "tonalRamp": ["#29261F", "#514B3E", "#7A715D", "#A39980", "#C9BEA5", "#E2D8C1", "#F1E8D4", "#FFFBEF"] },
+      "ink": { "role": "neutral", "displayName": "主墨色", "canonical": "#111820", "tonalRamp": ["#080C10", "#111820", "#28333D", "#495660", "#6F7B84", "#9EA6AC", "#CDD2D5", "#F3F5F6"] },
+      "muted-ink": { "role": "neutral", "displayName": "弱墨色", "canonical": "#44505A", "tonalRamp": ["#0D1115", "#252D34", "#44505A", "#66737D", "#89959D", "#ABB4BA", "#D1D7DA", "#F3F6F7"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "应用标题", "purpose": "票券排版器页头。" },
+      "title": { "displayName": "票面标题", "purpose": "路线和规则标题。" },
+      "body": { "displayName": "说明正文", "purpose": "布局规则与票面说明。" },
+      "label": { "displayName": "印刷标签", "purpose": "票号、闸口、座位与测量信息。" }
+    },
+    "shadows": [
+      { "name": "ticket-lift", "value": "0 18px 34px rgba(0,0,0,0.4)", "purpose": "只用于票纸离开扫描台的单层阴影。" }
+    ],
+    "motion": [],
+    "breakpoints": [
+      { "name": "stacked-stub", "value": "430px" },
+      { "name": "studio-columns", "value": "980px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Format Button",
+      "kind": "button",
+      "refersTo": "format-button",
+      "description": "未选中的票面宽度预设。",
+      "html": "<button class=\"ds-format-button\">窄票</button>",
+      "css": ".ds-format-button { padding:14px 16px; border:1px solid #7590AA; border-radius:0; color:#F7F0DD; background:#0D2B4A; font-weight:700; } .ds-format-button:hover { border-color:#F4C64E; } .ds-format-button:focus-visible { outline:3px solid #F4C64E; outline-offset:3px; }"
+    },
+    {
+      "name": "Selected Format Button",
+      "kind": "button",
+      "refersTo": "format-button-selected",
+      "description": "当前票面宽度预设。",
+      "html": "<button class=\"ds-format-selected\">标准票</button>",
+      "css": ".ds-format-selected { padding:14px 16px; border:1px solid #F4C64E; border-radius:0; color:#111820; background:#F4C64E; font-weight:700; } .ds-format-selected:focus-visible { outline:3px solid #F7F0DD; outline-offset:3px; }"
+    },
+    {
+      "name": "Ticket Tag",
+      "kind": "chip",
+      "refersTo": "ticket-tag",
+      "description": "票面中数量受控、可换行的短标签。",
+      "html": "<span class=\"ds-ticket-tag\">晚场入场</span>",
+      "css": ".ds-ticket-tag { display:inline-block; padding:6px 9px; border:1px solid #111820; border-radius:0; color:#111820; background:#F7F0DD; font-size:11px; font-weight:800; }"
+    },
+    {
+      "name": "Ticket Surface",
+      "kind": "card",
+      "description": "承载路线、标签和票根的纸张主体。",
+      "html": "<article class=\"ds-ticket\"><strong>滨岸馆 → 北码头</strong><small>潮线设计周 · 夜间场</small></article>",
+      "css": ".ds-ticket { display:grid; gap:10px; width:420px; max-width:100%; padding:26px 24px; border-radius:0; color:#111820; background:#F7F0DD; box-shadow:0 18px 34px rgba(0,0,0,.4); } .ds-ticket strong { font-size:26px; line-height:1.05; } .ds-ticket small { color:#44505A; }"
+    },
+    {
+      "name": "Gate Plaque",
+      "kind": "custom",
+      "description": "唯一允许越过票面边界的局部角标。",
+      "html": "<span class=\"ds-gate-plaque\">GATE 04</span>",
+      "css": ".ds-gate-plaque { display:inline-block; padding:8px 12px; color:white; background:#1646A0; font-size:12px; font-weight:900; letter-spacing:1.1px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "行李路由标签",
+    "overview": "界面借用交通票据、分拣标签和闸口标牌的视觉语言。深蓝舞台提供高对比工作区，纸色票面保留印刷品的密度，黄色只用于规则说明和当前选项。布局变化本身就是内容。宽度切换后，票根、标签和闸口牌要像同一张票据在重新排版，不能退回通用响应式卡片。",
+    "keyCharacteristics": ["方角、细边框和印刷标签感", "深蓝工作台与暖色票纸", "黄色只表示当前选择或布局规则", "局部角标越界，主体仍留在正常约束流"],
+    "rules": [
+      { "name": "The Signal Rule", "body": "实心黄色只表示当前选项或必须先读的布局规则。", "section": "colors" },
+      { "name": "The Printed Label Rule", "body": "大写与宽字距只用于短标签，不用于中文正文。", "section": "typography" },
+      { "name": "The One Sheet Rule", "body": "同一屏只有票面可以被抬起，其余层级由色块和间距区分。", "section": "elevation" }
+    ],
+    "dos": ["Do 让真实约束决定票面宽度、票根方向和标签换行。", "Do 用窄票、标准票和宽票验证同一套视觉语言。", "Do 在 320、768、1440 宽度和 200% 文本缩放下检查完整信息。"],
+    "donts": ["Don't 用整页 Stack 代替正常布局。", "Don't 把黄色用于不可操作的普通装饰。", "Don't 用圆角卡片、渐变或发光效果软化票据结构。"]
+  }
+}
+

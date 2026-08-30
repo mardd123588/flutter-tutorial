@@ -1,0 +1,21 @@
+name: ticket_layout_studio
+description: 第二部分重点项目：用行李路由标签式界面练习约束、Flex、Wrap 与 Stack。
+publish_to: none
+version: 0.1.0+1
+resolution: workspace
+
+environment:
+  sdk: ^3.13.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  integration_test:
+    sdk: flutter
+  flutter_lints: 6.0.0
+
+flutter:
