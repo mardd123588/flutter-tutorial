@@ -92,3 +92,15 @@ description: 按概念查找首次讲解、复习章节、项目和常见错误�
 | `render.pipeline`、`render.repaint-boundary`、`debug.layout-paint` | [渲染流水线与自绘边界](/guide/part-07/05-rendering-pipeline) | layout / paint / semantics、CustomPainter、Listenable、边界成本 |
 | `performance.frame-budget`、`performance.devtools`、`layout.sliver`、`performance.memory`、`project.scroll-timeline` | [Sliver、性能分析与长卷时间轴](/guide/part-07/06-sliver-performance-scroll-timeline) | SliverConstraints / Geometry、lazy、profile workload、golden 与长卷完整流程 |
 | `project.digital-archive-browser` | [项目：数字档案浏览器](/guide/part-07/07-digital-archive-browser) | 风险表、URL、Riverpod、mixed sliver、自绘、对照错误与 Web profile |
+
+## 第八部分
+
+| 概念 ID | 首次讲解 | 复习或错误入口 |
+| --- | --- | --- |
+| `engineering.pub-workspace`、`engineering.dependencies`、`engineering.config` | [Workspace、依赖与配置](/guide/part-08/01-workspace-dependencies-config) | 根与成员合同、manifest / lockfile / cache、公开编译时配置 |
+| `engineering.ci`、`engineering.affected-projects`、`engineering.reproducibility` | [可复现 CI 与受影响项目](/guide/part-08/02-reproducible-ci) | Git rename 两侧路径、matrix 隔离、ChromeDriver 与失败 artifact |
+| `web.release-build`、`web.base-href`、`web.wasm-boundary` | [Flutter Web release 与子路径](/guide/part-08/03-flutter-web-release) | base href、本地 CanvasKit、hash URL、Wasm、PWA 与 source map 边界 |
+| `deployment.pages`、`deployment.preview-layout`、`deployment.rollback` | [GitHub Pages artifact 与发布](/guide/part-08/04-github-pages-publishing) | 单一 staging、最小权限、smoke、内容版本与 commit 回滚 |
+| `platform.plugin`、`platform.permission`、`platform.channel`、`platform.web-limit` | [平台插件、权限与平台通道](/guide/part-08/05-platform-plugins-permissions-channels) | Service 接缝、federated plugin、MethodChannel、权限状态与证据标签 |
+| `release.quality`、`release.privacy`、`release.license`、`release.migration` | [发布质量、隐私、许可与升级](/guide/part-08/06-release-quality-privacy-upgrades) | 自动 / 人工证据、第三方请求、许可、依赖与 SDK 分批升级 |
+| `project.neighborhood-exchange` | [项目：邻里资源交换站](/guide/part-08/07-neighborhood-exchange) | Fixture、Drift 幂等、Riverpod、URL、响应式、CI、release 与 Pages 完整流程 |

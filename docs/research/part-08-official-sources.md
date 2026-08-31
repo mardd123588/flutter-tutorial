@@ -5,7 +5,18 @@
 > 发布目标：GitHub Pages `/flutter-tutorial/`，Flutter Web 预览位于 `/flutter-tutorial/previews/<project-slug>/`
 > 资料范围：Flutter / Dart 官方文档与源码、pnpm 与 VitePress 官方文档、GitHub Actions / Pages 官方文档与 action 源码、Chrome / Web 标准资料
 
-这份笔记只确定第八部分的知识边界、章节依赖、工程与发布方案，以及统筹项目“邻里资源交换站”的项目合同。不创建 workflow，不实现项目，也不编写教程正文。下文把工具、平台和规范规定写成“官方事实”，把仓库结构、教学顺序和项目功能写成“课程决定”。
+这份笔记确定第八部分的知识边界、章节依赖、工程与发布方案，以及统筹项目“邻里资源交换站”的项目合同。项目和 workflow 已经实现，本文同时记录实现核对结果；教程正文另行编写。下文把工具、平台和规范规定写成“官方事实”，把仓库结构与教学取舍写成“课程决定”，把本仓库已经跑过的结果写成“实现证据”。
+
+## 0. 本轮核对结论
+
+以下结论会直接影响 `08-01` 至 `08-07` 的写法：
+
+- **Pub workspace 需要改正旧表述。** workspace 统一依赖解析，但成员之间仍要声明依赖。只要依赖名与版本约束匹配 workspace 中的包，pub 会优先使用本地成员，不要求把依赖来源写成 `path`。Dart 3.11 起 `workspace` 还支持 glob，当前文档也允许 nested workspace；本仓库仍选择显式列出 13 个成员，且不建立成员间业务依赖。[Pub workspaces](https://dart.dev/tools/pub/workspaces)（查阅：2026-08-31）
+- **受影响项目检测已经保留 rename 两端。** Git 的 `--name-status -z` 会为 rename / copy 提供状态和旧、新路径；`tool/ci/affected_projects.mjs` 现使用 `--name-status -z --find-renames`，`parseNameStatus()` 把两端都交给选择器。第 7 项 Node 回归测试固定了 `R100` 解析，`pnpm projects:check` 为 7/7 通过。[`git diff` format options](https://git-scm.com/docs/diff-options#Documentation/diff-options.txt---name-status)（查阅：2026-08-31）
+- **“可复现”是锁定输入后的可重复验证，不是字节级复现。** Flutter、Dart、pnpm、VitePress 与 action commit 已固定；`node-version: 22` 仍会选择符合 22 的可用版本，`ubuntu-24.04` runner image 也会更新。正文应明确这一层级，不能写成 runner、浏览器和最终二进制永久不变。[setup-node versioning](https://github.com/actions/setup-node#basic) · [GitHub-hosted runner images](https://github.com/actions/runner-images#available-images)（查阅：2026-08-31）
+- **Flutter 3.47.0 的 release 参数仍可用，但有版本边界。** `--base-href`、`--no-web-resources-cdn`、`--source-maps`、`--wasm` 与默认开启的 Wasm dry run 都在当前 CLI 中；`--pwa-strategy` 已隐藏并弃用，只能作为 3.47.0 的过渡参数。[Flutter `build_web.dart` 3.47.0](https://github.com/flutter/flutter/blob/3.47.0/packages/flutter_tools/lib/src/commands/build_web.dart) · [Flutter WebAssembly](https://docs.flutter.dev/platform-integration/web/wasm)（查阅：2026-08-31）
+- **Pages 自动 smoke 的证据要按实际脚本写。** 当前 `release:smoke` 验证站点入口、manifest、13 个预览入口、声明的 Wasm / Worker 资源、HTTP 状态和 MIME；它没有启动真实浏览器、阻断外网或执行键盘流程。三档视口和控制台检查属于本轮人工浏览器验收，production URL、缓存更新和旧 Service Worker 仍要在首次 Pages 部署后确认。
+- **GitHub dependency graph 对 pnpm 与 pub 的能力不同。** 官方表中 pnpm 支持静态传递依赖，pub 虽以 `pubspec.lock` 为推荐文件，但静态传递依赖、Dependabot graph job 与自动提交三列目前都标为不支持。本仓库也尚未加入 dependency review job；正文只能把它写成“仓库识别到对应依赖时的补充证据”。[Dependency graph supported package ecosystems](https://docs.github.com/en/code-security/reference/supply-chain-security/dependency-graph-supported-package-ecosystems)（查阅：2026-08-31）
 
 ## 1. 固定边界与已学前置
 
@@ -38,9 +49,9 @@
 
 ### 2.1 pub workspace 的真实作用
 
-**官方事实：** pub workspace 由根 `pubspec.yaml` 的 `workspace` 列表和成员包的 `resolution: workspace` 组成。整个 workspace 共享一次依赖解析、一个根 `pubspec.lock` 与一个根 `.dart_tool/package_config.json`；成员之间仍是普通 package，只有显式声明 path dependency 才形成代码依赖。workspace 成员不能互相重叠，成员的 SDK 约束必须支持 workspace 功能。[Pub workspaces](https://dart.dev/tools/pub/workspaces)（查阅：2026-08-31）
+**官方事实：** pub workspace 由根 `pubspec.yaml` 的 `workspace` 列表和成员包的 `resolution: workspace` 组成。整个 workspace 共享一次依赖解析、一个根 `pubspec.lock` 与一个根 `.dart_tool/package_config.json`。成员之间不会自动获得彼此的 API；需要像普通 package 一样声明依赖。若依赖指向另一个 workspace 成员，pub 会优先解析到本地成员，并检查本地版本是否满足约束，不要求把来源写成 `path`。workspace 支持从 Dart 3.6 开始，glob 需要 Dart 3.11 或更新版本；当前 pub 还支持 nested workspace，并禁止未登记的中间 `pubspec.yaml` 遮蔽根解析。[Pub workspaces](https://dart.dev/tools/pub/workspaces)（查阅：2026-08-31）
 
-**课程决定：** 根 workspace 最终包含 13 个独立项目；“邻里资源交换站”实现时补为第 13 个成员。每个成员保留自己的 `pubspec.yaml`、`lib/`、`test/`、`integration_test/` 与 `web/`。workspace 只统一解析、lint 和仓库工具，不引入共享 domain、Repository、主题或组件包。
+**课程决定：** 根 workspace 包含 13 个独立项目，并显式列出每个路径，不使用 glob 或 nested workspace。每个成员保留自己的 `pubspec.yaml`、`lib/`、`test/`、`integration_test/` 与 `web/`。workspace 只统一解析、lint 和仓库工具；13 个项目不声明成员间依赖，也不引入共享 domain、Repository、主题或组件包。
 
 ### 2.2 锁文件是输入，不是缓存
 
@@ -75,13 +86,31 @@ pnpm install --frozen-lockfile
 
 **课程决定：** 编译时配置只放可公开值，例如 `APP_ENV=demo`、`CONTENT_VERSION=<commit-sha>`、功能开关和公开 API 根地址。token、私钥、服务账号和可写后端凭据不进入 `--dart-define`、`.env`、VitePress 配置、Pages artifact 或仓库。示例 `.env` 只能保存占位值，并明确不把它称作 Web 秘密方案。
 
+**官方事实：** Flutter 3.47.0 还提供 `--web-define=<KEY=VALUE>`，用于替换 `web/index.html` 与 `web/flutter_bootstrap.js` 中的 `{{KEY}}` 模板变量；`--dart-define` 则进入 Dart 的编译时环境。两种值最终都进入浏览器可取得的产物，不能保存秘密。[Flutter `build_web.dart` 3.47.0](https://github.com/flutter/flutter/blob/3.47.0/packages/flutter_tools/lib/src/commands/build_web.dart) · [Flutter `flutter_command.dart` 3.47.0](https://github.com/flutter/flutter/blob/3.47.0/packages/flutter_tools/lib/src/runner/flutter_command.dart)（查阅：2026-08-31）
+
+**课程决定：** “邻里资源交换站”只用 `--dart-define` 读取 `APP_ENV` 与 `CONTENT_VERSION`，不需要修改 Web 模板。正文简要说明 `--web-define` 的适用位置，避免把两套参数混成同一种配置入口。
+
 ## 3. 可复现 CI
 
 ### 3.1 CI 从固定输入开始
 
 **官方事实：** GitHub Actions workflow 可以收紧 `GITHUB_TOKEN` 权限；GitHub 的安全加固指南建议第三方 action 固定到完整 commit SHA，因为 SHA 是不可变引用。缓存内容可能来自权限更低的分支，不能存凭据，也不能当作可信构建产物直接发布。[Security hardening for GitHub Actions](https://docs.github.com/en/actions/security-for-github-actions/security-guides/security-hardening-for-github-actions)（查阅：2026-08-31）
 
-**课程决定：** workflow 固定 Flutter 3.47.0、Dart 3.13.0、Node.js 22 LTS、pnpm 10.34.5，并把 action 固定到已审核的完整 commit SHA；更新 SHA 走独立依赖 PR。默认权限从 `contents: read` 开始，只有 Pages deploy job 增加 `pages: write` 与 `id-token: write`。
+**课程决定：** workflow 固定 Flutter 3.47.0、Dart 3.13.0、pnpm 10.34.5 和 VitePress 1.6.4，并把 action 固定到已审核的完整 commit SHA；更新 SHA 走独立依赖 PR。当前 `node-version: 22` 固定的是 Node 主版本，不是补丁版本。默认权限从 `contents: read` 开始，只有 Pages deploy job 增加 `pages: write` 与 `id-token: write`。
+
+**实现证据：** `verify.yml` 与 `pages.yml` 使用以下固定 action：
+
+| Action | Commit SHA |
+| --- | --- |
+| `actions/checkout` | `11d5960a326750d5838078e36cf38b85af677262` |
+| `actions/setup-node` | `49933ea5288caeca8642d1e84afbd3f7d6820020` |
+| `subosito/flutter-action` | `1a449444c387b1966244ae4d4f8c696479add0b2` |
+| `actions/upload-artifact` | `ea165f8d65b6e75b540449e92b4886f43607fa02` |
+| `actions/configure-pages` | `983d7736d9b0ae728b81ab479565c72886d7745b` |
+| `actions/upload-pages-artifact` | `56afc609e74202658d3ffba0e8f6dda462b719fa` |
+| `actions/deploy-pages` | `d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e` |
+
+这些 SHA 固定 action 代码，不能固定 GitHub-hosted runner image、Chrome 安装版本或外部下载服务。正文把它们称为“受控输入”，不写成“所有环境字节一致”。
 
 ### 3.2 Pull request 与 main 的工作量不同
 
@@ -98,11 +127,15 @@ locked install
 
 `main`、手动发布与版本基线变化不走增量，固定验证 13 个项目。受影响项目算法只优化 PR 时间，不改变发布门槛。
 
+**官方事实：** `git diff A...B` 比较 `merge-base(A, B)` 与 `B`；`--name-status -z` 使用 NUL 分隔路径，并为 rename / copy 记录旧、新路径。只读取 `--name-only` 不足以恢复 rename 的两端。[`git diff`](https://git-scm.com/docs/git-diff) · [`git diff` format options](https://git-scm.com/docs/diff-options#Documentation/diff-options.txt---name-status)（查阅：2026-08-31）
+
+**实现证据：** `selectAffectedProjects()` 已覆盖项目私有输入、workspace 共享输入、站点输入、release / workflow 输入和未知 `examples/` 路径的保守全量回退。Git 读取层使用 `--name-status -z --find-renames`，`parseNameStatus()` 对 `R...` 与 `C...` 读取旧、新路径；7 项 Node 测试同时覆盖状态解析和选择结果。
+
 ### 3.3 并行必须隔离端口和浏览器状态
 
 **官方事实：** Chrome for Testing 从 M115 起提供与 Chrome release 对齐的版本选择和 JSON endpoints；ChromeDriver 文档要求选择与 Chrome binary 兼容的版本。仅把 `chromedriver` 加入 `PATH` 不能保证版本匹配。[ChromeDriver version selection](https://developer.chrome.com/docs/chromedriver/downloads/version-selection) · [Chrome for Testing](https://googlechromelabs.github.io/chrome-for-testing/)（查阅：2026-08-31）
 
-**课程决定：** 每个 Chrome job 记录 Chrome 与 ChromeDriver 的完整版本，先比较 major，再启动测试。并行 worker 使用独立的 ChromeDriver 端口、`--web-port`、临时浏览器 profile 和临时输出目录；不得共享 4444、浏览器 profile 或本地数据库。端口由 job 显式分配，不在脚本里依赖“碰巧空闲”。
+**课程决定：** 每个 Chrome job 记录 Chrome 与 ChromeDriver 的完整版本，并按 Chrome build 下载匹配的 ChromeDriver 后再启动测试。matrix 的每一项运行在独立 runner，可以重复使用 `4444` 与 `7357`；只有在同一 runner 内并行多个浏览器任务时，才必须分配不同端口、浏览器 profile、数据库和输出目录。端口仍由 job 显式传入，不在脚本里依赖“碰巧空闲”。
 
 ### 3.4 失败产物要能复现，而不是只留红叉
 
@@ -116,6 +149,8 @@ locked install
 
 普通 CI 不用绝对帧时间作为唯一通过条件。性能回归需要固定 workload、profile trace 和人工解释，这一边界已在第七部分建立。
 
+**实现核对：** 当前验证脚本会写入项目、commit、工具与浏览器版本、端口、命令、退出码、analyze / test / integration 日志和 ChromeDriver 日志；`flutter drive` 产生失败截图时也会进入 artifact。脚本尚未单独导出浏览器 console、网络请求与 HTTP 响应头，正文不能把这三项写成当前失败 artifact 已经具备。
+
 ## 4. Flutter Web release、子路径与 PWA 边界
 
 ### 4.1 release 构建只生成产物
@@ -126,17 +161,20 @@ locked install
 
 ```powershell
 flutter build web --release `
+  --pwa-strategy=none `
   --no-web-resources-cdn `
   --base-href /flutter-tutorial/previews/<project-slug>/
 ```
 
-构建后必须从相同子路径启动静态服务器，检查入口、hash 深链接、Back / Forward、刷新、字体、图片、Worker 与 Wasm（若项目使用）。
+`--pwa-strategy=none` 是 3.47.0 的版本内过渡参数，完整边界见 4.7。构建后必须从相同子路径启动静态服务器，检查入口、hash 深链接、Back / Forward、刷新、字体、图片、Worker 与 Wasm（若项目使用）。
 
 ### 4.2 `base href` 影响所有相对 URL
 
 **官方事实：** HTML `<base href>` 设置文档中相对 URL 的解析基准。Flutter 3.47.0 的 `--base-href` 会替换 Web 模板中的 `$FLUTTER_BASE_HREF`，并要求值以 `/` 开头和结尾。[MDN `<base>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/base) · [Flutter Web template](https://github.com/flutter/flutter/blob/3.47.0/packages/flutter_tools/templates/app/web/index.html.tmpl) · [Flutter `build_web.dart`](https://github.com/flutter/flutter/blob/3.47.0/packages/flutter_tools/lib/src/commands/build_web.dart)（查阅：2026-08-31）
 
 **课程决定：** VitePress 的 `base` 固定为 `/flutter-tutorial/`；每个 Flutter 预览使用完整 `/flutter-tutorial/previews/<slug>/`。不得用相对 `./` 掩盖部署错误，也不得在 Dart 代码里手拼 Pages 仓库名。资源 URI 保持相对 base；跨项目链接由站点配置生成。
+
+**官方事实：** VitePress 的 `base` 是站点部署根路径；部署到 `https://<user>.github.io/<repo>/` 时，官方部署指南要求把它设为 `/<repo>/`。VitePress 构建目录可以作为 Pages artifact 的一个静态目录上传。[VitePress site config: `base`](https://vitepress.dev/reference/site-config#base) · [VitePress: Deploying a VitePress Site](https://vitepress.dev/guide/deploy#github-pages)（查阅：2026-08-31）
 
 ### 4.3 Web engine 资源必须随 artifact 自托管
 
@@ -162,6 +200,8 @@ flutter build web --release `
 
 **课程决定：** GitHub Pages 普通 JavaScript build 是发布基线。正文只用一个对照构建解释 `--wasm`、兼容性、响应头和测量方法，不承诺 Pages 当前部署能满足所有多线程条件，也不为 13 个项目维护双份 release。只有固定 workload 在目标浏览器上显示明确收益，且服务器响应头、包兼容和回退都通过，才考虑项目级启用。
 
+**官方事实：** Flutter 3.47.0 在普通 JavaScript build 中默认执行 Wasm dry run；发现不兼容会打印非致命警告，真正的 `flutter build web --wasm` 才是 Wasm 产物的构建门槛。正文不要把 dry run 通过写成已经发布或实际运行了 Wasm。[Flutter WebAssembly](https://docs.flutter.dev/platform-integration/web/wasm) · [Flutter `build_web.dart` 3.47.0](https://github.com/flutter/flutter/blob/3.47.0/packages/flutter_tools/lib/src/commands/build_web.dart)（查阅：2026-08-31）
+
 ### 4.7 浏览器缓存不等于 PWA
 
 **官方事实：** HTTP cache 按请求、响应头和验证器复用资源；Service Worker 则可以拦截 fetch 并实现独立缓存策略，两者生命周期和失效路径不同。[MDN HTTP caching](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Caching) · [Service Workers Level 1](https://www.w3.org/TR/service-workers/)（查阅：2026-08-31）
@@ -186,7 +226,9 @@ flutter build web --release `
 
 **官方事实：** GitHub Pages 自定义 workflow 先构建静态文件，再用 `actions/upload-pages-artifact` 上传 Pages artifact，最后由 `actions/deploy-pages` 部署。deploy job 至少需要 `pages: write`、`id-token: write`，并建议使用 `github-pages` environment。[Using custom workflows with GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages) · [actions/deploy-pages](https://github.com/actions/deploy-pages)（查阅：2026-08-31）
 
-**官方事实：** `actions/upload-pages-artifact` 接受一个静态目录，先把目录归档再上传名为 `github-pages` 的 artifact；当前 action 的 `retention-days` 默认值是 `1`。它不是长期发布备份。[actions/upload-pages-artifact `action.yml`](https://github.com/actions/upload-pages-artifact/blob/main/action.yml)（查阅：2026-08-31）
+**官方事实：** `actions/upload-pages-artifact` 接受一个静态目录，先把目录归档再上传名为 `github-pages` 的 artifact；本仓库固定的 action commit 把 `retention-days` 默认值设为 `1`。GitHub Pages 要求上传内容最终是一个 gzip 压缩的 tar，tar 小于 10 GB，且不能包含 symbolic link 或 hard link。Pages artifact 不是长期发布备份。[GitHub Pages custom workflows](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages) · [pinned `actions/upload-pages-artifact` `action.yml`](https://github.com/actions/upload-pages-artifact/blob/56afc609e74202658d3ffba0e8f6dda462b719fa/action.yml)（查阅：2026-08-31）
+
+**官方事实：** `workflow_run` 无论上游结论如何都会触发；后续 workflow 必须读取 `github.event.workflow_run.conclusion` 决定是否继续。它还可能获得前一 workflow 没有的 secrets 与 write token，因此不能直接运行不可信分支代码。[GitHub Actions: `workflow_run`](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#workflow_run)（查阅：2026-08-31）
 
 **课程决定：** workflow 使用三个逻辑阶段：
 
@@ -198,6 +240,8 @@ verify all
 ```
 
 verify 未全部通过时不组装、不上传。deploy job 不重新构建，避免验证的内容与发布的内容来自两次不同解析。
+
+**实现证据：** `pages.yml` 只接收成功的 `Verify`，同时检查 `head_branch == 'main'` 与 `head_repository.full_name == github.repository`，并精确 checkout `workflow_run.head_sha`。build job 没有写权限；deploy job 才获得 `pages: write` 与 `id-token: write`。
 
 ### 5.2 预览在上传前合并
 
@@ -219,16 +263,15 @@ VitePress 先构建到 staging 根；每个 Flutter 项目使用自己的 `--bas
 
 ### 5.3 staging 验收必须检查真实 HTTP 行为
 
-**课程决定：** 上传前在 staging 根启动静态服务器，并阻断外部网络。自动检查至少覆盖：
+**课程决定：** 上传前分三层验收，三层证据不能互相替代：
 
-- 首页、随机章节、项目索引和固定搜索验收集；
-- 13 个预览根路径与各自一条 hash 深链接；
-- HTML、JavaScript、字体、图片、`sqlite3.wasm` 和 Worker 的 HTTP 状态与 MIME；
-- 320×720、768×900、1440×900 的关键任务；
-- 键盘焦点、200% 文本、reduced motion 与 Semantics 关键断言；
-- 页面没有向分析、广告、远程字体或其他非白名单第三方发请求。
+1. 内容检查运行 frontmatter、链接、region、搜索验收与 VitePress build；
+2. `release:smoke` 从 staging 根启动静态服务器，检查站点入口、项目索引、release manifest、13 个预览入口、hash URL 对应的 HTTP 入口、声明的 `sqlite3.wasm` / Worker 资源、状态码与 MIME；
+3. 浏览器验收检查 320×720、768×900、1440×900 的关键任务、控制台、键盘、200% 文本、reduced motion、Semantics 和非白名单第三方请求。
 
-Pages deploy 完成后再跑一组较短的 production smoke test，验证 Pages 实际 URL、base path、缓存更新和 hash 深链接。staging 通过不能替代真实托管检查。
+**实现证据：** 当前自动 `release:smoke` 已覆盖第 2 层，但没有启动浏览器或阻断外网。本轮已人工检查“邻里资源交换站”的三档视口和 console；键盘、网络阻断和完整 production smoke 不能冒充自动化结果。
+
+Pages deploy 完成后还要运行较短的 production smoke test，验证 Pages 实际 URL、base path、缓存更新、旧 Service Worker 和 hash 深链接。staging 通过不能替代真实托管检查。
 
 ### 5.4 缓存与回滚
 
@@ -273,9 +316,11 @@ Pages artifact 默认只保留 1 天，因此回滚锚点是“上一个成功�
 
 **官方事实：** `dart pub outdated` 报告 current、upgradable、resolvable 与 latest，用来区分锁文件可升级项、约束限制和最新版本；`dart pub upgrade --dry-run` 可以预览解析结果。它们不会替项目判断破坏性行为。[dart pub outdated](https://dart.dev/tools/pub/cmd/pub-outdated) · [dart pub upgrade](https://dart.dev/tools/pub/cmd/pub-upgrade)（查阅：2026-08-31）
 
-**官方事实：** GitHub dependency review action比较 Pull request 前后的依赖变化，可以按漏洞严重度和 SPDX 许可策略失败；未知许可会报告，但默认不因此失败。GitHub 的 pub 生态支持由 Dart community 维护，能力范围要以仓库实际 dependency graph 为准。[dependency-review-action](https://github.com/actions/dependency-review-action) · [Dependency graph supported package ecosystems](https://docs.github.com/en/code-security/reference/supply-chain-security/dependency-graph-supported-package-ecosystems)（查阅：2026-08-31）
+**官方事实：** GitHub dependency review action 比较 Pull request 前后的依赖变化，可以按漏洞严重度和 SPDX 许可策略失败；未知许可会报告，但默认不因此失败。它依赖 GitHub dependency graph 已识别到的变化。官方生态表中 pnpm 支持静态传递依赖；pub 由 Dart community 维护，但 `pubspec.lock` 对应的静态传递依赖、Dependabot graph job 与自动提交目前都标为不支持。[dependency-review-action](https://github.com/actions/dependency-review-action) · [Dependency graph supported package ecosystems](https://docs.github.com/en/code-security/reference/supply-chain-security/dependency-graph-supported-package-ecosystems)（查阅：2026-08-31）
 
-**课程决定：** 依赖 PR 同时保留四类证据：manifest 与 lockfile diff、`pub outdated` / `pnpm outdated` 报告、GitHub dependency review（仓库识别到对应生态时）、完整项目验证。新增包还要人工核对发布者、源码仓库、支持平台、许可、维护状态、传递依赖和原生构建要求。工具发现更新只创建审查入口，不自动合并 major upgrade。
+**课程决定：** 依赖 PR 同时保留四类证据：manifest 与 lockfile diff、`pub outdated` / `pnpm outdated` 报告、GitHub dependency review（仓库识别到对应生态时）、完整项目验证。pub 依赖不能依赖当前 dependency graph 自动补齐，仍要审查 `pubspec.lock` 与许可清单。新增包还要人工核对发布者、源码仓库、支持平台、许可、维护状态、传递依赖和原生构建要求。工具发现更新只创建审查入口，不自动合并 major upgrade。
+
+**实现核对：** 当前 workflow 尚未运行 `actions/dependency-review-action`。`08-06` 可以讲配置与能力边界，但项目验收只能引用 lockfile diff、人工许可检查和现有完整验证，不能写成 dependency review 已通过。
 
 ## 7. 平台插件、权限与原生扩展
 
@@ -293,15 +338,15 @@ Pages artifact 默认只保留 1 天，因此回滚锚点是“上一个成功�
 
 ### 7.3 权限是运行时状态，不是一次布尔值
 
-**官方事实：** 不同平台对权限的声明位置、请求时机、拒绝状态和设置入口并不相同；应用生命周期变化后，先前权限与外部资源状态可能已经改变。Flutter 的 `AppLifecycleState` 也不保证收到所有状态通知，例如进程被终止时可能没有最后回调。[Flutter permissions cookbook](https://docs.flutter.dev/cookbook/plugins/picture-using-camera#complete-example) · [`AppLifecycleState`](https://api.flutter.dev/flutter/dart-ui/AppLifecycleState.html)（查阅：2026-08-31）
+**官方事实：** 不同平台的插件接入会涉及各自的 manifest、entitlement、Info.plist 或浏览器能力，权限声明与请求入口不能跨平台照搬。应用生命周期变化后，先前权限与外部资源状态可能已经改变。Flutter 的 `AppLifecycleState` 不保证收到所有状态通知，例如进程被终止时可能没有最后回调。[Flutter camera cookbook](https://docs.flutter.dev/cookbook/plugins/picture-using-camera) · [`AppLifecycleState`](https://api.flutter.dev/flutter/dart-ui/AppLifecycleState.html)（查阅：2026-08-31）
 
-**课程决定：** 正文用 capability → request → result → resume recheck 的状态机讲权限，不写一个永久 `bool hasPermission`。拒绝、永久拒绝、平台不支持、浏览器策略阻止和用户取消分开呈现。平台扩展只给最小接口、测试替身和官方入口，不把未在真机验证的代码列入 Web 项目验收。
+**课程决定：** 正文用 capability → request → result → resume recheck 的状态机讲权限，不写一个永久 `bool hasPermission`。`denied`、`restricted`、`permanentlyDenied` 等名字是适配层可能定义的业务结果，不是 Flutter 保证所有平台都提供的统一枚举；平台不支持、浏览器策略阻止和用户取消也要分开呈现。平台扩展只给最小接口、测试替身和官方入口，不把未在真机验证的代码列入 Web 项目验收。
 
 ### 7.4 Web 通过不能外推到原生
 
 **课程决定：** 第八部分明确使用三种证据标签：
 
-- `Web verified`：在本仓库 Chrome 与 release Pages 路径通过；
+- `Web verified`：在本仓库 Chrome 与 Pages staging 子路径通过；production Pages 另记部署证据；
 - `contract tested`：Dart 接口和 fake 行为通过，但未运行宿主实现；
 - `native verification required`：需要 Android / iOS / desktop 构建、权限、设备或商店环境。
 
@@ -401,8 +446,9 @@ Pages artifact 默认只保留 1 天，因此回滚锚点是“上一个成功�
 
 - 项目私有文件变化只选择一个项目；
 - 根 lockfile、共享脚本或 Flutter 版本变化选择 13 个项目；
-- 两个 Chrome job 并行时端口和 profile 不冲突；
+- matrix job 在独立 runner 上复用固定端口而不冲突；同一 runner 并行时另行分配端口和 profile；
 - 失败 job 上传可定位证据。
+- `--name-status -z --find-renames` 与状态解析测试证明跨项目 rename 的旧、新项目都被选择。
 
 ### 9.3 `08-03` Flutter Web release
 
@@ -473,7 +519,7 @@ Pages artifact 默认只保留 1 天，因此回滚锚点是“上一个成功�
 
 - 一个 artifact 同时包含教程和 13 个预览；
 - 缺失或重复 slug 阻止上传；
-- staging 检查搜索、预览、hash 深链接、MIME 和第三方请求；
+- 内容工具检查搜索，staging HTTP smoke 检查预览、hash URL 入口和 MIME；第三方请求由浏览器层另查；
 - 记录上一个成功 commit SHA 并演练重新部署。
 
 ### 9.5 `08-05` 平台插件、权限与平台通道
@@ -544,6 +590,7 @@ Pages artifact 默认只保留 1 天，因此回滚锚点是“上一个成功�
 - 一份能追溯到 commit 和检查人的发布清单；
 - 一次模拟依赖升级，包含 lockfile diff、迁移说明、回归和回退；
 - 构建产物第三方 URL 与许可清单检查。
+- dependency review 只在 GitHub dependency graph 确实识别到依赖时补充；当前 workflow 尚未接入该 action。
 
 ### 9.7 `08-07` 统筹项目：邻里资源交换站
 
@@ -722,17 +769,17 @@ ExchangeRepository（单一事实来源）
 
 #### Chrome 关键流程
 
-1. 从固定 fixture 启动；
-2. 搜索并筛选到目标资源；
-3. 打开 fixture 详情，复制 hash 深链接并在全新浏览器 profile 直达；
-4. 返回后发布一条有效资源；
-5. 复制本地记录链接，确认警告；在当前 profile 直达，在全新 profile 看到可恢复的本地数据说明；
-6. 打开另一条 fixture 资源并认领；
-7. 刷新当前 profile，验证发布和认领仍在；再用全新 profile 打开同一 fixture 链接，确认只恢复构建内置基础状态；
-8. Back / Forward 恢复筛选和详情；
-9. 在窄屏只用键盘重复核心流程。
+当前 integration test 覆盖一条连续主流程：
 
-Chrome / ChromeDriver 版本、端口、profile、fixture clock 和数据库位置都写入失败 artifact。
+1. 从固定 fixture 启动并发布一条本地资源；
+2. 关闭应用与数据库，再从本地详情 URL 打开，确认记录仍在；
+3. 打开 `r-001` 并认领；
+4. 再次关闭应用与数据库，从 `r-001` 详情 URL 打开；
+5. 确认“我已认领”状态仍在。
+
+fixture 跨浏览器恢复、本地链接在空数据库中的边界说明、URL query、三档布局、200% 文本、RTL、reduced motion、发布错误焦点与复制本地链接警告由 Unit / Widget 测试覆盖。Back / Forward、全新浏览器 profile、窄屏纯键盘和网络阻断仍属于人工浏览器验收，不应写成 integration test 已覆盖。
+
+Chrome / ChromeDriver 版本、端口和基础工具信息会写入失败 artifact；当前脚本没有记录独立 profile 路径、fixture clock 或数据库文件位置。
 
 #### Release / Pages
 
@@ -747,6 +794,8 @@ flutter build web --release `
 
 构建后从实际子路径检查 `index.html`、JavaScript、本地 CanvasKit、字体、`sqlite3.wasm`、`drift_worker.js`、hash 深链接与刷新持久化；再合并进单一 Pages staging。升级 Flutter 后首先复核 `--pwa-strategy` 与 `--no-web-resources-cdn` 的工具行为，命令不能无条件复制到新版本。
 
+**实现证据：** 项目当前有 26 项 Unit / Repository / Drift / Widget 测试和 1 条 Chrome integration 主流程；`flutter analyze`、`flutter test`、Chrome integration、独立 release、13 项目全量 release、Pages staging smoke 均已通过。三档实际浏览器检查没有 console error / warning。production Pages 尚未部署验收。
+
 ### 10.8 明确不做
 
 - 不做账号、真实身份、云同步或远程后端；
@@ -760,6 +809,8 @@ flutter build web --release `
 - 不把 fixture 人名、片区或资源写成真实个人与真实地址。
 
 ### 10.9 项目验收矩阵
+
+这张表定义项目要提供的证据，不表示每一行都由同一个自动脚本完成。Unit / Widget / integration、release HTTP smoke 与人工浏览器验收要分别署名，正文引用时也要说清证据来源。
 
 | 项目 | 通过条件 |
 | --- | --- |
@@ -800,19 +851,24 @@ flutter build web --release `
 | 误讲 | 正确边界 |
 | --- | --- |
 | “用了 workspace 就共享代码” | workspace 共享解析与工具上下文；成员只有显式依赖才共享代码。 |
+| “workspace 成员只能用 path dependency 互相依赖” | 声明普通依赖即可；匹配的本地 workspace 成员会优先参与解析，版本仍须满足约束。 |
 | “提交 lockfile 就完全可复现” | 还要固定 SDK、工具、action、命令、平台和外部下载；locked install 负责尽早暴露漂移。 |
+| “`node-version: 22` 固定了精确 Node 版本” | 它固定主版本；补丁版本与 runner image 仍会变化。 |
 | “cache 保证依赖一致” | cache 只复用下载，lockfile 与 hash 校验决定解析输入。 |
+| “`--name-only` 能完整处理跨项目 rename” | rename 选择需要 `--name-status -z` 的旧、新路径；本仓库已按这个格式解析。 |
 | “`--dart-define` 能藏 API key” | Web 客户端值可被检查，不能承载秘密。 |
 | “`flutter build web` 成功就发布成功” | 还要验证 base path、HTTP、MIME、hash 深链接、缓存、数据库和 Pages。 |
 | “`--wasm` 一定更快” | 需要兼容性、响应头、fallback 和固定 workload 测量。 |
 | “浏览器缓存就是 PWA” | HTTP cache 与 Service Worker 是不同机制；首版不做 PWA。 |
 | “Flutter 默认 service worker 是长期推荐” | 3.47.0 仍生成，但工具已弃用并计划移除；课程只写版本内过渡。 |
 | “Pages artifact 可以长期回滚” | upload action 默认保留 1 天；首版从成功 commit SHA 重建。 |
+| “staging HTTP smoke 已验证浏览器任务和第三方请求” | 当前 smoke 只检查 HTTP 入口、声明资源与 MIME；浏览器、键盘和网络边界另验。 |
 | “Semantics 测试通过就是 WCAG AA” | 自动测试只是证据之一，还需要人工键盘、读屏、对比度和任务检查。 |
 | “pub.dev 显示平台支持就算验证过” | 包声明与本站实测分开记录。 |
 | “权限申请一次后永久有效” | 权限和 capability 会变化，resume 后需要重查。 |
 | “Web 测试通过就证明原生插件可用” | 原生宿主实现、权限和设备行为需要独立平台证据。 |
 | “outdated 有新版就应自动升级” | 先读迁移资料，按风险拆批，审查 lockfile 并跑受影响项目。 |
+| “dependency review 已覆盖 pub workspace” | 当前 pub dependency graph 能力有限，workflow 也未接入该 action；保留 lockfile 与人工许可审查。 |
 | “邻里资源交换站验证了真实并发” | 项目只验证本地顺序事务和 UI 状态，不模拟服务器竞争。 |
 | “复制链接后别人能看到我发布或认领的内容” | fixture 深链接可跨浏览器恢复；本地发布与认领只在当前浏览器，本地链接在其他浏览器显示边界说明。 |
 
@@ -828,6 +884,13 @@ flutter build web --release `
 - [dart fix](https://dart.dev/tools/dart-fix)（查阅：2026-08-31）
 - [pnpm install](https://pnpm.io/cli/install)（查阅：2026-08-31）
 
+### Git 与 VitePress
+
+- [`git diff`](https://git-scm.com/docs/git-diff)（查阅：2026-08-31）
+- [`git diff` format options](https://git-scm.com/docs/diff-options)（查阅：2026-08-31）
+- [VitePress site config: `base`](https://vitepress.dev/reference/site-config#base)（查阅：2026-08-31）
+- [VitePress deployment guide](https://vitepress.dev/guide/deploy#github-pages)（查阅：2026-08-31）
+
 ### Flutter Web 与平台扩展
 
 - [Build and release a web app](https://docs.flutter.dev/deployment/web)（查阅：2026-08-31）
@@ -838,6 +901,7 @@ flutter build web --release `
 - [Flutter `build_web.dart` 3.47.0](https://github.com/flutter/flutter/blob/3.47.0/packages/flutter_tools/lib/src/commands/build_web.dart)（查阅：2026-08-31）
 - [Flutter `flutter_command.dart` 3.47.0](https://github.com/flutter/flutter/blob/3.47.0/packages/flutter_tools/lib/src/runner/flutter_command.dart)（查阅：2026-08-31）
 - [Flutter `compile.dart` 3.47.0](https://github.com/flutter/flutter/blob/3.47.0/packages/flutter_tools/lib/src/web/compile.dart)（查阅：2026-08-31）
+- [Flutter service worker generator 3.47.0](https://github.com/flutter/flutter/blob/3.47.0/packages/flutter_tools/lib/src/web/file_generators/flutter_service_worker_js.dart)（查阅：2026-08-31）
 - [Using packages](https://docs.flutter.dev/packages-and-plugins/using-packages)（查阅：2026-08-31）
 - [Developing packages & plugins](https://docs.flutter.dev/packages-and-plugins/developing-packages)（查阅：2026-08-31）
 - [Writing custom platform-specific code](https://docs.flutter.dev/platform-integration/platform-channels)（查阅：2026-08-31）
@@ -848,9 +912,12 @@ flutter build web --release `
 ### GitHub Actions 与 Pages
 
 - [Using custom workflows with GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages)（查阅：2026-08-31）
+- [GitHub Actions: `workflow_run`](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#workflow_run)（查阅：2026-08-31）
 - [actions/upload-pages-artifact](https://github.com/actions/upload-pages-artifact)（查阅：2026-08-31）
+- [pinned upload-pages-artifact `action.yml`](https://github.com/actions/upload-pages-artifact/blob/56afc609e74202658d3ffba0e8f6dda462b719fa/action.yml)（查阅：2026-08-31）
 - [actions/deploy-pages](https://github.com/actions/deploy-pages)（查阅：2026-08-31）
 - [actions/setup-node advanced usage](https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md)（查阅：2026-08-31）
+- [GitHub-hosted runner images](https://github.com/actions/runner-images)（查阅：2026-08-31）
 - [Security hardening for GitHub Actions](https://docs.github.com/en/actions/security-for-github-actions/security-guides/security-hardening-for-github-actions)（查阅：2026-08-31）
 - [dependency-review-action](https://github.com/actions/dependency-review-action)（查阅：2026-08-31）
 - [Dependency graph supported package ecosystems](https://docs.github.com/en/code-security/reference/supply-chain-security/dependency-graph-supported-package-ecosystems)（查阅：2026-08-31）
@@ -867,13 +934,22 @@ flutter build web --release `
 - [BSD 3-Clause](https://opensource.org/license/bsd-3-clause)（查阅：2026-08-31）
 - [Flutter brand guidelines](https://flutter.dev/brand)（查阅：2026-08-31）
 
-## 14. 进入实现前仍需验证
+## 14. 写作前的实现核对
 
-1. 为 13 个项目定义唯一 slug 清单，并让 workspace、项目矩阵、staging 合并和 smoke test 共用同一数据源。
-2. 实现受影响项目算法的 fixture 测试，覆盖 rename、delete、根 lockfile、共享脚本、workflow 与 Flutter 版本变化。
-3. 在 GitHub-hosted runner 上确定 Chrome / ChromeDriver 的安装与版本匹配方式，再固定 action SHA 和端口分配。
-4. 在 Pages staging 与 production 检查旧 Worker 的注销和更新行为；本地 3.47.0 产物探针已确认 0 字节 worker 与无注册配置，升级时仍要重新核对 #156910。
-5. 验证 GitHub Pages 对 `sqlite3.wasm`、Worker、字体和缓存响应的实际行为，不用本地静态服务器结果代替。
-6. 验证 dependency graph 对根 pub workspace 与 pnpm lockfile 的识别范围；识别不到的部分保留 lockfile diff 与人工许可清单，不能假装 action 已覆盖。
-7. 实现“邻里资源交换站”前先冻结 48 条 fixture、claim 幂等规则、Drift schema、URL query 与 `CONTENT_VERSION` 显示位置。
-8. Pages workflow 落地时新增 ADR 或更新 ADR-0017，记录 action SHA、artifact 目录、失败保留和从 commit SHA 回滚的实际命令。
+### 已确认
+
+1. `tool/projects.json` 是 13 个项目的唯一清单，受影响项目检测、独立构建、staging 合并和 smoke 共用它；重复 slug、路径和项目数量都有校验。
+2. “邻里资源交换站”的 48 条 fixture、claim 幂等事务、Drift schema、URL query、本地数据边界与 `CONTENT_VERSION` 已实现并通过现有测试。
+3. 受影响项目读取使用 `--name-status -z --find-renames`，7 项 Node 测试覆盖 rename 两端、共享输入、站点输入与未知项目回退。
+4. ChromeDriver 安装脚本按 Chrome build 查询 Chrome for Testing 元数据，验证 job 记录完整版本和固定端口。
+5. 两个 workflow 已固定 action SHA；PR 运行受影响项目，main 运行全量项目，Pages 只消费成功的同仓库 main Verify。
+6. 13 个 release Web 构建、单一 Pages staging 合并、声明的 Wasm / Worker 资源和 MIME smoke 已通过；actionlint 也已通过。
+7. Flutter 3.47.0 的 release 产物使用本地 CanvasKit，`flutter_service_worker.js` 为 0 字节；升级 SDK 时仍需重新检查。
+
+### 正文必须保留的未决项
+
+1. 首次 GitHub Pages 部署后检查 production URL、`sqlite3.wasm` / Worker / 字体的真实响应、缓存更新、旧 Service Worker 注销和 hash 深链接刷新。
+2. 浏览器层补齐网络阻断、纯键盘与 Back / Forward 的可重复验收；当前 `release:smoke` 不包含这些检查。
+3. 若接入 dependency review，先确认仓库 dependency graph 对 pnpm 和 pub 的实际快照，再决定 job 范围；pub 继续保留 lockfile diff 与人工许可清单。
+4. 若课程要把 Node 也写成精确工具输入，把 `node-version: 22` 改成完整版本；否则明确它只是 Node 22 基线。
+5. ADR-0017 已记录单一 Pages artifact 的架构决定，但尚未记录固定 action SHA、失败保留与按 commit SHA 重建的操作细节；这些内容先放教程与发布清单，若成为长期治理合同再补 ADR。

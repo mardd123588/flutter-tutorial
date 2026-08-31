@@ -127,6 +127,19 @@ export default defineConfig({
             { text: '项目：数字档案浏览器', link: '/guide/part-07/07-digital-archive-browser' },
           ],
         },
+        {
+          text: '第八部分 · 工程化、Web 发布与平台扩展',
+          collapsed: false,
+          items: [
+            { text: 'Workspace、依赖与配置', link: '/guide/part-08/01-workspace-dependencies-config' },
+            { text: '可复现 CI 与受影响项目', link: '/guide/part-08/02-reproducible-ci' },
+            { text: 'Flutter Web release 与子路径', link: '/guide/part-08/03-flutter-web-release' },
+            { text: 'GitHub Pages artifact 与发布', link: '/guide/part-08/04-github-pages-publishing' },
+            { text: '平台插件、权限与平台通道', link: '/guide/part-08/05-platform-plugins-permissions-channels' },
+            { text: '发布质量、隐私、许可与升级', link: '/guide/part-08/06-release-quality-privacy-upgrades' },
+            { text: '项目：邻里资源交换站', link: '/guide/part-08/07-neighborhood-exchange' },
+          ],
+        },
       ],
       '/reference/': [
         {

@@ -62,14 +62,31 @@ function isWithin(path, directory) {
 }
 
 function readChangedPaths(base, head) {
-  const output = execFileSync('git', ['diff', '--name-only', '-z', `${base}...${head}`], {
-    encoding: 'buffer',
-    maxBuffer: 16 * 1024 * 1024,
-  });
-  return output
-    .toString('utf8')
-    .split('\0')
-    .filter(Boolean);
+  const output = execFileSync(
+    'git',
+    ['diff', '--name-status', '-z', '--find-renames', `${base}...${head}`],
+    {
+      encoding: 'buffer',
+      maxBuffer: 16 * 1024 * 1024,
+    },
+  );
+  return parseNameStatus(output.toString('utf8'));
+}
+
+export function parseNameStatus(output) {
+  const fields = output.split('\0');
+  const paths = [];
+  for (let index = 0; index < fields.length; ) {
+    const status = fields[index++];
+    if (!status) break;
+    const firstPath = fields[index++];
+    if (firstPath) paths.push(firstPath);
+    if (status.startsWith('R') || status.startsWith('C')) {
+      const secondPath = fields[index++];
+      if (secondPath) paths.push(secondPath);
+    }
+  }
+  return paths;
 }
 
 async function main() {

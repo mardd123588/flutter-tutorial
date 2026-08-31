@@ -5,7 +5,7 @@ description: 首版 58 章的八部分结构与当前完成状态。
 
 # 学习路线
 
-首版规划 58 章，分为八个部分。前七部分共 51 章已经完成正文与项目实现。
+首版 58 章已经完成正文与项目实现，按八个部分组织。
 
 | 部分 | 章节 | 当前状态 | 统筹项目 |
 | --- | ---: | --- | --- |
@@ -16,7 +16,7 @@ description: 首版 58 章的八部分结构与当前完成状态。
 | [05 · 导航、自适应、可访问性与国际化](#part-05) | 7 | `verified` | 场馆导览册 |
 | [06 · 应用架构与生态主方案](#part-06) | 8 | `verified` | 社区工坊排期台 |
 | [07 · 测试、调试、渲染与性能](#part-07) | 7 | `verified` | 数字档案浏览器 |
-| [08 · 工程化、Web 发布与平台扩展](#part-08) | 7 | `not-started` | 邻里资源交换站 |
+| [08 · 工程化、Web 发布与平台扩展](#part-08) | 7 | `verified` | 邻里资源交换站 |
 
 ## 第一部分：起步与 Flutter 所需 Dart {#part-01}
 
@@ -64,4 +64,4 @@ description: 首版 58 章的八部分结构与当前完成状态。
 
 覆盖 workspace、可复现 CI、Flutter Web release、GitHub Pages、平台插件边界、隐私、许可与升级。统筹项目是邻里资源交换站。
 
-完整章节定义和验收条件见 [首版规格 #1](https://github.com/mardd123588/flutter-tutorial/issues/1)。
+[从 Workspace 开始](/guide/part-08/01-workspace-dependencies-config) · [查看 Flutter Web release](/guide/part-08/03-flutter-web-release) · [查看邻里资源交换站](/guide/part-08/07-neighborhood-exchange)

@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 
-import { selectAffectedProjects } from './affected_projects.mjs';
+import { parseNameStatus, selectAffectedProjects } from './affected_projects.mjs';
 
 const projects = [
   {
@@ -37,6 +37,19 @@ test('rename paths select both source and destination projects', () => {
     'alpha',
     'beta',
   ]);
+});
+
+test('git name-status parsing keeps both sides of renames', () => {
+  assert.deepEqual(
+    parseNameStatus(
+      'M\0site/guide/index.md\0R100\0examples/capstones/alpha/lib/old.dart\0examples/focus/beta/lib/new.dart\0',
+    ),
+    [
+      'site/guide/index.md',
+      'examples/capstones/alpha/lib/old.dart',
+      'examples/focus/beta/lib/new.dart',
+    ],
+  );
 });
 
 test('workspace and workflow inputs select every project', () => {
