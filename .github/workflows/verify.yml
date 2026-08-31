@@ -1,0 +1,104 @@
+name: Verify
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: verify-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  scope:
+    runs-on: ubuntu-24.04
+    outputs:
+      matrix: ${{ steps.affected.outputs.matrix }}
+      has_projects: ${{ steps.affected.outputs.has_projects }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 22
+      - name: Enable pnpm
+        run: corepack enable
+      - name: Install Node dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Check repository tools and content
+        run: |
+          pnpm projects:check
+          pnpm docs:check
+          pnpm docs:build
+      - name: Select affected projects
+        id: affected
+        shell: bash
+        run: |
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            node tool/ci/affected_projects.mjs \
+              --base "${{ github.event.pull_request.base.sha }}" \
+              --head "${{ github.event.pull_request.head.sha }}" \
+              --github-output "$GITHUB_OUTPUT"
+          else
+            node tool/ci/affected_projects.mjs --all --github-output "$GITHUB_OUTPUT"
+          fi
+
+  projects:
+    needs: scope
+    if: needs.scope.outputs.has_projects == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.scope.outputs.matrix) }}
+    env:
+      CHROME_BINARY: google-chrome
+      CHROMEDRIVER_PORT: 4444
+      FLUTTER_WEB_PORT: 7357
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 22
+      - uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2
+        with:
+          flutter-version: 3.47.0
+          channel: stable
+          cache: true
+      - name: Resolve locked Flutter workspace
+        run: flutter pub get --enforce-lockfile
+      - name: Install matching ChromeDriver
+        run: node tool/ci/install_chromedriver.mjs
+      - name: Verify ${{ matrix.slug }}
+        run: node tool/ci/verify_project.mjs --project "${{ matrix.slug }}" --integration --build
+      - name: Upload failure evidence
+        if: failure()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: verify-${{ matrix.slug }}-${{ github.sha }}
+          path: build/ci-logs/${{ matrix.slug }}
+          if-no-files-found: warn
+          retention-days: 7
+
+  complete:
+    if: always()
+    needs: [scope, projects]
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Confirm required jobs
+        env:
+          SCOPE_RESULT: ${{ needs.scope.result }}
+          PROJECTS_RESULT: ${{ needs.projects.result }}
+          HAS_PROJECTS: ${{ needs.scope.outputs.has_projects }}
+        run: |
+          test "$SCOPE_RESULT" = success
+          if [ "$HAS_PROJECTS" = true ]; then
+            test "$PROJECTS_RESULT" = success
+          else
+            test "$PROJECTS_RESULT" = skipped
+          fi

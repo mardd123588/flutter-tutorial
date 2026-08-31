@@ -1,0 +1,402 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-31T04:44:24.8013848Z",
+  "title": "Design System: 邻里资源交换站",
+  "extensions": {
+    "colorMeta": {
+      "garden-ink": {
+        "role": "primary",
+        "displayName": "深花园墨",
+        "tonalRamp": [
+          "oklch(15% 0.030 171.3)",
+          "oklch(27% 0.030 171.3)",
+          "oklch(39% 0.030 171.3)",
+          "oklch(51% 0.030 171.3)",
+          "oklch(63% 0.030 171.3)",
+          "oklch(75% 0.030 171.3)",
+          "oklch(87% 0.030 171.3)",
+          "oklch(95% 0.030 171.3)"
+        ]
+      },
+      "garden-ink-soft": {
+        "role": "neutral",
+        "displayName": "柔和花园墨",
+        "tonalRamp": [
+          "oklch(15% 0.028 168.5)",
+          "oklch(27% 0.028 168.5)",
+          "oklch(39% 0.028 168.5)",
+          "oklch(51% 0.028 168.5)",
+          "oklch(63% 0.028 168.5)",
+          "oklch(75% 0.028 168.5)",
+          "oklch(87% 0.028 168.5)",
+          "oklch(95% 0.028 168.5)"
+        ]
+      },
+      "noticeboard": {
+        "role": "neutral",
+        "displayName": "公告板米色",
+        "tonalRamp": [
+          "oklch(15% 0.031 90.3)",
+          "oklch(27% 0.031 90.3)",
+          "oklch(39% 0.031 90.3)",
+          "oklch(51% 0.031 90.3)",
+          "oklch(63% 0.031 90.3)",
+          "oklch(75% 0.031 90.3)",
+          "oklch(87% 0.031 90.3)",
+          "oklch(95% 0.031 90.3)"
+        ]
+      },
+      "civic-paper": {
+        "role": "neutral",
+        "displayName": "社区纸",
+        "tonalRamp": [
+          "oklch(15% 0.022 89.8)",
+          "oklch(27% 0.022 89.8)",
+          "oklch(39% 0.022 89.8)",
+          "oklch(51% 0.022 89.8)",
+          "oklch(63% 0.022 89.8)",
+          "oklch(75% 0.022 89.8)",
+          "oklch(87% 0.022 89.8)",
+          "oklch(95% 0.022 89.8)"
+        ]
+      },
+      "civic-paper-muted": {
+        "role": "neutral",
+        "displayName": "静音社区纸",
+        "tonalRamp": [
+          "oklch(15% 0.028 88.8)",
+          "oklch(27% 0.028 88.8)",
+          "oklch(39% 0.028 88.8)",
+          "oklch(51% 0.028 88.8)",
+          "oklch(63% 0.028 88.8)",
+          "oklch(75% 0.028 88.8)",
+          "oklch(87% 0.028 88.8)",
+          "oklch(95% 0.028 88.8)"
+        ]
+      },
+      "action-rust": {
+        "role": "secondary",
+        "displayName": "行动锈红",
+        "tonalRamp": [
+          "oklch(15% 0.140 33.3)",
+          "oklch(27% 0.140 33.3)",
+          "oklch(39% 0.140 33.3)",
+          "oklch(51% 0.140 33.3)",
+          "oklch(63% 0.140 33.3)",
+          "oklch(75% 0.140 33.3)",
+          "oklch(87% 0.140 33.3)",
+          "oklch(95% 0.140 33.3)"
+        ]
+      },
+      "availability-green": {
+        "role": "primary",
+        "displayName": "配额绿",
+        "tonalRamp": [
+          "oklch(15% 0.065 153.5)",
+          "oklch(27% 0.065 153.5)",
+          "oklch(39% 0.065 153.5)",
+          "oklch(51% 0.065 153.5)",
+          "oklch(63% 0.065 153.5)",
+          "oklch(75% 0.065 153.5)",
+          "oklch(87% 0.065 153.5)",
+          "oklch(95% 0.065 153.5)"
+        ]
+      },
+      "selection-green": {
+        "role": "primary",
+        "displayName": "选中浅绿",
+        "tonalRamp": [
+          "oklch(15% 0.035 126.5)",
+          "oklch(27% 0.035 126.5)",
+          "oklch(39% 0.035 126.5)",
+          "oklch(51% 0.035 126.5)",
+          "oklch(63% 0.035 126.5)",
+          "oklch(75% 0.035 126.5)",
+          "oklch(87% 0.035 126.5)",
+          "oklch(95% 0.035 126.5)"
+        ]
+      },
+      "focus-gold": {
+        "role": "tertiary",
+        "displayName": "焦点金",
+        "tonalRamp": [
+          "oklch(15% 0.124 76.1)",
+          "oklch(27% 0.124 76.1)",
+          "oklch(39% 0.124 76.1)",
+          "oklch(51% 0.124 76.1)",
+          "oklch(63% 0.124 76.1)",
+          "oklch(75% 0.124 76.1)",
+          "oklch(87% 0.124 76.1)",
+          "oklch(95% 0.124 76.1)"
+        ]
+      },
+      "local-blue": {
+        "role": "tertiary",
+        "displayName": "本地边界蓝",
+        "tonalRamp": [
+          "oklch(15% 0.051 210.3)",
+          "oklch(27% 0.051 210.3)",
+          "oklch(39% 0.051 210.3)",
+          "oklch(51% 0.051 210.3)",
+          "oklch(63% 0.051 210.3)",
+          "oklch(75% 0.051 210.3)",
+          "oklch(87% 0.051 210.3)",
+          "oklch(95% 0.051 210.3)"
+        ]
+      },
+      "rule-gray": {
+        "role": "neutral",
+        "displayName": "规则灰",
+        "tonalRamp": [
+          "oklch(15% 0.023 81.7)",
+          "oklch(27% 0.023 81.7)",
+          "oklch(39% 0.023 81.7)",
+          "oklch(51% 0.023 81.7)",
+          "oklch(63% 0.023 81.7)",
+          "oklch(75% 0.023 81.7)",
+          "oklch(87% 0.023 81.7)",
+          "oklch(95% 0.023 81.7)"
+        ]
+      },
+      "error-red": {
+        "role": "tertiary",
+        "displayName": "错误红",
+        "tonalRamp": [
+          "oklch(15% 0.154 25.0)",
+          "oklch(27% 0.154 25.0)",
+          "oklch(39% 0.154 25.0)",
+          "oklch(51% 0.154 25.0)",
+          "oklch(63% 0.154 25.0)",
+          "oklch(75% 0.154 25.0)",
+          "oklch(87% 0.154 25.0)",
+          "oklch(95% 0.154 25.0)"
+        ]
+      },
+      "action-white": {
+        "role": "neutral",
+        "displayName": "行动白",
+        "tonalRamp": [
+          "oklch(15% 0 0)",
+          "oklch(27% 0 0)",
+          "oklch(39% 0 0)",
+          "oklch(51% 0 0)",
+          "oklch(63% 0 0)",
+          "oklch(75% 0 0)",
+          "oklch(87% 0 0)",
+          "oklch(95% 0 0)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "独立任务主标题",
+        "purpose": "发布页和边界说明页的主标题；中文按平台字族回退。"
+      },
+      "headline": {
+        "displayName": "公告标题",
+        "purpose": "浏览页问题句和资源详情标题。"
+      },
+      "subheadline": {
+        "displayName": "工作区标题",
+        "purpose": "筛选簿、状态面板和次级任务标题。"
+      },
+      "title": {
+        "displayName": "资源标题",
+        "purpose": "站名、公告标题和主要信息组。"
+      },
+      "body": {
+        "displayName": "正文",
+        "purpose": "资源说明、数据边界和表单帮助。"
+      },
+      "body-compact": {
+        "displayName": "紧凑正文",
+        "purpose": "公告摘要和次级说明。"
+      },
+      "label": {
+        "displayName": "动作与状态标签",
+        "purpose": "按钮、状态、剩余数量和事实名称。"
+      }
+    },
+    "shadows": [
+      {
+        "name": "notice-rest",
+        "value": "Material elevation 2; shadowColor rgba(32, 53, 46, 0.24)",
+        "purpose": "可点击公告的静置高度。"
+      },
+      {
+        "name": "notice-selected",
+        "value": "Material elevation 6; shadowColor rgba(32, 53, 46, 0.24)",
+        "purpose": "当前选中公告的抬升高度。"
+      },
+      {
+        "name": "detail-standalone",
+        "value": "Material elevation 3; shadowColor rgba(32, 53, 46, 0.18)",
+        "purpose": "独立详情路由中的纸面高度；嵌入详情保持 elevation 0。"
+      }
+    ],
+    "motion": [
+      {
+        "name": "detail-enter",
+        "value": "220ms easeOutCubic; opacity 0→1; translateX 4%→0",
+        "purpose": "宽屏详情原位替换时说明新内容进入。"
+      },
+      {
+        "name": "detail-exit",
+        "value": "220ms easeInCubic; opacity 1→0; translateX 0→4%",
+        "purpose": "宽屏详情原位替换时让旧内容离开。"
+      },
+      {
+        "name": "reduced-motion",
+        "value": "0ms",
+        "purpose": "MediaQuery.disableAnimations 为 true 时移除详情过渡。"
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "notice-slip-stacked",
+        "value": "420px"
+      },
+      {
+        "name": "grid-two-columns",
+        "value": "560px"
+      },
+      {
+        "name": "header-compact",
+        "value": "640px"
+      },
+      {
+        "name": "browse-medium",
+        "value": "700px"
+      },
+      {
+        "name": "form-two-columns",
+        "value": "720px"
+      },
+      {
+        "name": "browse-wide",
+        "value": "1100px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Service Header",
+      "kind": "nav",
+      "refersTo": "service-header",
+      "description": "深色服务栏同时保留站点身份、边界入口和发布动作。",
+      "html": "<nav class=\"ds-service-header\"><span class=\"ds-service-mark\"><i></i><i></i><i></i></span><strong>邻里资源交换站</strong><span class=\"ds-service-actions\"><button>预览边界</button><button class=\"ds-service-publish\">发布资源</button></span></nav>",
+      "css": ".ds-service-header { display:flex; align-items:center; gap:12px; padding:12px 18px; background:#20352E; color:#FFF9E9; font:800 20px/1.2 Georgia,system-ui,sans-serif; } .ds-service-mark { position:relative; width:38px; height:38px; flex:0 0 38px; } .ds-service-mark i { position:absolute; display:block; width:25px; height:27px; } .ds-service-mark i:nth-child(1) { left:3px; top:5px; background:#FFF9E9; } .ds-service-mark i:nth-child(2) { left:8px; top:0; background:#DCE7CE; } .ds-service-mark i:nth-child(3) { left:13px; top:10px; width:22px; height:25px; background:#A9422D; } .ds-service-actions { margin-left:auto; display:flex; gap:8px; flex-wrap:wrap; } .ds-service-actions button { min-height:48px; padding:0 16px; border:0; border-radius:8px; background:transparent; color:#FFF9E9; font:800 14px system-ui,sans-serif; } .ds-service-actions button:hover { background:rgba(63,104,76,.12); } .ds-service-actions button:focus-visible { outline:3px solid #C18A2D; outline-offset:2px; } .ds-service-actions .ds-service-publish { background:#A9422D; color:#fff; } @media (max-width:639px) { .ds-service-header { align-items:flex-start; flex-wrap:wrap; } .ds-service-actions { width:100%; margin-left:0; } }"
+    },
+    {
+      "name": "Primary Action",
+      "kind": "button",
+      "refersTo": "action-primary",
+      "description": "发布、认领和明确确认使用的锈红主动作。",
+      "html": "<button class=\"ds-action-primary\">发布到当前浏览器</button>",
+      "css": ".ds-action-primary { min-height:48px; padding:0 18px; border:0; border-radius:8px; background:#A9422D; color:#fff; font:800 14px system-ui,sans-serif; } .ds-action-primary:hover { background:linear-gradient(rgba(63,104,76,.12),rgba(63,104,76,.12)),#A9422D; } .ds-action-primary:focus-visible { outline:3px solid #C18A2D; outline-offset:2px; } .ds-action-primary:active { filter:brightness(.92); }"
+    },
+    {
+      "name": "Outlined Action",
+      "kind": "button",
+      "refersTo": "action-outline",
+      "description": "取消、复制链接和恢复演示数据使用的次要动作。",
+      "html": "<button class=\"ds-action-outline\">复制链接</button>",
+      "css": ".ds-action-outline { min-height:48px; padding:0 18px; border:1.2px solid #20352E; border-radius:8px; background:transparent; color:#20352E; font:800 14px system-ui,sans-serif; } .ds-action-outline:hover { background:rgba(63,104,76,.12); } .ds-action-outline:focus-visible { outline:3px solid #C18A2D; outline-offset:2px; } .ds-action-outline:active { background:rgba(63,104,76,.2); }"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "text-field",
+      "description": "搜索和发布表单共用的暖纸输入框。",
+      "html": "<label class=\"ds-field\"><span>资源名称</span><input type=\"text\" placeholder=\"例如：折叠野餐桌\"></label>",
+      "css": ".ds-field { display:grid; gap:6px; color:#20352E; font:800 14px system-ui,sans-serif; } .ds-field input { min-height:48px; padding:0 14px; border:1px solid #7B7365; border-radius:8px; background:#FFF9E9; color:#20352E; font:400 16px/1.48 system-ui,sans-serif; } .ds-field input:hover { border-color:#3D5149; } .ds-field input:focus-visible { border:3px solid #C18A2D; outline:0; } .ds-field input:invalid { border:2px solid #A52F2F; }"
+    },
+    {
+      "name": "Available Status Label",
+      "kind": "chip",
+      "refersTo": "status-label",
+      "description": "在公告开头直接说明可认领状态。",
+      "html": "<span class=\"ds-status-available\">可认领</span>",
+      "css": ".ds-status-available { display:inline-flex; align-items:center; padding:4px 8px; border-radius:4px; background:#3F684C; color:#fff; font:800 14px/1.2 system-ui,sans-serif; }"
+    },
+    {
+      "name": "Notice Card",
+      "kind": "card",
+      "refersTo": "notice-card",
+      "description": "公告正文与剩余数量通过穿孔取用签保持在同一可点击对象内。",
+      "html": "<article class=\"ds-notice-card\" tabindex=\"0\"><div class=\"ds-notice-body\"><div><span class=\"ds-notice-status\">可认领</span><span class=\"ds-notice-category\">工具</span></div><h3>折叠手推车</h3><p>承重约 60 公斤，适合搬花盆和纸箱，车轮已检查。</p><strong>石桥巷 · 工作日 18:30–20:30</strong></div><aside class=\"ds-claim-slip\">余 1 份</aside></article>",
+      "css": ".ds-notice-card { display:grid; grid-template-columns:minmax(0,1fr) 104px; overflow:hidden; border-radius:2px; background:#FFF9E9; color:#20352E; box-shadow:0 2px 5px rgba(32,53,46,.24); font-family:system-ui,sans-serif; } .ds-notice-body { padding:18px; } .ds-notice-status,.ds-notice-category { display:inline-block; margin:0 8px 8px 0; padding:4px 8px; border-radius:4px; background:#3F684C; color:#fff; font-size:14px; font-weight:800; } .ds-notice-category { background:#3D5149; } .ds-notice-body h3 { margin:4px 0 8px; font:800 20px/1.2 system-ui,sans-serif; } .ds-notice-body p { margin:0 0 14px; color:#3D5149; font:400 14px/1.45 system-ui,sans-serif; } .ds-notice-body strong { font:800 14px/1.3 system-ui,sans-serif; } .ds-claim-slip { display:grid; place-items:center; padding:12px; border-left:1px dashed #7B7365; background:#3F684C; color:#fff; text-align:center; font:800 14px system-ui,sans-serif; } .ds-notice-card:hover { background:linear-gradient(rgba(63,104,76,.06),rgba(63,104,76,.06)),#FFF9E9; } .ds-notice-card:focus-visible { outline:3px solid #C18A2D; outline-offset:2px; } @media (max-width:419px) { .ds-notice-card { grid-template-columns:1fr; } .ds-claim-slip { min-height:62px; border-left:0; border-top:1px dashed #7B7365; } }"
+    },
+    {
+      "name": "Selected Notice Card",
+      "kind": "card",
+      "refersTo": "notice-card-selected",
+      "description": "浅绿纸面和更高 elevation 同时标记右侧详情的当前来源。",
+      "html": "<article class=\"ds-notice-selected\" tabindex=\"0\"><div><span>可认领</span><h3>折叠手推车</h3><p>承重约 60 公斤，适合搬花盆和纸箱。</p></div><aside>余 1 份</aside></article>",
+      "css": ".ds-notice-selected { display:grid; grid-template-columns:minmax(0,1fr) 104px; overflow:hidden; border-radius:2px; background:#DCE7CE; color:#20352E; box-shadow:0 6px 14px rgba(32,53,46,.24); font-family:system-ui,sans-serif; } .ds-notice-selected>div { padding:18px; } .ds-notice-selected span { display:inline-block; padding:4px 8px; border-radius:4px; background:#3F684C; color:#fff; font-size:14px; font-weight:800; } .ds-notice-selected h3 { margin:12px 0 8px; font-size:20px; } .ds-notice-selected p { margin:0; color:#3D5149; font-size:14px; line-height:1.45; } .ds-notice-selected aside { display:grid; place-items:center; padding:12px; border-left:1px dashed #7B7365; background:#3F684C; color:#fff; font-size:14px; font-weight:800; } .ds-notice-selected:hover { filter:brightness(.99); } .ds-notice-selected:focus-visible { outline:3px solid #C18A2D; outline-offset:2px; }"
+    },
+    {
+      "name": "Filter Ledger",
+      "kind": "custom",
+      "refersTo": "filter-ledger",
+      "description": "桌面值班筛选簿把筛选控制和演示身份集中在深色服务栏中。",
+      "html": "<section class=\"ds-filter-ledger\"><h3>值班筛选簿</h3><p>先缩小范围，再打开取用签。</p><label>片区<select><option>全部片区</option></select></label><label>类别<select><option>全部类别</option></select></label><button>清除全部条件</button></section>",
+      "css": ".ds-filter-ledger { display:grid; gap:14px; padding:18px; border-radius:12px; background:#20352E; color:#FFF9E9; font-family:system-ui,sans-serif; } .ds-filter-ledger h3 { margin:0; font:800 23px/1.12 Georgia,system-ui,sans-serif; } .ds-filter-ledger p { margin:-6px 0 8px; color:#F3EBD7; font-size:14px; line-height:1.45; } .ds-filter-ledger label { display:grid; gap:4px; color:#F3EBD7; font-size:12px; } .ds-filter-ledger select { min-height:48px; padding:0 14px; border:1px solid #7B7365; border-radius:8px; background:#FFF9E9; color:#20352E; font:800 16px system-ui,sans-serif; } .ds-filter-ledger select:hover { border-color:#C18A2D; } .ds-filter-ledger select:focus-visible { border:3px solid #C18A2D; outline:0; } .ds-filter-ledger button { min-height:48px; border:1.2px solid #F3EBD7; border-radius:8px; background:transparent; color:#FFF9E9; font:800 14px system-ui,sans-serif; } .ds-filter-ledger button:hover { background:rgba(63,104,76,.24); } .ds-filter-ledger button:focus-visible { outline:3px solid #C18A2D; outline-offset:2px; }"
+    },
+    {
+      "name": "Detail Sheet",
+      "kind": "custom",
+      "refersTo": "detail-sheet",
+      "description": "详情纸依次呈现状态、资源事实、本地边界和认领动作。",
+      "html": "<section class=\"ds-detail-sheet\"><span>可认领</span><h2>折叠手推车</h2><p>承重约 60 公斤，适合搬花盆和纸箱，车轮已检查。</p><dl><div><dt>剩余数量</dt><dd>1 / 1 份</dd></div><div><dt>可取时段</dt><dd>工作日 18:30–20:30</dd></div><div><dt>片区与交接</dt><dd>石桥巷 · 社区共享柜</dd></div></dl></section>",
+      "css": ".ds-detail-sheet { max-width:720px; padding:24px; border-radius:14px; background:#FFF9E9; color:#20352E; box-shadow:0 3px 8px rgba(32,53,46,.18); font-family:system-ui,sans-serif; } .ds-detail-sheet>span { display:inline-block; padding:4px 8px; border-radius:4px; background:#3F684C; color:#fff; font-size:14px; font-weight:800; } .ds-detail-sheet h2 { margin:18px 0 12px; font:800 29px/1.08 Georgia,system-ui,sans-serif; letter-spacing:-.5px; } .ds-detail-sheet p { margin:0 0 24px; font:400 16px/1.48 system-ui,sans-serif; } .ds-detail-sheet dl { display:grid; gap:16px; margin:0; padding-top:24px; border-top:1px solid #7B7365; } .ds-detail-sheet dl div { display:grid; gap:2px; } .ds-detail-sheet dt { font-size:14px; font-weight:800; } .ds-detail-sheet dd { margin:0; font-size:16px; line-height:1.48; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "值班公告板与取用签",
+    "overview": "界面像一张正在值班的社区公告板，而不是商品市场或匿名后台。深色服务栏承载站点身份和筛选工作，暖色公告纸承载资源事实，绿色取用签把数量和可认领状态直接接在公告上。锈红色只推动发布与认领等关键动作。\n\n系统优先保证任务扫描、数据边界和响应式重排。桌面把筛选、公告、详情同时摊开；中屏保留行内筛选；窄屏把筛选移入 bottom sheet，并把取用签转到公告下方。动效只解释详情替换，减少动画时立即归零。",
+    "keyCharacteristics": [
+      "深花园墨色服务栏与暖米色公告纸形成稳定的工作区层级。",
+      "方正公告纸连接虚线取用签，状态与动作不脱离资源事实。",
+      "锈红负责关键动作，配额绿负责可用、选中与成功，金色负责焦点。",
+      "布局在明确断点重组，不把桌面三栏压成不可读的缩略版。",
+      "本地发布、认领和跨浏览器可恢复范围始终写在界面上。"
+    ],
+    "rules": [
+      {
+        "name": "The Ink Rail Rule",
+        "body": "深花园墨只形成页头、筛选簿和筛选条等服务栏；资源正文与详情继续落在社区纸上。",
+        "section": "colors"
+      },
+      {
+        "name": "The Rust Means Action Rule",
+        "body": "行动锈红只标记发布、认领和确认，不用于装饰、状态标签或大面积背景。",
+        "section": "colors"
+      },
+      {
+        "name": "The Local Fallback Is a Constraint Rule",
+        "body": "中文平台字体回退是“不加载远程字体，也不打包第三方字体”的交付约束，不是任意更换展示字体的视觉许可；必须在 320、768 和 1440 宽度检查换行与截断。",
+        "section": "typography"
+      },
+      {
+        "name": "The Paper First Rule",
+        "body": "先用公告板、静音纸和社区纸的色差分层；只有可点击公告、当前选中项和独立详情获得低海拔阴影。",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do 把筛选和导航放在深色服务栏，把资源事实和表单放在暖色纸面。",
+      "Do 让公告、取用签、剩余数量和选中详情保持可追溯关系。",
+      "Do 保持按钮至少 48px 高，并让输入焦点以 3px 焦点金边线清楚可见。",
+      "Do 在 420、640、700、720 和 1100px 的实现断点检查重排，并覆盖 200% 文本与减少动画设置。",
+      "Do 直接说明哪些数据可跨浏览器恢复、哪些只保存在当前浏览器。"
+    ],
+    "donts": [
+      "Don't 把公告改成脱离交接信息的商品瓷砖、等尺寸市场卡片或匿名 dashboard 卡。",
+      "Don't 把行动锈红用于装饰性大底色，或用颜色代替“仅此浏览器”等边界文字。",
+      "Don't 给所有容器相同的大圆角、胶囊轮廓或硬偏移阴影。",
+      "Don't 在没有公告与取用关系的组件上复用穿孔线。",
+      "Don't 加载远程字体或打包第三方字体来强行统一中文字形。"
+    ]
+  }
+}

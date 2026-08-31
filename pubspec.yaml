@@ -17,3 +17,4 @@ workspace:
   - examples/focus/route_share_card
   - examples/focus/scroll_timeline
   - examples/capstones/digital_archive_browser
+  - examples/capstones/neighborhood_exchange

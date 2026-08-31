@@ -23,9 +23,9 @@ description: 8 个统筹项目和 5 个重点项目的实现与测试状态。
 | 社区工坊排期台 | 统筹 | 06-08 | `passing` |
 | 长卷时间轴 | 重点 | 07-06 | `passing` |
 | 数字档案浏览器 | 统筹 | 07-07 | `passing` |
-| 邻里资源交换站 | 统筹 | 08-07 | `not-started` |
+| 邻里资源交换站 | 统筹 | 08-07 | `passing` |
 
-`passing` 表示项目已有可运行实现，且当前适用的发布检查全部通过。当前完成到第七部分，共有十二个项目达到这个状态。
+`passing` 表示项目已有可运行实现，且当前适用的发布检查全部通过。13 个项目都达到这个状态；第八部分正文仍未编写。
 
 ## 今日节奏板验收状态
 
@@ -123,6 +123,12 @@ Unit、Widget 与 golden 共 11 项；Chrome profile 关键流程覆盖主题筛
 
 Unit、provider 与 Widget 共 16 项；Chrome profile 关键流程覆盖滚动、网格、Unicode 查询、详情返回和三项对照。测试固定 120 条记录、URL 往返、lazy materialization、loading / error / retry / empty、第四条拒绝的 live region 与焦点，以及 320×720、768×900、1440×900、200% 文本、RTL 和 reduced motion。Profile 基线记录 165 帧，build p90 为 `5.801ms`，raster p90 为 `3.801ms`。`Visual` 为 `not-applicable`：本项目不维护 golden，但已完成三档尺寸和实际 Chrome 视觉检查。
 
-邻里资源交换站的验收列目前均为 `not-started`。
+## 邻里资源交换站验收状态
+
+| Analyze | Unit | Widget | Integration | Release Web | Keyboard | Semantics | Responsive | Text scale | Motion | Visual |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `passing` | `passing` | `passing` | `passing` | `passing` | `passing` | `passing` | `passing` | `passing` | `passing` | `not-applicable` |
+
+Unit、Repository、Drift 与 Widget 共 26 项；Chrome 关键流程覆盖发布本地资源、重开浏览器数据库、认领 fixture 和持久化。测试固定 48 条资源、6 个片区和 6 个类别，覆盖 URL 归一化、幂等认领、loading / empty / error / retry、发布错误焦点、认领 live region、320×720、768×900、1440×900、200% 文本、RTL 和 reduced motion。独立 release 使用 `/flutter-tutorial/previews/neighborhood-exchange/`，并与其余 12 个预览和 VitePress 合并后通过 staging smoke。详情签只在宽屏打开时执行一次短过渡，reduced motion 下时长为零。`Visual` 为 `not-applicable`：本项目不维护 golden，但已完成三档实际浏览器检查。
 
 完整项目任务、风险和浏览器关键流程见 [首版规格 #1](https://github.com/mardd123588/flutter-tutorial/issues/1)。

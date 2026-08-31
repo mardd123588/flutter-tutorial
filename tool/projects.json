@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "projects": [
+    {"slug":"daily-rhythm-board","name":"今日节奏板","kind":"capstone","chapter":"01-07","path":"examples/capstones/daily_rhythm_board","integrationTest":"integration_test/daily_rhythm_board_test.dart"},
+    {"slug":"ticket-layout-studio","name":"票券排版器","kind":"focus","chapter":"02-02","path":"examples/focus/ticket_layout_studio","integrationTest":"integration_test/ticket_layout_studio_test.dart"},
+    {"slug":"micro-gallery-editor","name":"小型展览编辑器","kind":"capstone","chapter":"02-07","path":"examples/capstones/micro_gallery_editor","integrationTest":"integration_test/gallery_editor_test.dart"},
+    {"slug":"sortable-duty-board","name":"可排序值班板","kind":"focus","chapter":"03-03","path":"examples/focus/sortable_duty_board","integrationTest":"integration_test/sortable_duty_board_test.dart"},
+    {"slug":"plant-care-desk","name":"植物照护台","kind":"capstone","chapter":"03-07","path":"examples/capstones/plant_care_desk","integrationTest":"integration_test/plant_care_desk_test.dart"},
+    {"slug":"instant-book-search","name":"即时书目检索","kind":"focus","chapter":"04-04","path":"examples/focus/instant_book_search","integrationTest":"integration_test/instant_book_search_test.dart"},
+    {"slug":"city-event-radar","name":"城市活动雷达","kind":"capstone","chapter":"04-08","path":"examples/capstones/city_event_radar","integrationTest":"integration_test/city_event_radar_test.dart","webAssets":["sqlite3.wasm","drift_worker.js"]},
+    {"slug":"route-share-card","name":"路线分享卡","kind":"focus","chapter":"05-03","path":"examples/focus/route_share_card","integrationTest":"integration_test/route_share_card_test.dart"},
+    {"slug":"venue-guidebook","name":"场馆导览册","kind":"capstone","chapter":"05-07","path":"examples/capstones/venue_guidebook","integrationTest":"integration_test/venue_guidebook_test.dart"},
+    {"slug":"community-workshop-scheduler","name":"社区工坊排期台","kind":"capstone","chapter":"06-08","path":"examples/capstones/community_workshop_scheduler","integrationTest":"integration_test/community_workshop_scheduler_test.dart","webAssets":["sqlite3.wasm","drift_worker.js"]},
+    {"slug":"scroll-timeline","name":"长卷时间轴","kind":"focus","chapter":"07-06","path":"examples/focus/scroll_timeline","integrationTest":"integration_test/scroll_timeline_test.dart"},
+    {"slug":"digital-archive-browser","name":"数字档案浏览器","kind":"capstone","chapter":"07-07","path":"examples/capstones/digital_archive_browser","integrationTest":"integration_test/digital_archive_browser_test.dart"},
+    {"slug":"neighborhood-exchange","name":"邻里资源交换站","kind":"capstone","chapter":"08-07","path":"examples/capstones/neighborhood_exchange","integrationTest":"integration_test/neighborhood_exchange_test.dart","webAssets":["sqlite3.wasm","drift_worker.js"]}
+  ]
+}

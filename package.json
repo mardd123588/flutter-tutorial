@@ -11,11 +11,16 @@
     "docs:build": "vitepress build site",
     "docs:preview": "vitepress preview site",
     "docs:check": "node tool/site/validate-content.mjs",
-    "check": "pnpm docs:check && pnpm docs:build"
+    "projects:check": "node --test tool/ci/*.test.mjs",
+    "projects:affected": "node tool/ci/affected_projects.mjs",
+    "release:build:exchange": "node tool/release/build_project.mjs --project neighborhood-exchange",
+    "release:build:all": "node tool/release/build_all.mjs",
+    "release:stage": "node tool/release/assemble_pages.mjs",
+    "release:smoke": "node tool/release/smoke_staging.mjs",
+    "check": "pnpm projects:check && pnpm docs:check && pnpm docs:build"
   },
   "devDependencies": {
     "vitepress": "1.6.4",
     "vue": "3.5.42"
   }
 }
-
