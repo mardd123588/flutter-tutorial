@@ -1,0 +1,25 @@
+name: digital_archive_browser
+description: 第七部分统筹项目：支持 URL 恢复、对照与 profile 证据的数字档案浏览器。
+publish_to: none
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.13.0 <4.0.0'
+
+resolution: workspace
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_riverpod: 3.4.2
+  go_router: 18.0.0
+
+dev_dependencies:
+  flutter_lints: 6.0.0
+  flutter_test:
+    sdk: flutter
+  integration_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true

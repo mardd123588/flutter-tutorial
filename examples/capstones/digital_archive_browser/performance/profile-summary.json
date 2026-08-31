@@ -1,0 +1,21 @@
+{
+  "captured_at": "2026-08-31",
+  "flutter": "3.47.0 (4cf2416426)",
+  "dart": "3.13.0",
+  "chrome": "151.0.7922.174",
+  "mode": "web profile",
+  "renderer_baseline": "JavaScript default (CanvasKit)",
+  "viewport": "ChromeDriver default",
+  "workload": "scroll three segments, switch grid, restore Unicode query URL, open detail, return, compare three records",
+  "report_key": "archive_journey",
+  "frame_count": 165,
+  "average_frame_build_time_millis": 3.161,
+  "p90_frame_build_time_millis": 5.801,
+  "p99_frame_build_time_millis": 33.5,
+  "missed_frame_build_budget_count": 4,
+  "average_frame_rasterizer_time_millis": 1.709,
+  "p90_frame_rasterizer_time_millis": 3.801,
+  "p99_frame_rasterizer_time_millis": 9.5,
+  "missed_frame_rasterizer_budget_count": 2,
+  "threshold_policy": "evidence only; no cross-machine absolute pass/fail threshold"
+}

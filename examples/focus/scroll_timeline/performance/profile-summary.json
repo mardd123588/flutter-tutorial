@@ -1,0 +1,21 @@
+{
+  "captured_at": "2026-08-31",
+  "flutter": "3.47.0 (4cf2416426)",
+  "dart": "3.13.0",
+  "chrome": "151.0.7922.174",
+  "mode": "web profile",
+  "renderer_baseline": "JavaScript default (CanvasKit)",
+  "viewport": "ChromeDriver default",
+  "workload": "filter ecology, fling down eight times, fling up eight times",
+  "report_key": "long_scroll",
+  "frame_count": 595,
+  "average_frame_build_time_millis": 0.798,
+  "p90_frame_build_time_millis": 1.199,
+  "p99_frame_build_time_millis": 3.301,
+  "missed_frame_build_budget_count": 1,
+  "average_frame_rasterizer_time_millis": 1.179,
+  "p90_frame_rasterizer_time_millis": 1.5,
+  "p99_frame_rasterizer_time_millis": 3.301,
+  "missed_frame_rasterizer_budget_count": 1,
+  "threshold_policy": "evidence only; no cross-machine absolute pass/fail threshold"
+}

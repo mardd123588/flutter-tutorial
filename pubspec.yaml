@@ -15,3 +15,5 @@ workspace:
   - examples/focus/sortable_duty_board
   - examples/focus/ticket_layout_studio
   - examples/focus/route_share_card
+  - examples/focus/scroll_timeline
+  - examples/capstones/digital_archive_browser
