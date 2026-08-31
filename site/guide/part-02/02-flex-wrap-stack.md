@@ -18,6 +18,8 @@ status: verified
 
 先看内容关系，再选布局：一条主轴上的空间分配交给 Flex；数量受控、放不下就换行的内容交给 Wrap；确实需要重叠的局部交给 Stack。三者可以组合，但职责不要混在一起。
 
+票券排版器沿用上一章的[约束诊断顺序](/guide/part-02/01-constraints)。遇到尺寸与期望不一致时，先回查父约束，再判断 Flex、Wrap 或 Stack 的选择。
+
 ## Flex 先放普通子级，再分剩余空间
 
 `Row` 和 `Column` 都是 `Flex`。它们布局时，先处理 flex factor 为 0 的子级，再计算主轴剩余空间，然后按 factor 分给 `Expanded` 或 `Flexible` 子级。
@@ -88,7 +90,7 @@ cd examples/focus/ticket_layout_studio
 flutter run -d chrome
 ```
 
-项目维护一张确定性 golden。它用于发现排版回归，不负责证明键盘、语义或所有屏幕尺寸都正确：
+golden 测试把渲染结果与已审阅的基准图比较。项目维护一张确定性 golden，用于发现排版回归，不负责证明键盘、语义或所有屏幕尺寸都正确：
 
 <<< ../../../examples/focus/ticket_layout_studio/test/ticket_layout_studio_test.dart#golden-test{dart}
 
@@ -103,7 +105,7 @@ flutter run -d chrome
 - [ ] 能指出票面中哪些子级决定 Stack 尺寸，哪些只是定位。
 - [ ] 能解释为什么 `Clip.none` 不会扩大可点击范围。
 - [ ] 能修改 430 像素切换条件，并用测试记录横向票根与纵向票根的边界。
-- [ ] analyze、Unit、Widget、golden、Chrome 关键流程和 release Web build 全部通过。
+- [ ] analyze、单元测试、Widget 测试、golden 测试、Chrome 集成测试和 Web release 构建全部通过。
 
 ## 复习线索
 
@@ -120,4 +122,3 @@ flutter run -d chrome
 - [Wrap class](https://api.flutter.dev/flutter/widgets/Wrap-class.html)（查阅：2026-08-30）
 - [Stack class](https://api.flutter.dev/flutter/widgets/Stack-class.html)（查阅：2026-08-30）
 - [Positioned class](https://api.flutter.dev/flutter/widgets/Positioned-class.html)（查阅：2026-08-30）
-

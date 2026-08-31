@@ -22,6 +22,8 @@ status: verified
 
 普通 `ListView.builder` 已经能懒构建长列表。页面还要组合可折叠标题、pinned 目录、列表、网格和空状态时，`CustomScrollView` 与 Sliver 能让这些区域共享一个 viewport 和滚动位置。
 
+长卷时间轴沿用[测试策略](/guide/part-07/01-test-strategy-unit)、[Widget 与 golden 测试](/guide/part-07/02-widget-semantics-golden)、[Chrome 集成测试](/guide/part-07/03-web-integration)、[三棵树](/guide/part-07/04-widget-element-renderobject)和[渲染流水线](/guide/part-07/05-rendering-pipeline)。本章新增 Sliver 协议与固定 workload 的 profile 证据。
+
 本章先说明 Sliver 协议与 profile 方法，随后完整讲解重点项目“长卷时间轴”。项目不会延伸到下一章。
 
 ## 用现成 Sliver 组合页面
@@ -183,7 +185,7 @@ Golden 只验证受控环境中的构图。中文真实字形、键盘筛选和�
 
 ## Chrome profile 使用固定长滚动
 
-Integration test 把“选择主题并往返滚动”包在同一个 performance workload 中：
+集成测试把“选择主题并往返滚动”包在同一个 performance workload 中：
 
 <<< ../../../examples/focus/scroll_timeline/integration_test/scroll_timeline_test.dart#timeline-profile-workload{dart}
 
@@ -207,7 +209,7 @@ flutter drive --driver=test_driver/integration_test.dart --target=integration_te
 flutter build web --release --base-href /flutter-tutorial/previews/scroll-timeline/
 ```
 
-ChromeDriver 需要先启动并匹配 Chrome 主版本。Release 构建完成后，实际打开独立子路径，检查宽屏、窄屏、键盘、200% 文本和 reduced motion。
+ChromeDriver 需要先启动并与当前 Chrome build 匹配。Web release 构建完成后，实际打开独立子路径，检查宽屏、窄屏、键盘、200% 文本和 reduced motion。
 
 ## 项目完成检查
 
@@ -218,7 +220,7 @@ ChromeDriver 需要先启动并匹配 Chrome 主版本。Release 构建完成后
 - [ ] painter 监听 scroll controller，不用滚动 `setState` 重建页面。
 - [ ] 事件文字、操作和语义不进入 Canvas。
 - [ ] 320×720、768×900、1440×900、200% 文本、reduced motion 通过。
-- [ ] 两张 golden、Chrome 关键流程、profile workload 和 release Web 构建通过。
+- [ ] 两张 golden、Chrome 集成测试、profile workload 和 Web release 构建通过。
 
 ## 复习线索
 
@@ -228,6 +230,7 @@ ChromeDriver 需要先启动并匹配 Chrome 主版本。Release 构建完成后
 - 性能测量要固定 workload，并区分 debug、profile、release。
 - Web profile 使用 Chrome DevTools，移动端和桌面端使用 Flutter DevTools Performance view。
 - “长卷时间轴”用 Sliver 管内容，用 painter 管连续几何，用 Widget 管文字、输入和语义。
+- [项目源码](https://github.com/mardd123588/flutter-tutorial/tree/main/examples/focus/scroll_timeline)
 
 ## 参考资料
 
@@ -240,4 +243,3 @@ ChromeDriver 需要先启动并匹配 Chrome 主版本。Release 构建完成后
 - [Use the Performance view](https://docs.flutter.dev/tools/devtools/performance)（查阅：2026-08-31）
 - [Debug performance for web apps](https://docs.flutter.dev/perf/web-performance)（查阅：2026-08-31）
 - [Impeller rendering engine](https://docs.flutter.dev/perf/impeller)（查阅：2026-08-31）
-

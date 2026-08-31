@@ -219,7 +219,7 @@ runApp(BulletinListView(viewModel: viewModel));
 
 把一个活动公告页面分成四层，保持原 Widget 测试的可见行为不变：
 
-- Fixture Service 返回原始 Map；
+- fixture Service 返回原始 Map；
 - Repository 转成不可变模型，并缓存最近一次成功结果；
 - `ChangeNotifier` ViewModel 暴露 loading、data、error 和刷新动作；
 - View 只显示状态并转交刷新意图；
@@ -248,4 +248,3 @@ runApp(BulletinListView(viewModel: viewModel));
 - [Flutter dependency injection case study](https://docs.flutter.dev/app-architecture/case-study/dependency-injection)（查阅：2026-08-30）
 - [Flutter testing each layer](https://docs.flutter.dev/app-architecture/case-study/testing)（查阅：2026-08-30）
 - [ChangeNotifier API](https://api.flutter.dev/flutter/foundation/ChangeNotifier-class.html)（查阅：2026-08-30）
-

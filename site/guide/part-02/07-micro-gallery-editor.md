@@ -35,6 +35,8 @@ status: verified
 
 这章一次讲完统筹项目。先按项目简报实现，再回来对照结构、测试和取舍；后续章节不会继续拆解这个项目。
 
+项目把[约束](/guide/part-02/01-constraints)、[滚动与网格](/guide/part-02/03-scrolling-lists-grids)、[组件接口](/guide/part-02/04-component-interfaces)、[表单验证](/guide/part-02/05-text-input-and-forms)和[焦点、键盘与语义](/guide/part-02/06-gestures-focus-keyboard-semantics)放进同一条编辑流程。单项 API 回到对应章节，本章只讲项目内的数据流与取舍。
+
 ## 项目简报
 
 小型展览编辑器服务一面临时展墙。策展人可以筛选现有展签，选择一件展品修改资料，也可以新建或删除展品。所有数据留在内存中，刷新页面会恢复种子数据。
@@ -63,13 +65,13 @@ cd examples/capstones/micro_gallery_editor
 flutter run -d chrome
 ```
 
-release Web 构建使用最终预览路径：
+Web release 构建使用最终预览路径：
 
 ```powershell
 flutter build web --release --base-href /flutter-tutorial/previews/micro-gallery-editor/
 ```
 
-浏览器关键流程由 `integration_test/gallery_editor_test.dart` 驱动。它需要匹配 Chrome 主版本的 ChromeDriver，运行方式会在第七部分系统讲解。
+Chrome 集成测试由 `integration_test/gallery_editor_test.dart` 驱动。它需要与当前 Chrome build 匹配的 ChromeDriver，运行方式会在[Web 浏览器关键流程](/guide/part-07/03-web-integration)中系统讲解。
 
 ## 状态保持在页面内
 
@@ -122,10 +124,10 @@ validator 保持纯同步，单元测试直接覆盖空值、合法年份、非�
 
 项目现有证据包括：
 
-- Unit：必填和年份规则；
-- Widget：空表单错误、新增成功、筛选、Ctrl+N、320×720 与 200% 文本；
-- Integration：完整 Web 应用中修正验证错误并新增展品；
-- Release Web：使用 Pages 预览 base href 构建。
+- 单元测试：必填和年份规则；
+- Widget 测试：空表单错误、新增成功、筛选、Ctrl+N、320×720 与 200% 文本；
+- Chrome 集成测试：完整 Web 应用中修正验证错误并新增展品；
+- Web release 构建：使用 Pages 预览 base href。
 
 响应式测试不读取私有断点，只检查目标视口完成布局且没有异常：
 
@@ -141,7 +143,7 @@ validator 保持纯同步，单元测试直接覆盖空值、合法年份、非�
 - [ ] 能让按钮与快捷键调用同一个保存动作。
 - [ ] 能用键盘完成新增、修正验证错误、保存、筛选和删除。
 - [ ] 能说明展签、状态消息和装饰分别如何进入或排除语义树。
-- [ ] analyze、Unit、Widget、Chrome 关键流程和 release Web build 全部通过。
+- [ ] analyze、单元测试、Widget 测试、Chrome 集成测试和 Web release 构建全部通过。
 
 ## 复习线索
 
@@ -158,4 +160,3 @@ validator 保持纯同步，单元测试直接覆盖空值、合法年份、非�
 - [Using Actions and Shortcuts](https://docs.flutter.dev/ui/interactivity/actions-and-shortcuts)（查阅：2026-08-30）
 - [Semantics class](https://api.flutter.dev/flutter/widgets/Semantics-class.html)（查阅：2026-08-30）
 - [Build and release a web app](https://docs.flutter.dev/deployment/web)（查阅：2026-08-30）
-

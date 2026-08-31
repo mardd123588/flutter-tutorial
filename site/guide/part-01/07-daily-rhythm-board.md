@@ -23,6 +23,8 @@ status: verified
 
 这章集中讲完一个项目，不把它延伸到后续章节。建议先按项目简报自己实现，再看源码如何处理组件边界、窄屏和测试。
 
+项目复用前六章的 [Flutter 代码里的 Dart](/guide/part-01/02-dart-in-flutter)、[Widget 配置](/guide/part-01/03-widget-as-configuration)、[`build` 与 `BuildContext`](/guide/part-01/04-build-and-context)、[基础布局](/guide/part-01/05-minimum-layout)和[主题、资源与测试](/guide/part-01/06-theme-assets-test)。本章只解释它们怎样组成一个完整页面。
+
 ## 项目简报
 
 一天不需要被填满。这个工具把五个有意安排的时段放在日晷刻度上，用户选择一项后，影线转到对应时间，底部显示这段时间的说明。
@@ -49,7 +51,7 @@ cd examples/capstones/daily_rhythm_board
 flutter run -d chrome
 ```
 
-release Web 构建使用实际预览路径：
+Web release 构建使用实际预览路径：
 
 ```powershell
 flutter build web --release --base-href /flutter-tutorial/previews/daily-rhythm-board/
@@ -93,7 +95,7 @@ flutter build web --release --base-href /flutter-tutorial/previews/daily-rhythm-
 
 - 单元测试确认日晷位置有序且落在 0～1；
 - Widget 测试点击午后时段，检查详情与语义；窄屏测试再检查日晷、刻度、按钮和说明的布局矩形；
-- Chrome 关键流程测试在完整 Web 应用中完成同一选择。
+- Chrome 集成测试在完整 Web 应用中完成同一选择。
 
 交互测试不读取私有索引，只验证用户能看到的结果。窄屏测试会检查日晷绘制区里的影针和刻度；如果图形结构重写，这一条布局测试需要跟着调整，但状态实现仍可独立替换。
 
@@ -104,7 +106,7 @@ flutter build web --release --base-href /flutter-tutorial/previews/daily-rhythm-
 - [ ] 能说明为什么选中时段属于页面内临时状态。
 - [ ] 能在不改数据模型的情况下调整宽屏与窄屏组合。
 - [ ] 能让失败测试先复现问题，再修改代码。
-- [ ] analyze、单元测试、Widget 测试、Chrome 关键流程和 release Web build 全部通过。
+- [ ] analyze、单元测试、Widget 测试、Chrome 集成测试和 Web release 构建全部通过。
 
 ## 复习线索
 

@@ -114,7 +114,7 @@ static SettingsScope of(BuildContext context) {
 建立一个 `ChangeNotifier` 计量表，保存两项源数据并提供一个派生 getter：
 
 1. 无变化的方法不调用 `notifyListeners`；真实变化只通知一次。
-2. Unit 测试直接注册 listener，记录通知次数并验证派生值始终与源状态一致。
+2. 单元测试直接注册 listener，记录通知次数并验证派生值始终与源状态一致。
 3. 先用 `ListenableBuilder` 重建一个读数，再改为 `InheritedNotifier` 让两个不同深度的后代读取。
 4. 给 controller 增加外部注入入口，测试外部对象不会被页面 dispose，内部对象会释放。
 5. 故意在 `build` 中创建 notifier，观察状态被重置后移回 State 生命周期。

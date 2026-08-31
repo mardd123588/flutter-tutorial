@@ -23,8 +23,8 @@ status: verified
 
 | 风险 | 自动检查 | 人工或平台检查 |
 | --- | --- | --- |
-| 编译、lint、Unit / Widget | CI 命令与日志 | 失败时审查变更意图 |
-| URL 查询、详情与恢复 | Widget、覆盖对应任务的 Chrome integration | Back / Forward、刷新与非法 URL 实际流程 |
+| 编译、lint、单元测试 / Widget 测试 | CI 命令与日志 | 失败时审查变更意图 |
+| URL 查询、详情与恢复 | Widget 测试、覆盖对应任务的 Chrome 集成测试 | Back / Forward、刷新与非法 URL 实际流程 |
 | 资产、MIME、发布子路径 | staging smoke | 真实生产地址抽查 |
 | 键盘、Semantics、200% 文本 | Widget / Semantics 测试 | 键盘与读屏实际流程 |
 | 性能 | 固定 profile workload | DevTools trace 与设备解释 |
@@ -110,7 +110,7 @@ dart fix --dry-run
 2. locked install，保存解析 diff；
 3. 运行 analyze 和 `dart fix --dry-run`，人工决定迁移；
 4. 重新生成代码，检查 generator diff；
-5. 跑 13 个项目的 Unit、Widget、Chrome 和 release；
+5. 跑 13 个项目的单元测试、Widget 测试、Chrome 集成测试和 Web release 构建；
 6. 重组 Pages staging，检查弃用参数与产物结构；
 7. 记录破坏性变化、人工修改和回退 SHA。
 

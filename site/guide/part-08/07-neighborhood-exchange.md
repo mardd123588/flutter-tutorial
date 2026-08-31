@@ -33,7 +33,9 @@ status: verified
 
 # 项目：邻里资源交换站
 
-邻里资源交换站是第八部分的统筹项目。读者以社区共享点值班成员的身份浏览、发布和认领资源；应用把本地数据边界、工程输入、CI、release 子路径和 Pages artifact 放进同一条可验证路径。
+邻里资源交换站是第八部分的统筹项目。读者以社区共享点值班成员的身份浏览、发布和认领资源；应用把本地数据边界、工程输入、CI、Web release 子路径和 Pages artifact 放进同一条可验证路径。
+
+单项工程合同可回查[workspace 与配置](/guide/part-08/01-workspace-dependencies-config)、[可复现 CI](/guide/part-08/02-reproducible-ci)、[Web release 构建](/guide/part-08/03-flutter-web-release)、[Pages 发布](/guide/part-08/04-github-pages-publishing)、[平台扩展](/guide/part-08/05-platform-plugins-permissions-channels)和[发布质量](/guide/part-08/06-release-quality-privacy-upgrades)。本章只解释这些合同如何约束一个可发布应用。
 
 本章完整讲解项目。前六章引用过的 workspace、分享 Service 和发布脚本，会在这里回到完整应用中的位置。
 
@@ -48,7 +50,7 @@ status: verified
 - 3 个派生状态：`available`、`reserved`、`completed`；
 - 3 种交接方式和一组预设可用时段。
 
-Fixture ID 固定为 `r-001` 至 `r-048`。本地发布使用 `local-` 前缀，当前演示身份固定为 `local-neighbor`，显示名“林澄”。Fixture 与测试时钟都不读取执行当天。
+fixture ID 固定为 `r-001` 至 `r-048`。本地发布使用 `local-` 前缀，当前演示身份固定为 `local-neighbor`，显示名“林澄”。fixture 与测试时钟都不读取执行当天。
 
 ### 用户任务
 
@@ -104,7 +106,7 @@ bool canBeClaimedBy(String userId) {
 
 发布草稿在 domain 层验证。标题 trim 后不能为空，最多 40 个 grapheme；说明最多 240 个 grapheme；数量是 1 到 9 的整数。使用 `characters.length`，避免把一个由多个 code unit 组成的用户可见字符算成多位。
 
-## Fixture Service、Repository 与 Drift 分工
+## fixture Service、Repository 与 Drift 分工
 
 对象图如下：
 
@@ -173,7 +175,7 @@ Codec 只写非默认值，非法枚举回退为默认：
 
 详情使用 `#/listings/:listingId`。1100px 以上，详情嵌在右栏；更窄时进入独立页面。Route ID 保持不变，所以刷新和复制链接恢复同一资源。
 
-Fixture 深链接能跨浏览器恢复。本地链接在复制前弹出说明；另一浏览器打开不存在的 `local-...` ID 时，页面明确写“这条记录属于另一个浏览器”，并提供“返回全部资源”。普通未知 fixture ID 使用另一种错误状态。
+fixture 深链接能跨浏览器恢复。本地链接在复制前弹出说明；另一浏览器打开不存在的 `local-...` ID 时，页面明确写“这条记录属于另一个浏览器”，并提供“返回全部资源”。普通未知 fixture ID 使用另一种错误状态。
 
 ## 三档布局共享同一状态
 
@@ -220,7 +222,7 @@ Fixture 深链接能跨浏览器恢复。本地链接在复制前弹出说明；
 
 Pull Request 修改项目私有文件时只选择本项目；根 lockfile、CI、release 工具和 workflow 变化触发全部 13 个项目。`main` 固定全量验证。
 
-独立 release 使用：
+独立 Web release 构建使用：
 
 ```text
 --pwa-strategy=none
@@ -232,7 +234,7 @@ Pull Request 修改项目私有文件时只选择本项目；根 lockfile、CI�
 
 ## 自动验收覆盖的风险
 
-项目共有 26 项 Unit、Repository、Drift 与 Widget 测试，覆盖：
+项目共有 26 项单元测试、Repository 测试、Drift 测试与 Widget 测试，覆盖：
 
 - 48 条稳定 fixture、6 个片区、6 个类别；
 - 派生状态、筛选、排序 tie-breaker、grapheme 与数量边界；
@@ -243,11 +245,11 @@ Pull Request 修改项目私有文件时只选择本项目；根 lockfile、CI�
 - 发布错误摘要焦点、认领 live region；
 - 320×720、768×900、1440×900、200% 文本、RTL、reduced motion。
 
-Chrome integration 完成“发布本地资源 → 关闭并重开数据库 → 恢复详情 → 认领 fixture → 再次重开 → 保留认领状态”。它使用真实 Drift Web 和浏览器持久化，但不访问远程服务。
+Chrome 集成测试完成“发布本地资源 → 关闭并重开数据库 → 恢复详情 → 认领 fixture → 再次重开 → 保留认领状态”。它使用真实 Drift Web 和浏览器持久化，但不访问远程服务。
 
-这条流程没有遍历全部查询参数、非法 URL、全新浏览器 profile 或键盘边界；这些情况分别由 Widget 测试和人工验收覆盖，不能算进 Chrome integration 的结果。
+这条流程没有遍历全部查询参数、非法 URL、全新浏览器 profile 或键盘边界；这些情况分别由 Widget 测试和人工验收覆盖，不能算进 Chrome 集成测试的结果。
 
-本轮三档人工 Chrome 检查没有 console error 或 warn。项目不维护 golden，`Visual` 为 `not-applicable`；响应式 Widget 测试和浏览器视觉检查仍然保留。
+本轮三档人工 Chrome 检查没有 console error 或 warn。项目不维护 golden，“视觉”为 `not-applicable`；响应式 Widget 测试和浏览器视觉检查仍然保留。
 
 ## 运行与发布
 
@@ -283,14 +285,14 @@ pnpm release:smoke
 ## 项目完成检查
 
 - [ ] 根 workspace 与项目 analyze 通过，locked install 不改 lockfile。
-- [ ] Fixture 保持 48 条、6 个片区、6 个类别和稳定 ID。
+- [ ] fixture 保持 48 条、6 个片区、6 个类别和稳定 ID。
 - [ ] 发布验证使用 grapheme，数量限制为 1–9。
 - [ ] 认领事务按复合主键幂等，最后一份派生为 `reserved`。
-- [ ] Fixture、本地发布和认领的跨浏览器边界写在结果旁边。
+- [ ] fixture、本地发布和认领的跨浏览器边界写在结果旁边。
 - [ ] URL 保存查询和详情，非法 fixture 与缺失本地链接可恢复。
 - [ ] 三档宽度、200% 文本、RTL、键盘、Semantics 和 reduced motion 通过。
 - [ ] Chrome 完成发布、重开、认领与再次重开持久化。
-- [ ] Release 从独立 base 加载本地 CanvasKit、Wasm 与 Worker。
+- [ ] Web release 产物能从独立 base 加载本地 CanvasKit、Wasm 与 Worker。
 - [ ] VitePress 与 13 个预览合并后通过 Pages staging smoke。
 - [ ] 隐私、许可、已知限制、commit 和回滚入口已经记录。
 
@@ -302,7 +304,8 @@ pnpm release:smoke
 - 复合主键和事务提供本地幂等，不代表真实多人并发。
 - URL 能分享 fixture 查询，本地记录和认领只属于当前浏览器。
 - 响应式布局重排界面，不复制查询、列表或选中状态。
-- CI、独立 release、Pages staging 和生产发布证明的是不同层级。
+- CI、独立 Web release 构建、Pages staging 和生产发布证明的是不同层级。
+- [项目源码](https://github.com/mardd123588/flutter-tutorial/tree/main/examples/capstones/neighborhood_exchange)
 
 ## 参考资料
 

@@ -150,7 +150,7 @@ dart run build_runner watch --delete-conflicting-outputs
 | 许可 | 是否允许项目分发与修改，依赖许可是否可接受 |
 | 退出成本 | 业务模型是否被包类型绑住，能否从接口边界替换 |
 
-下载量、Pub points 和 Flutter Favorite 都是线索，不能单独决定采用。平台标签来自声明和静态分析，也不能代替 release 构建与真实浏览器测试。
+下载量、Pub points 和 Flutter Favorite 都是线索，不能单独决定采用。平台标签来自声明和静态分析，也不能代替 Web release 构建与真实浏览器测试。
 
 Riverpod 在本教程中的退出成本受接口控制：ViewModel 可以换实现，Repository 与 Service 仍是普通 Dart 接口，业务模型不继承 Riverpod 类型。
 
@@ -174,12 +174,12 @@ flutter pub outdated
 
 升级状态包时，不要同时升级数据库、路由、Flutter SDK 和生成器链。更稳的顺序是：
 
-1. 记录当前 analyze、测试、浏览器流程和 release build 结果；
+1. 记录当前 analyze、测试、浏览器流程和 Web release 构建结果；
 2. 只改一组紧密配套的依赖；
 3. 重新解析并检查 lockfile；
 4. 重新生成代码；
 5. 运行静态检查、相关单元与 Widget 测试；
-6. 在 Web 执行关键流程，再做 release 子路径构建；
+6. 在 Web 执行关键流程，再做 Web release 子路径构建；
 7. 检查生成 diff 和行为变化后再提交。
 
 本教程的 Riverpod runtime 是 3.4.2，配套 annotation 是 4.0.6、generator 是 4.0.8。包的主版本号不必相同，兼容关系要看各自 pubspec 与实际解析结果。
@@ -199,7 +199,7 @@ Riverpod offline persistence 与 Mutations 在当前文档中仍标为 experimen
 - 运行 build_runner、analyze 和 provider 测试；
 - 用 `flutter pub outdated` 记录 Current、Resolvable、Latest；
 - 检查 runtime、annotation、generator、build_runner 的兼容约束；
-- 构建 release Web，并在浏览器跑一次参数切换和返回流程；
+- 执行 Web release 构建，并在浏览器跑一次参数切换和返回流程；
 - 写下如果移除 Riverpod，需要修改哪些文件。
 
 若生成版没有明显减少重复，保留手写版本。
@@ -232,4 +232,3 @@ Riverpod offline persistence 与 Mutations 在当前文档中仍标为 experimen
 - [dart pub outdated](https://dart.dev/tools/pub/cmd/pub-outdated)（查阅：2026-08-30）
 - [Riverpod offline persistence](https://riverpod.dev/docs/concepts2/offline)（查阅：2026-08-30）
 - [Riverpod Mutations](https://riverpod.dev/docs/concepts2/mutations)（查阅：2026-08-30）
-

@@ -39,6 +39,8 @@ status: verified
 
 社区工坊排期台把这一部分的分层、Result、Riverpod、依赖替换和代码生成放进一个本地 Flutter Web 应用。协调员可以查看两天排期，按活动日、场馆和讲师筛选，新建或编辑场次；保存前一次显示全部冲突，刷新后改动仍保存在当前浏览器。
 
+单项机制可回查[复杂度信号](/guide/part-06/01-complexity-signals)、[应用分层](/guide/part-06/02-application-layers)、[Result 与命令](/guide/part-06/03-result-command-errors)、[Riverpod 基础](/guide/part-06/04-riverpod-basics)、[异步缓存](/guide/part-06/05-riverpod-async-cache)、[依赖替换与测试](/guide/part-06/06-riverpod-testing)和[代码生成与升级](/guide/part-06/07-codegen-package-upgrades)。本章聚焦冲突规则怎样穿过这些边界。
+
 本章集中讲完整项目。前七章的小例子不依赖它，也没有跨章拆解同一功能。
 
 ## 项目简报
@@ -68,7 +70,7 @@ status: verified
 - 首次打开 seed 10 条排期，之后保留本地修改；
 - “恢复演示数据”先确认，再覆盖当前本地排期；
 - 320×720、768×900、1440×900 与 200% 文本下可完成主要任务；
-- Web 使用 Hash URL，release 子路径支持详情直达和刷新。
+- Web 使用 hash URL，Web release 子路径支持详情直达和刷新。
 
 ### 明确不做
 
@@ -229,13 +231,13 @@ Widget 测试同时断言三类冲突只出现一次，并确认焦点已经落�
 
 ## 测试分层覆盖不同风险
 
-项目目前有 25 条 Unit / Widget 测试：
+项目目前有 25 条单元测试与 Widget 测试：
 
 - domain policy：场馆、讲师、容量、多冲突顺序、半开区间和编辑排除自身；
 - Repository：冲突不写入、Drift 风格 Stream 更新、恢复数据、Exception 映射和 Error 继续抛出；
 - Drift：首次 seed 与查询；
 - Riverpod：Repository override、query 参数隔离、保存状态；
-- Widget：loading、empty、failure、未知详情、冲突焦点、URL 筛选、三种尺寸和 200% 文本。
+- Widget 测试：loading、empty、failure、未知详情、冲突焦点、URL 筛选、三种尺寸和 200% 文本。
 
 响应式测试对同一份数据分别渲染宽屏与窄屏：
 
@@ -243,7 +245,7 @@ Widget 测试同时断言三类冲突只出现一次，并确认焦点已经落�
 
 Chrome 集成测试完成以下流程：从筛选后的排期进入详情并返回；新建同时触发容量、场馆和讲师冲突；修正场馆与时间后保存；关闭并重新打开应用，确认 Drift 中的新排期仍在。
 
-浏览器还人工检查了 1440×900、768×900、320×720、详情深链接、手机编辑页、Back / Forward 和 release 子路径硬刷新。本项目不维护 golden；它的首要风险是状态、规则和数据流，视觉仍通过实际截图和三档尺寸检查。
+浏览器还人工检查了 1440×900、768×900、320×720、详情深链接、手机编辑页、Back / Forward 和 Web release 子路径硬刷新。本项目不维护 golden；它的首要风险是状态、规则和数据流，视觉仍通过实际截图和三档尺寸检查。
 
 ## 运行与检查
 
@@ -288,7 +290,7 @@ flutter build web --release --base-href /flutter-tutorial/previews/community-wor
 - [ ] Drift 查询 Stream 推送写入结果，不做冗余 invalidate。
 - [ ] 宽屏排期墙与窄屏议程读取同一份状态。
 - [ ] 冲突有可见文字、live region、焦点和修复入口。
-- [ ] 25 条测试、Chrome 集成测试和 release 子路径构建通过。
+- [ ] 25 条测试、Chrome 集成测试和 Web release 子路径构建通过。
 
 ## 复习线索
 
@@ -313,4 +315,3 @@ flutter build web --release --base-href /flutter-tutorial/previews/community-wor
 - [Drift Web](https://drift.simonbinder.eu/platforms/web/)（查阅：2026-08-30）
 - [Flutter Web integration tests](https://docs.flutter.dev/testing/integration-tests#test-in-a-web-browser)（查阅：2026-08-30）
 - [Build and release a Flutter Web app](https://docs.flutter.dev/deployment/web)（查阅：2026-08-30）
-

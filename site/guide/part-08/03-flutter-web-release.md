@@ -1,6 +1,6 @@
 ---
-title: Flutter Web release 与子路径
-description: 构建可从真实子路径加载的 Flutter Web release，处理 base href、本地 CanvasKit、hash URL、Wasm 与 Service Worker 边界。
+title: Flutter Web release 构建与子路径
+description: 构建可从真实子路径加载的 Flutter Web release 产物，处理 base href、本地 CanvasKit、hash URL、Wasm 与 Service Worker 边界。
 part: 8
 order: 3
 kind: concept
@@ -14,13 +14,13 @@ provides:
 status: verified
 ---
 
-# Flutter Web release 与子路径
+# Flutter Web release 构建与子路径
 
-`flutter build web` 只负责生成静态产物。用户能否打开页面，还取决于部署子路径、资源 URL、MIME、浏览器缓存、Worker 和路由策略。Release 验收必须通过 HTTP server 从最终子路径加载，不能双击 `index.html`，也不能只看构建命令退出码。
+`flutter build web` 只负责生成静态产物。用户能否打开页面，还取决于部署子路径、资源 URL、MIME、浏览器缓存、Worker 和路由策略。Web release 验收必须通过 HTTP server 从最终子路径加载，不能双击 `index.html`，也不能只看构建命令退出码。
 
 ## 独立构建命令写出部署合同
 
-本仓库为每个项目生成独立 release：
+本仓库为每个项目生成独立 Web release 产物：
 
 ```powershell
 flutter build web --release `
@@ -109,7 +109,7 @@ HTTP cache 按 URL、缓存响应头和验证器复用资源。Service Worker �
 
 本教程首版不做安装、离线启动、后台同步、推送或 Web app manifest 体验。Flutter 3.47.0 使用 `--pwa-strategy=none` 后，构建脚本检查 `flutter_service_worker.js` 为 0 字节；还要在已有部署上确认旧 Worker 没有继续控制页面。
 
-入口 HTML 与带内容 hash 的静态资源缓存策略也不同。入口需要及时指向新资源；内容 hash 文件可以长期复用。Release manifest 记录 commit，帮助确认页面和预览来自同一版本。
+入口 HTML 与带内容 hash 的静态资源缓存策略也不同。入口需要及时指向新资源；内容 hash 文件可以长期复用。`release-manifest.json` 记录 commit，帮助确认页面和预览来自同一版本。
 
 ## Source map 是诊断材料
 

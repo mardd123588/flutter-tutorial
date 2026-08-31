@@ -19,6 +19,8 @@ status: verified
 
 列表名字已经换了顺序，输入框里的文字却留在原位置，这不是 TextField 自己串了数据。旧 Element 和 State 被按位置复用，而新 Widget 配置代表了另一个业务对象。Key 负责给框架足够的身份信息，让配置更新与业务对象对齐。
 
+可排序值班板建立在[状态所有权](/guide/part-03/01-state-ownership)和[生命周期](/guide/part-03/02-lifecycle-and-effects)之上。本章只新增 Element 身份、Key 与重排规则。
+
 ## 状态默认跟着 Element
 
 Widget 是不可变配置；Element 把 Widget 放进树中，State 再挂在 StatefulElement 上。父级重建后，框架要判断旧 Element 能否接收当前位置的新 Widget。
@@ -117,7 +119,7 @@ cd examples/focus/sortable_duty_board
 flutter run -d chrome
 ```
 
-release Web 构建：
+Web release 构建：
 
 ```powershell
 flutter build web --release --base-href /flutter-tutorial/previews/sortable-duty-board/
@@ -133,7 +135,7 @@ flutter build web --release --base-href /flutter-tutorial/previews/sortable-duty
 - [ ] 使用 Flutter 3.47 的 `onReorderItem`，向后移动时不再手工减索引。
 - [ ] 拖动与上移 / 下移按钮调用同一重排逻辑。
 - [ ] 测试先制造行内状态，再验证它跟随同一业务 ID。
-- [ ] analyze、Unit、Widget、Chrome 关键流程和 release Web build 全部通过。
+- [ ] analyze、单元测试、Widget 测试、Chrome 集成测试和 Web release 构建全部通过。
 
 ## 复习线索
 

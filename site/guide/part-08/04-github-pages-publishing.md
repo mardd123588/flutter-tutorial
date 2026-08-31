@@ -17,7 +17,7 @@ status: verified
 
 # GitHub Pages artifact 与发布
 
-GitHub Pages 自定义 workflow 分两段：build job 生成并上传静态 artifact，deploy job 取得 Pages 权限并部署。本站还要把 VitePress 和 13 个 Flutter release 放进同一目录，上传前先把它当成最终网站验收。
+GitHub Pages 自定义 workflow 分两段：build job 生成并上传静态 artifact，deploy job 取得 Pages 权限并部署。本站还要把 VitePress 和 13 个 Flutter Web release 产物放进同一目录，上传前先把它当成最终网站验收。
 
 ## 一个 staging 目录对应一个站点
 
@@ -145,7 +145,7 @@ pnpm release:smoke
 - Pages build 生成 artifact，deploy 只部署已经上传的内容。
 - VitePress 和全部预览先合并到一个干净 staging 目录。
 - Manifest 用 commit SHA 标记内容，不加入构建时间噪声。
-- Smoke test 检查静态入口与 MIME，Chrome 流程检查应用恢复和交互。
+- Smoke test 检查静态入口与 MIME，Chrome 集成测试检查应用恢复和交互。
 - 上一个成功 commit 才是可长期重建的回滚入口。
 
 ## 参考资料

@@ -83,7 +83,7 @@ class ProbeTitle extends StatelessWidget {
 assert(records.map((record) => record.id).toSet().length == records.length);
 ```
 
-用户输入、网络响应和可恢复业务错误必须用运行时 validation 或 Result。Release 关闭 assertions，不能指望它阻止非法提交。
+用户输入、网络响应和可恢复业务错误必须用运行时 validation 或 Result。release 模式关闭 assertions，不能指望它阻止非法提交。
 
 ## 留下结构化调试信息
 
@@ -128,7 +128,7 @@ build 是普通更新入口，本身不等于性能缺陷。先确认：
 
 实现“可切换标题”probe：固定 `ValueKey`，点击按钮在两个不同长度标题之间切换。用 Inspector 记录 Widget 配置、Element 位置和 RenderParagraph size 的变化，再把 Key 改为每次新建的 `UniqueKey()`，解释 State / Element 身份为什么被替换。
 
-补一条 Widget 回归测试，证明固定 Key 时输入框内容不会因标题切换丢失。
+补一条 Widget 测试，证明固定 Key 时输入框内容不会因标题切换丢失。
 
 ## 复习线索
 
@@ -147,4 +147,3 @@ build 是普通更新入口，本身不等于性能缺陷。先确认：
 - [Use the Flutter inspector](https://docs.flutter.dev/tools/devtools/inspector)（查阅：2026-08-31）
 - [Flutter build modes](https://docs.flutter.dev/testing/build-modes)（查阅：2026-08-31）
 - [`developer.log`](https://api.dart.dev/dart-developer/log.html)（查阅：2026-08-31）
-

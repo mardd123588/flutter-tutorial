@@ -26,9 +26,9 @@ Flutter 官方把自动化测试分为 unit、widget 和 integration。越靠近
 | --- | --- | --- |
 | 排序、解析、冲突规则 | unit | Repository 或 provider 状态测试 |
 | ViewModel 状态迁移 | unit / provider | Widget 的用户反馈 |
-| 输入、布局、焦点、Semantics | widget | Chrome 关键流程 |
+| 输入、布局、焦点、Semantics | Widget 测试 | Chrome 集成测试 |
 | 字体、颜色、绘制结果 | golden | 人工审查 diff |
-| URL、刷新、Back / Forward、Web 资产 | Chrome integration | release 子路径检查 |
+| URL、刷新、Back / Forward、Web 资产 | Chrome 集成测试 | Web release 子路径检查 |
 | 长任务、异常 build / paint | profile trace | 同一 workload 的前后对照 |
 
 一个行为可能需要两层证据。例如“保存冲突”可以用单元测试覆盖全部规则，再用 Widget 测试确认错误摘要得到焦点。不要在浏览器流程里重跑每一种冲突组合。
@@ -136,4 +136,3 @@ fixture 也要固定顺序、稳定 ID 和明确数量。测试依赖“当前�
 - [Testing Flutter apps](https://docs.flutter.dev/testing/overview)（查阅：2026-08-31）
 - [Testing each layer](https://docs.flutter.dev/app-architecture/case-study/testing)（查阅：2026-08-31）
 - [Dart test package](https://pub.dev/packages/test)（查阅：2026-08-31）
-

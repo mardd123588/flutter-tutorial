@@ -35,6 +35,8 @@ status: verified
 
 数字档案浏览器把第七部分的测试策略、浏览器流程、三棵树、渲染流水线、Sliver 和 profile 方法放进一个独立 Flutter Web 应用。研究者可以在 120 条虚构档案中搜索、筛选、切换列表与网格、打开稳定深链接，并把最多三条记录放入对照栏。
 
+需要回查时，可返回[测试策略](/guide/part-07/01-test-strategy-unit)、[Widget、语义与视觉测试](/guide/part-07/02-widget-semantics-golden)、[Chrome 集成测试](/guide/part-07/03-web-integration)、[Widget—Element—RenderObject](/guide/part-07/04-widget-element-renderobject)、[渲染流水线](/guide/part-07/05-rendering-pipeline)和[Sliver 与 profile](/guide/part-07/06-sliver-performance-scroll-timeline)。本章只讲风险如何分配给这些证据层。
+
 本章完整讲解项目。它不连接网络或数据库，不再引入新的架构方案；Riverpod 沿用第六部分的对象图与替换接缝。
 
 ## 项目简报
@@ -60,9 +62,9 @@ status: verified
 - 最多三条记录进入对照，第四条有 live region、焦点和恢复动作；
 - loading、error、retry、empty 和非法详情都有独立状态；
 - 320×720、768×900、1440×900、200% 文本、RTL 测试壳与 reduced motion 可用；
-- release Web 从 `/flutter-tutorial/previews/digital-archive-browser/` 加载。
+- Web release 产物从 `/flutter-tutorial/previews/digital-archive-browser/` 加载。
 
-项目不做账号、上传、OCR、服务端搜索、数据库、收藏持久化、协作标注、真实版权判断、原件播放器、自定义 RenderObject 或 renderer 迁移。`Visual` 为 `not-applicable`，因此不维护 golden；三档尺寸和实际 Chrome 视觉检查仍然保留。
+项目不做账号、上传、OCR、服务端搜索、数据库、收藏持久化、协作标注、真实版权判断、原件播放器、自定义 RenderObject 或 renderer 迁移。“视觉”为 `not-applicable`，因此不维护 golden；三档尺寸和实际 Chrome 视觉检查仍然保留。
 
 ## 先用风险表分配证据
 
@@ -70,14 +72,14 @@ status: verified
 | --- | --- | --- |
 | URL parse / encode、非法参数 | unit | 刷新、新标签、Back / Forward |
 | 多筛选交集、排序、对照上限 | unit / provider | 主旅程中的代表分支 |
-| loading、retry、empty、非法详情 | widget | 主流程不重复所有分支 |
-| lazy materialization、列表 / 网格身份 | widget | 连续滚动与 profile trace |
+| loading、retry、empty、非法详情 | Widget 测试 | 主流程不重复所有分支 |
+| lazy materialization、列表 / 网格身份 | Widget 测试 | 连续滚动与 profile trace |
 | 第四条拒绝的提示和焦点 | Semantics / widget | 键盘实际操作 |
 | 自绘缩略图 | painter unit / widget | 三档 Chrome 截图 |
-| URL、资产、release base href | Chrome integration / build | 实际预览路径 |
+| URL、资产、release base href | Chrome 集成测试 / 构建 | 实际预览路径 |
 | build / raster 分布 | profile workload | Chrome Performance trace |
 
-这个矩阵决定测试位置。Integration 不重复每个非法参数；profile 不承担业务正确性；截图不证明焦点和 URL。
+这个矩阵决定测试位置。Chrome 集成测试不重复每个非法参数；profile 不承担业务正确性；截图不证明焦点和 URL。
 
 ## URL 是查询的单一事实来源
 
@@ -189,7 +191,7 @@ Lazy 测试先确认第 120 条尚不存在，再滚动到目标：
 
 ## Chrome 旅程与 profile workload 共用确定性输入
 
-Integration test 完成以下操作：
+Chrome 集成测试完成以下操作：
 
 - 从 120 条结果开始；
 - 连续滚动三段；
@@ -229,7 +231,7 @@ Workload 同时包含滚动、视图切换和路由，不能仅凭离群帧断�
 - 200% 文本、RTL 测试壳、reduced motion；
 - 固定浏览器 profile workload。
 
-`Visual` 为 `not-applicable`，所以没有 golden。实际 Chrome 已检查 1440×900 与 320×720；这不改变 golden 与视觉检查的职责边界。
+“视觉”为 `not-applicable`，所以没有 golden。实际 Chrome 已检查 1440×900 与 320×720；这不改变 golden 与视觉检查的职责边界。
 
 ## 运行与发布
 
@@ -241,7 +243,7 @@ flutter drive --driver=test_driver/integration_test.dart --target=integration_te
 flutter build web --release --base-href /flutter-tutorial/previews/digital-archive-browser/
 ```
 
-ChromeDriver 先在 4444 端口启动，并与 Chrome 主版本匹配。构建后打开：
+ChromeDriver 先在 4444 端口启动，并与当前 Chrome build 匹配。构建后打开：
 
 ```text
 /flutter-tutorial/previews/digital-archive-browser/#/archive
@@ -258,18 +260,19 @@ ChromeDriver 先在 4444 端口启动，并与 Chrome 主版本匹配。构建�
 - [ ] 缩略图 painter 只处理无交互图形，Semantics 由 Widget 提供。
 - [ ] 第四条对照显示 live region，焦点到错误栏，并提供恢复动作。
 - [ ] loading、error、retry、empty、非法详情可测试且可恢复。
-- [ ] 三档尺寸、200% 文本、RTL、reduced motion、Chrome 主流程通过。
+- [ ] 三档尺寸、200% 文本、RTL、reduced motion、Chrome 集成测试通过。
 - [ ] Profile 环境、workload、摘要和相对比较方法已经记录。
-- [ ] Release Web 能从独立 base href 加载并恢复 hash URL。
+- [ ] Web release 产物能从独立 base href 加载并恢复 hash URL。
 
 ## 复习线索
 
-- 风险表决定 unit、provider、widget、Semantics、Chrome、profile 的分工。
+- 风险表决定单元测试、provider 测试、Widget 测试、Semantics、Chrome 集成测试和 profile 的分工。
 - URL 保存可分享查询；对照栏只保存稳定 ID。
 - Mixed sliver 让 header、列表、网格和空状态共享 viewport。
 - Painter 管像素，Widget 管交互、文字和语义。
 - Lazy materialization 用“远端项滚动前不存在”固定，比统计 build 次数更稳。
 - Profile 数字必须连同环境和 workload 解读，离群帧还需要 trace 定位。
+- [项目源码](https://github.com/mardd123588/flutter-tutorial/tree/main/examples/capstones/digital_archive_browser)
 
 ## 参考资料
 
@@ -280,4 +283,3 @@ ChromeDriver 先在 4444 端口启动，并与 Chrome 主版本匹配。构建�
 - [Performance best practices](https://docs.flutter.dev/perf/best-practices)（查阅：2026-08-31）
 - [Debug performance for web apps](https://docs.flutter.dev/perf/web-performance)（查阅：2026-08-31）
 - [`Semantics`](https://api.flutter.dev/flutter/widgets/Semantics-class.html)（查阅：2026-08-31）
-

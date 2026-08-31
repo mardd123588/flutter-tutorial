@@ -33,6 +33,8 @@ status: verified
 
 这章一次讲完第三部分统筹项目。项目把状态所有权、通知传播、行内身份、撤销和动画放进同一条温室值班流程；后续章节不会再跨章拆解它。
 
+需要回查单项机制时，可返回[状态所有权](/guide/part-03/01-state-ownership)、[生命周期](/guide/part-03/02-lifecycle-and-effects)、[Key 与重排](/guide/part-03/03-keys-and-reordering)、[通知与 inherited 依赖](/guide/part-03/04-listenable-inherited-notifier)、[隐式动画](/guide/part-03/05-implicit-animations)和[显式动画](/guide/part-03/06-explicit-animations)。本章关注它们在撤销与重排中的组合。
+
 ## 项目简报
 
 植物照护台服务一轮固定的温室观测。值班员查看四份植物记录，按“全部 / 需要照护 / 状态稳定”筛选，记录一次浇水并观察湿度变化。浇水后列表按照护紧迫度重排，最近一次操作可以撤销。
@@ -62,13 +64,13 @@ cd examples/capstones/plant_care_desk
 flutter run -d chrome
 ```
 
-release Web 构建：
+Web release 构建：
 
 ```powershell
 flutter build web --release --base-href /flutter-tutorial/previews/plant-care-desk/
 ```
 
-Chrome 关键流程由 `integration_test/plant_care_desk_test.dart` 驱动：切换到“需要照护”，给琴叶榕记录浇水，确认它离开筛选结果，再撤销并恢复记录。
+Chrome 集成测试由 `integration_test/plant_care_desk_test.dart` 驱动：切换到“需要照护”，给琴叶榕记录浇水，确认它离开筛选结果，再撤销并恢复记录。
 
 ## 状态图先于 Widget tree
 
@@ -145,10 +147,10 @@ UI 调用 `PlantCareScope.of(context)` 后建立依赖。controller 通知时，
 
 项目现有证据：
 
-- Unit：筛选不复制源列表，浇水重排并保存快照，撤销恢复筛选与湿度；
-- Widget：筛选—浇水—撤销、Key 身份、两类动画时间点、reduced motion、语义、320×720 与 200% 文本；
-- Integration：完整 Web 应用中的一次照护与撤销；
-- Release Web：使用 Pages 预览 base href 构建。
+- 单元测试：筛选不复制源列表，浇水重排并保存快照，撤销恢复筛选与湿度；
+- Widget 测试：筛选—浇水—撤销、Key 身份、两类动画时间点、reduced motion、语义、320×720 与 200% 文本；
+- Chrome 集成测试：完整 Web 应用中的一次照护与撤销；
+- Web release 构建：使用 Pages 预览 base href。
 
 动画测试精确推进起点、中点与终点；reduced motion 测试确认一次 pump 后已经到达目标：
 
@@ -166,7 +168,7 @@ UI 调用 `PlantCareScope.of(context)` 后建立依赖。controller 通知时，
 - [ ] 撤销恢复完整快照，不靠反向猜测刚才改了哪些字段。
 - [ ] 隐式动画和显式动画都覆盖起点、中点、终点与 reduced motion。
 - [ ] 用键盘完成筛选、查看、浇水和撤销，状态结果可由语义树读取。
-- [ ] analyze、Unit、Widget、Chrome 关键流程和 release Web build 全部通过。
+- [ ] analyze、单元测试、Widget 测试、Chrome 集成测试和 Web release 构建全部通过。
 
 ## 复习线索
 

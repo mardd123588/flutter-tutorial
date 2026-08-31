@@ -38,6 +38,8 @@ status: verified
 
 城市活动雷达把这一部分的异步与数据边界放进一张值班图。读者可以搜索活动、筛选分区、收藏条目、模拟离线并刷新。页面始终显示数据来源和更新时间，不把 fixture、缓存与网络结果混成同一种“成功”。
 
+单项机制可回查[异步状态](/guide/part-04/01-async-ui-state)、[HTTP Service](/guide/part-04/02-http-service)、[手写 JSON](/guide/part-04/03-hand-written-json)、[搜索竞态](/guide/part-04/04-search-race)、[代码生成](/guide/part-04/05-json-serializable)、[缓存与离线回退](/guide/part-04/06-preferences-cache-offline)和[Drift](/guide/part-04/07-drift-relational-data)。本章只解释这些边界如何共享一份活动数据。
+
 ## 项目简报
 
 先按下面的合同独立实现，再阅读后续拆解。
@@ -56,7 +58,7 @@ status: verified
 - 网络失败时依次使用 Drift 缓存和内置 fixture，并标明来源；
 - 收藏由 Drift 查询 Stream 驱动，刷新页面后仍在；
 - migration 从 version 1 保留旧收藏；
-- Web release 携带匹配的 Wasm 和 Worker。
+- Web release 产物携带匹配的 Wasm 和 Worker。
 
 ### 验收
 
@@ -65,7 +67,7 @@ status: verified
 - 切换模拟离线，页面保留活动并显示缓存来源；
 - 只看收藏与分区筛选可以组合，空交集提供清空条件提示；
 - 320×720、200% 文本、键盘和语义操作无阻塞；
-- analyze、Unit、Widget、Chrome 关键流程和 release Web build 全部通过。
+- analyze、单元测试、Widget 测试、Chrome 集成测试和 Web release 构建全部通过。
 
 ## 数据边界保持窄
 
@@ -132,7 +134,7 @@ status: verified
 
 活动雷达采用“城市夜班调度图”：深色扫描面展示当前活动信号，纸色调度单承载可操作详情，数据值班簿列出 source、freshness、可见数量、收藏数和旧响应计数。
 
-扫描动画只在数据变化时执行一次；系统要求减少动画时直接显示终态。活动列表和来源文字始终存在，CustomPainter 不是唯一信息载体。
+`CustomPainter` 是 Flutter 的 canvas 自绘入口，这里只用它绘制扫描装饰。扫描动画只在数据变化时执行一次；系统要求减少动画时直接显示终态。活动列表和来源文字始终存在，像素不是唯一信息载体。[渲染流水线与自绘边界](/guide/part-07/05-rendering-pipeline)会再解释它的重绘与语义责任。
 
 所有活动、场地、时间、价格和信号值都明确标为教学示例。项目不加载地图、第三方字体、分析脚本或远程图片。
 
@@ -153,7 +155,7 @@ flutter run -d chrome
 dart run build_runner build
 ```
 
-release Web 构建：
+Web release 构建：
 
 ```powershell
 flutter build web --release --base-href /flutter-tutorial/previews/city-event-radar/

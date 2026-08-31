@@ -9,6 +9,17 @@ const allowedKinds = new Set(['concept', 'capstone', 'focus-project'])
 const allowedStatuses = new Set(['draft', 'verified'])
 const conceptPattern = /^[a-z0-9]+(?:[.-][a-z0-9]+)*$/
 const projectPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/
+const deprecatedTerms = [
+  { pattern: /\brelease Web\b|\bRelease Web\b/, preferred: 'Web release 构建' },
+  { pattern: /\bChrome integration\b/, preferred: 'Chrome 集成测试' },
+  { pattern: /\bWidget test\b/, preferred: 'Widget 测试' },
+  { pattern: /\bIntegration test\b/, preferred: '集成测试' },
+  { pattern: /\bdeterministic golden\b/, preferred: '确定性 golden' },
+  { pattern: /Chrome 关键流程/, preferred: 'Chrome 集成测试' },
+  { pattern: /(?:\|\s*Unit\s*\||\bUnit\s*(?:测试|[、/]))/, preferred: '单元测试' },
+  { pattern: /平台适应/, preferred: '平台适配' },
+  { pattern: /导航、自适应|导航、适应/, preferred: '导航、响应式与平台适配' },
+]
 const errors = []
 
 async function walk(directory, extension) {
@@ -144,10 +155,32 @@ async function validateLinks(file, source) {
   const links = source.matchAll(/\[[^\]]*\]\(([^)]+)\)/g)
   for (const match of links) {
     const target = match[1].trim().replace(/^<|>$/g, '')
-    if (/^(?:https?:|mailto:)/.test(target) || target.startsWith('#')) continue
-    if (!await resolveSiteTarget(file, target)) {
+    if (/^(?:https?:|mailto:)/.test(target)) continue
+
+    const [targetPath, rawFragment] = target.split('#', 2)
+    const resolved = targetPath === '' ? file : await resolveSiteTarget(file, targetPath)
+    if (!resolved) {
       fail(file, `内部链接不存在：${target}`)
+      continue
     }
+
+    if (rawFragment) {
+      const fragment = decodeURIComponent(rawFragment)
+      const targetSource = resolved === file ? source : await readFile(resolved, 'utf8')
+      const escaped = fragment.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+      const explicitAnchor = new RegExp(`(?:\\{#${escaped}\\}|\\bid=["']${escaped}["'])`)
+      if (!explicitAnchor.test(targetSource)) {
+        fail(file, `内部锚点不存在或未显式声明：${target}`)
+      }
+    }
+  }
+}
+
+function validateTerminology(file, source) {
+  const prose = source.replace(/```[\s\S]*?```/g, '')
+  for (const { pattern, preferred } of deprecatedTerms) {
+    const match = prose.match(pattern)
+    if (match) fail(file, `使用了旧术语“${match[0]}”，统一写作“${preferred}”`)
   }
 }
 
@@ -231,7 +264,9 @@ for (const file of chapterFiles) {
 }
 
 for (const file of markdownFiles) {
-  await validateLinks(file, await readFile(file, 'utf8'))
+  const source = await readFile(file, 'utf8')
+  await validateLinks(file, source)
+  validateTerminology(file, source)
 }
 
 chapters.sort((left, right) => left.part - right.part || left.order - right.order)

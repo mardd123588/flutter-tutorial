@@ -61,7 +61,7 @@ flutter run -d chrome
 | --- | --- |
 | `lib/` | Dart 与 Flutter 源码，应用入口通常是 `lib/main.dart` |
 | `test/` | 单元测试和 Widget 测试 |
-| `integration_test/` | 在完整应用上运行的关键流程测试 |
+| `integration_test/` | 在完整应用上运行的集成测试 |
 | `web/` | Web 启动页、图标和 manifest 等平台外壳 |
 | `pubspec.yaml` | SDK 范围、依赖、资源和包信息 |
 | `analysis_options.yaml` | 静态分析与 lint 规则 |

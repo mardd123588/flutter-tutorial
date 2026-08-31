@@ -130,7 +130,7 @@ Service 可以统一业务结果，但不能抹掉平台上确实不同的恢复
 
 | 标签 | 含义 |
 | --- | --- |
-| `Web verified` | 已在本仓库 Chrome 流程和 release 子路径验证 |
+| `Web verified` | 已在本仓库 Chrome 集成测试和 Web release 子路径验证 |
 | `contract tested` | Dart 接口、fake 与错误映射有测试，未验证真实平台 API |
 | `native verification required` | 需要真机、权限弹窗、商店配置或宿主代码证据 |
 
@@ -138,7 +138,7 @@ Service 可以统一业务结果，但不能抹掉平台上确实不同的恢复
 
 ## Web 平台的硬边界
 
-浏览器沙箱限制文件系统、后台执行、系统权限和窗口控制。Flutter plugin 即使提供 Web 实现，也可能依赖特定浏览器 API、HTTPS 或用户手势。Integration test 还不能操作所有系统级权限弹窗。
+浏览器沙箱限制文件系统、后台执行、系统权限和窗口控制。Flutter plugin 即使提供 Web 实现，也可能依赖特定浏览器 API、HTTPS 或用户手势。集成测试还不能操作所有系统级权限弹窗。
 
 遇到平台功能时，先决定验收目标：
 

@@ -45,7 +45,7 @@ Drift 的 `watch()` 返回 Stream。相关表发生写入后，Drift 按查询�
 
 页面订阅收藏 ID 集合后，再计算当前列表的 saved 状态。数据库 Stream 负责持续事实，Widget 负责展示；关闭数据库前要先结束使用它的订阅。
 
-Unit 测试使用 `NativeDatabase.memory()`，能验证 SQL、事务和 Stream，不证明浏览器的 Wasm、Worker 或持久化实现。
+单元测试使用 `NativeDatabase.memory()`，能验证 SQL、事务和 Stream，不证明浏览器的 Wasm、Worker 或持久化实现。
 
 ## migration 是发布合同
 
@@ -79,7 +79,7 @@ Drift 2.34.3 的 Web 预览携带同版本链路所需：
 - `web/sqlite3.wasm`
 - `web/drift_worker.js`
 
-`sqlite3.wasm` 必须以 `application/wasm` 提供。release 构建成功只证明文件进入产物，不证明部署服务器的 MIME、worker URL 和 base path 正确。
+`sqlite3.wasm` 必须以 `application/wasm` 提供。Web release 构建成功只证明文件进入产物，不证明部署服务器的 MIME、worker URL 和 base path 正确。
 
 Drift 会按浏览器能力选择 OPFS、带锁 OPFS、Shared IndexedDB、unsafe IndexedDB 或内存实现。没有 COOP / COEP 时通常会回退，不是必然无法运行；回退到 unsafe IndexedDB 时多标签安全性降低，回退到内存时刷新不持久化。
 
@@ -93,7 +93,7 @@ Drift 会按浏览器能力选择 OPFS、带锁 OPFS、Shared IndexedDB、unsafe
 2. 故意让 transaction 中途失败，确认没有半条记录。
 3. `watchSavedIds()` 依次发出空集合、收藏集合和空集合。
 4. 从 version 1 文件升级到 version 2，旧收藏保留。
-5. release Web 服务器正确返回 Wasm MIME，worker 无 404。
+5. 服务器能从 Web release 产物正确返回 Wasm MIME，worker 无 404。
 6. Chrome 中收藏后刷新仍在；另开标签页记录当前存储实现与同步边界。
 
 ## 复习线索

@@ -16,21 +16,21 @@ status: verified
 
 # Web 浏览器关键流程
 
-Widget 测试能驱动完整 Widget 生命周期，却没有真实地址栏、浏览器历史和发布服务器。`flutter build web` 只证明代码可以产生产物，也不证明用户能刷新深链接、加载 Wasm 或使用 Back / Forward。Web 关键流程要在真实 Chrome 中运行。
+Widget 测试能驱动完整 Widget 生命周期，却没有真实地址栏、浏览器历史和发布服务器。`flutter build web` 只证明代码可以产生产物，也不证明用户能刷新深链接、加载 Wasm 或使用 Back / Forward。Chrome 集成测试要在真实 Chrome 中运行。
 
 ## 三类证据不要互相冒充
 
 | 检查 | 能证明 | 不能证明 |
 | --- | --- | --- |
-| Widget test | Widget 生命周期、输入、焦点、Semantics、布局分支 | 地址栏、浏览器历史、发布资产 |
-| release Web build | release 编译、tree shaking、静态产物生成 | 页面能正确交互、刷新和恢复 |
-| Chrome integration | 真实浏览器中的主旅程、URL、资产和输入边界 | 所有纯规则分支、像素稳定性 |
+| Widget 测试 | Widget 生命周期、输入、焦点、Semantics、布局分支 | 地址栏、浏览器历史、发布资产 |
+| Web release 构建 | release 编译、tree shaking、静态产物生成 | 页面能正确交互、刷新和恢复 |
+| Chrome 集成测试 | 真实浏览器中的主旅程、URL、资产和输入边界 | 所有纯规则分支、像素稳定性 |
 
-一条 Chrome 流程应覆盖最重要的用户旅程，例如“打开列表 → 改筛选 → 打开详情 → Back → 刷新后恢复”。排序 tie-breaker、非法参数全集和每个空状态仍放在更便宜的测试层。
+一条 Chrome 集成测试应覆盖最重要的用户旅程，例如“打开列表 → 改筛选 → 打开详情 → Back → 刷新后恢复”。排序 tie-breaker、非法参数全集和每个空状态仍放在更便宜的测试层。
 
 ## Web 使用 ChromeDriver
 
-本仓库使用 Flutter `integration_test`、`flutter drive -d web-server` 和 ChromeDriver。ChromeDriver 主版本要和本机 Chrome 匹配，并放在 `PATH` 中。
+本仓库使用 Flutter `integration_test`、`flutter drive -d web-server` 和 ChromeDriver。ChromeDriver 要与当前 Chrome build 匹配，并放在 `PATH` 中。
 
 先启动 driver：
 
@@ -49,11 +49,11 @@ flutter drive \
   --profile
 ```
 
-PowerShell 可以把续行符换成反引号，或写成一行。端口被占用、Chrome 与 ChromeDriver 主版本不一致、driver 不在 `PATH`，都会在 Flutter 测试进入应用之前失败。
+PowerShell 可以把续行符换成反引号，或写成一行。端口被占用、Chrome 与 ChromeDriver 版本不匹配、driver 不在 `PATH`，都会在 Flutter 测试进入应用之前失败。
 
 `-d web-server` 让 Flutter 启动 Web 服务，由 WebDriver 打开页面。它与 `flutter test -d chrome` 不是同一条路径；当前 Flutter 环境的 Web integration test 以 WebDriver 方案为准。
 
-## Integration test 只保留关键旅程
+## 集成测试只保留关键旅程
 
 测试仍使用熟悉的 `testWidgets` API：
 
@@ -74,7 +74,7 @@ void main() {
 }
 ```
 
-这段 API 看起来像 Widget test，执行环境却是完整应用和真实浏览器。项目若要断言地址栏，应读取 Router 的 `RouteInformationProvider`，并在人工或浏览器自动化步骤中补查刷新、新标签与 Back / Forward；不要把组件内部字符串当作地址栏证据。
+这段 API 看起来像 Widget 测试，执行环境却是完整应用和真实浏览器。项目若要断言地址栏，应读取 Router 的 `RouteInformationProvider`，并在人工或浏览器自动化步骤中补查刷新、新标签与 Back / Forward；不要把组件内部字符串当作地址栏证据。
 
 ## URL 流程要覆盖恢复
 
@@ -101,7 +101,7 @@ flutter build web --release --base-href /flutter-tutorial/previews/example-app/
 
 ## 失败时保留最小证据包
 
-Integration 失败后，先留下能复现的材料：
+集成测试失败后，先留下能复现的材料：
 
 - 完整命令与退出码；
 - Flutter、Chrome、ChromeDriver 版本；
@@ -120,15 +120,15 @@ Flutter integration test 不能操作浏览器之外的系统权限弹窗、原�
 
 ## 可验证任务
 
-为一个带 hash URL 的档案列表设计一条 Chrome 关键流程，写出测试步骤和发布命令。流程必须覆盖筛选、详情、Back、刷新和 release 子路径；排序规则、空结果与非法参数分别说明应该落在哪个更低层测试中。
+为一个带 hash URL 的档案列表设计一条 Chrome 集成测试，写出测试步骤和发布命令。流程必须覆盖筛选、详情、Back、刷新和 Web release 子路径；排序规则、空结果与非法参数分别说明应该落在哪个更低层测试中。
 
 故意把 `--base-href` 改错一次，记录失败 URL、控制台错误和截图，再恢复配置。不要用“页面打不开”作为唯一失败描述。
 
 ## 复习线索
 
-- Widget test、release build、Chrome integration 证明的是三件不同的事。
-- Integration 只覆盖关键旅程，不复制 unit / widget 的分支矩阵。
-- ChromeDriver 主版本必须匹配 Chrome。
+- Widget 测试、Web release 构建、Chrome 集成测试证明的是三件不同的事。
+- 集成测试只覆盖关键旅程，不复制单元测试和 Widget 测试的分支矩阵。
+- ChromeDriver 必须与当前 Chrome build 匹配。
 - URL 流程要验证直达、更新、历史、刷新、新标签和发布子路径。
 - 失败证据至少包含命令、版本、URL、日志、截图和 fixture。
 
@@ -138,4 +138,3 @@ Flutter integration test 不能操作浏览器之外的系统权限弹窗、原�
 - [Flutter build modes](https://docs.flutter.dev/testing/build-modes)（查阅：2026-08-31）
 - [Flutter Web deployment](https://docs.flutter.dev/deployment/web)（查阅：2026-08-31）
 - [ChromeDriver downloads and version selection](https://developer.chrome.com/docs/chromedriver/downloads/version-selection)（查阅：2026-08-31）
-

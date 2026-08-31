@@ -39,6 +39,8 @@ status: verified
 
 场馆导览册把这一部分的路由、URL、响应式、输入、可访问性和本地化放进同一个 Flutter Web 应用。用户可以搜索地点、查看楼层、切换标签、浏览三条路线，并在中文与英文之间切换。
 
+需要回查单项机制时，可返回[页面栈](/guide/part-05/01-navigator-page-stack)、[Router 与 go_router](/guide/part-05/02-router-url-go-router)、[深链接](/guide/part-05/03-deep-links-route-share-card)、[响应式与平台适配](/guide/part-05/04-responsive-adaptive)、[可访问性](/guide/part-05/05-accessibility-as-feature)和[国际化](/guide/part-05/06-internationalization-localization)。本章只讲这些机制如何共享路由与页面状态。
+
 这里从项目合同开始，再按数据与控制流解释实现。建议先独立完成一个版本，再对照源码和测试。
 
 ## 项目简报
@@ -57,7 +59,7 @@ status: verified
 - 中英文切换后保留 URL、query、搜索文本和焦点；
 - 楼层图只给语义摘要，房间操作由可聚焦列表承担；
 - 200% 文本、RTL 测试壳和减少动画模式不丢任务；
-- 两张 deterministic golden 固定宽屏首页与窄屏详情的视觉基线。
+- 两张确定性 golden 固定宽屏首页与窄屏详情的视觉基线。
 
 ### 明确不做
 
@@ -167,7 +169,7 @@ Widget 测试同时核对 URL、搜索文本、英文结果和焦点：
 
 ## 楼层图和房间列表分工
 
-`CustomPainter` 画楼层轮廓、房间块和路线。图形外层只提供一条 `image` 语义摘要：
+`CustomPainter` 画楼层轮廓、房间块和路线。本章只使用它的绘制接口；重绘与渲染阶段留到[渲染流水线与自绘边界](/guide/part-07/05-rendering-pipeline)。图形外层只提供一条 `image` 语义摘要：
 
 <<< ../../../examples/capstones/venue_guidebook/lib/src/venues_page.dart#floor-plan-semantics{dart}
 
@@ -189,7 +191,7 @@ Padding 主要使用 `EdgeInsetsDirectional`，返回箭头根据 `Directionalit
 
 ## 测试矩阵覆盖不同失败方式
 
-项目的 Unit 与 Widget / golden 共 18 项：
+项目的单元测试、Widget 测试与 golden 测试共 18 项：
 
 - codec 默认值、round-trip 和七类非法 URL；
 - Drawer / Rail 切换和 Escape；
@@ -199,7 +201,7 @@ Padding 主要使用 `EdgeInsetsDirectional`，返回箭头根据 `Directionalit
 - 结果数、楼层摘要、房间选择语义；
 - 320×720、768×900、1440×900；
 - 200% 文本、RTL 测试壳、减少动画；
-- 两张 deterministic golden。
+- 两张确定性 golden。
 
 响应式尺寸矩阵直接成为 Widget 测试：
 
@@ -211,7 +213,7 @@ Golden 固定宽屏地点目录和 390×844 的紧凑详情：
 
 Golden 能发现色块、间距、字体回退和布局变化，不证明交互正确。URL、焦点、语义和动画仍由各自测试承担。
 
-Chrome `flutter drive` 完成搜索、进入中庭、切到二层、切换英文，并断言 URI 仍是 `/venues/atrium?floor=2`。release Web 还在真实浏览器补验直达、刷新、Back / Forward、语言切换和键盘输入边界。
+Chrome 集成测试通过 `flutter drive` 完成搜索、进入中庭、切到二层、切换英文，并断言 URI 仍是 `/venues/atrium?floor=2`。Web release 产物另在真实浏览器补验直达、刷新、Back / Forward、语言切换和键盘输入边界。
 
 ## 运行与检查
 
@@ -254,7 +256,7 @@ flutter build web --release --base-href /flutter-tutorial/previews/venue-guidebo
 - [ ] locale 切换保留 path、query、搜索文本与焦点。
 - [ ] 楼层图有摘要，真实房间列表承担焦点、动作和 selected 状态。
 - [ ] 320×720、768×900、1440×900、200% 文本、RTL 壳与减少动画都有证据。
-- [ ] 两张 golden、Chrome 流程和 release 子路径构建均通过。
+- [ ] 两张 golden、Chrome 集成测试和 Web release 子路径构建均通过。
 
 ## 复习线索
 
@@ -262,7 +264,7 @@ flutter build web --release --base-href /flutter-tutorial/previews/venue-guidebo
 - 可分享状态写入 path / query；显示语言和页面局部输入分别管理。
 - 响应式只替换布局与导航容器，不替换路由和任务。
 - 自绘图给摘要，真实控件承担语义与操作。
-- Golden、Widget、集成和真实浏览器测试各自覆盖不同风险。
+- golden 测试、Widget 测试、Chrome 集成测试和人工浏览器检查各自覆盖不同风险。
 - [项目源码](https://github.com/mardd123588/flutter-tutorial/tree/main/examples/capstones/venue_guidebook)
 
 ## 参考资料

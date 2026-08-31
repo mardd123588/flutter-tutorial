@@ -90,7 +90,7 @@ class OpenDrawerButton extends StatelessWidget {
 
 ## 不要长期保存 context
 
-context 代表一个会挂载、移动或卸载的树位置。把它放进全局变量、Repository 或长生命周期服务，会把界面生命周期泄漏到不该知道 Widget tree 的代码。
+context 代表一个会挂载、移动或卸载的树位置。把它放进全局变量或长生命周期的数据服务，会把界面生命周期泄漏到不该知道 Widget tree 的代码。
 
 异步等待后使用 context 也要确认位置仍然挂载：
 
@@ -100,7 +100,7 @@ if (!context.mounted) return;
 Navigator.of(context).pop();
 ```
 
-这一行先作为边界记住。生命周期与 `mounted` 会在第三部分解释。
+这里先把 `pop` 理解为关闭当前页面。生命周期与 `mounted` 会在第三部分解释，页面栈会在[第五部分](/guide/part-05/01-navigator-page-stack)完整展开。
 
 ## 错误案例怎么判断
 

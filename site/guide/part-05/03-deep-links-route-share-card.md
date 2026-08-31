@@ -21,6 +21,8 @@ status: verified
 
 深链接让应用从一个 URL 直接恢复到具体内容。能打开一个地址只是起点；可分享链接还要经得住刷新、新标签、非法参数、Back / Forward 和部署子路径。
 
+路线分享卡建立在[页面栈](/guide/part-05/01-navigator-page-stack)和[Router、URL 与 go_router](/guide/part-05/02-router-url-go-router)之上。本章只新增可分享 URL 合同、参数校验与部署边界。
+
 本章用“路线分享卡”完成这套合同。项目只有三条本地路线，不接地图、定位、网络、账号或数据库，问题集中在 URL 本身。
 
 ## 先定义 URL 合同
@@ -159,7 +161,7 @@ Widget 测试还会断言：
 - 复制的是完整部署 URL；
 - 320×720、200% 文本和减少动画边界可用。
 
-Chrome 集成测试覆盖打开路线与修改偏好。地址栏粘贴、硬刷新、Back、Forward 和新标签复制仍需在 release Web 的真实 HTTP 子路径补验；Widget 测试不能证明托管合同。
+Chrome 集成测试覆盖打开路线与修改偏好。地址栏粘贴、硬刷新、Back、Forward 和新标签复制仍需针对 Web release 产物的真实 HTTP 子路径补验；Widget 测试不能证明托管合同。
 
 ## 运行与验收
 
@@ -178,7 +180,7 @@ Chrome 集成测试需要 ChromeDriver 监听 4444 端口：
 flutter drive -d web-server --browser-name=chrome --driver=test_driver/integration_test.dart --target=integration_test/route_share_card_test.dart
 ```
 
-release 构建后，从下面的深链接开始检查：
+Web release 构建后，从下面的深链接开始检查：
 
 ```text
 /flutter-tutorial/previews/route-share-card/#/routes/museum-loop?mode=quiet

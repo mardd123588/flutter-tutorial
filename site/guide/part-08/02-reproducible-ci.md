@@ -108,7 +108,7 @@ steps:
 
 每个 matrix 项都在单独虚拟机中，因此它们可以使用相同的 4444 和 7357 端口；进程、浏览器 profile、数据库和输出目录不会跨 runner 共享。若在同一 runner 内并行多个浏览器任务，端口和 profile 就必须显式区分。
 
-单个项目按 `analyze → test → Chrome integration → release build` 执行。便宜检查先失败，能减少无意义的浏览器启动和构建。
+单个项目按 `analyze → test → Chrome 集成测试 → Web release 构建` 执行。便宜检查先失败，能减少无意义的浏览器启动和构建。
 
 ## ChromeDriver 要匹配 Chrome build
 
@@ -130,7 +130,7 @@ ChromeDriver 151.0.7922.174
 - driver 与 Web 端口；
 - analyze、test、integration 的完整命令、输出和退出码；
 - ChromeDriver 日志与失败截图；
-- release 构建失败信息。
+- Web release 构建失败信息。
 
 只有失败时上传该目录，保留 7 天。Artifact 用于诊断，不是可信发布输入；Pages workflow 会从已经验证的 commit 重新构建。
 

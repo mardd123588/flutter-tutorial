@@ -63,7 +63,7 @@ description: 按概念查找首次讲解、复习章节、项目和常见错误�
 | `navigation.navigator-stack`、`navigation.route-result`、`navigation.pop-scope` | [Navigator 与页面栈](/guide/part-05/01-navigator-page-stack) | push/pop 返回值、异步 context、嵌套栈、dialog 与离开确认 |
 | `navigation.router`、`navigation.url-state`、`navigation.go-router`、`navigation.shell-route` | [Router、URL 与 go_router](/guide/part-05/02-router-url-go-router) | Router 与 Navigator 分工、go/push、redirect、onExit、ShellRoute 与错误页 |
 | `navigation.deep-link`、`navigation.url-validation`、`deployment.hash-url`、`project.route-share-card` | [深链接与路线分享卡](/guide/part-05/03-deep-links-route-share-card) | 稳定 ID、Uri 编码、非法参数、hash、base href 与新标签恢复 |
-| `layout.responsive`、`layout.content-breakpoint`、`navigation.adaptive-shell`、`input.adaptive` | [响应式与平台适应](/guide/part-05/04-responsive-adaptive) | LayoutBuilder、MediaQuery、Drawer/Rail、hover、键盘与平台惯例 |
+| `layout.responsive`、`layout.content-breakpoint`、`navigation.adaptive-shell`、`input.adaptive` | [响应式与平台适配](/guide/part-05/04-responsive-adaptive) | LayoutBuilder、MediaQuery、Drawer/Rail、hover、键盘与平台惯例 |
 | `a11y.semantics`、`a11y.keyboard-flow`、`a11y.text-scale`、`a11y.error-feedback`、`a11y.motion-preference` | [可访问性作为功能](/guide/part-05/05-accessibility-as-feature) | 语义分工、完整键盘流程、200% 文本、对比度、错误与减少动画 |
 | `i18n.gen-l10n`、`i18n.arb`、`i18n.format`、`i18n.locale`、`i18n.directionality` | [国际化与本地化](/guide/part-05/06-internationalization-localization) | ARB placeholder/plural、intl、稳定路由与 RTL 测试边界 |
 | `project.venue-guidebook` | [项目：场馆导览册](/guide/part-05/07-venue-guidebook) | ShellRoute、深链接、响应式导航、键盘、语义、本地化与 golden 完整流程 |
@@ -87,7 +87,7 @@ description: 按概念查找首次讲解、复习章节、项目和常见错误�
 | --- | --- | --- |
 | `test.strategy`、`test.unit`、`test.determinism` | [测试策略与单元测试](/guide/part-07/01-test-strategy-unit) | 风险表、arrange—act—assert、固定时钟、fake / mock / 真实依赖 |
 | `test.widget`、`test.semantics`、`test.golden-boundary` | [Widget、语义与视觉测试](/guide/part-07/02-widget-semantics-golden) | 精确 pump、lazy finder、用户可感知合同、golden 环境 |
-| `test.integration-web`、`test.webdriver`、`test.failure-artifact` | [Web 浏览器关键流程](/guide/part-07/03-web-integration) | ChromeDriver、URL 恢复、release 子路径与失败证据包 |
+| `test.integration-web`、`test.webdriver`、`test.failure-artifact` | [Web 浏览器关键流程](/guide/part-07/03-web-integration) | ChromeDriver、URL 恢复、Web release 子路径与失败证据包 |
 | `internals.widget-element-renderobject`、`internals.update-matching`、`debug.rebuild` | [Widget、Element、RenderObject](/guide/part-07/04-widget-element-renderobject) | 三棵树、canUpdate、build mode、Inspector 与 build tracing |
 | `render.pipeline`、`render.repaint-boundary`、`debug.layout-paint` | [渲染流水线与自绘边界](/guide/part-07/05-rendering-pipeline) | layout / paint / semantics、CustomPainter、Listenable、边界成本 |
 | `performance.frame-budget`、`performance.devtools`、`layout.sliver`、`performance.memory`、`project.scroll-timeline` | [Sliver、性能分析与长卷时间轴](/guide/part-07/06-sliver-performance-scroll-timeline) | SliverConstraints / Geometry、lazy、profile workload、golden 与长卷完整流程 |
@@ -99,8 +99,8 @@ description: 按概念查找首次讲解、复习章节、项目和常见错误�
 | --- | --- | --- |
 | `engineering.pub-workspace`、`engineering.dependencies`、`engineering.config` | [Workspace、依赖与配置](/guide/part-08/01-workspace-dependencies-config) | 根与成员合同、manifest / lockfile / cache、公开编译时配置 |
 | `engineering.ci`、`engineering.affected-projects`、`engineering.reproducibility` | [可复现 CI 与受影响项目](/guide/part-08/02-reproducible-ci) | Git rename 两侧路径、matrix 隔离、ChromeDriver 与失败 artifact |
-| `web.release-build`、`web.base-href`、`web.wasm-boundary` | [Flutter Web release 与子路径](/guide/part-08/03-flutter-web-release) | base href、本地 CanvasKit、hash URL、Wasm、PWA 与 source map 边界 |
+| `web.release-build`、`web.base-href`、`web.wasm-boundary` | [Flutter Web release 构建与子路径](/guide/part-08/03-flutter-web-release) | base href、本地 CanvasKit、hash URL、Wasm、PWA 与 source map 边界 |
 | `deployment.pages`、`deployment.preview-layout`、`deployment.rollback` | [GitHub Pages artifact 与发布](/guide/part-08/04-github-pages-publishing) | 单一 staging、最小权限、smoke、内容版本与 commit 回滚 |
 | `platform.plugin`、`platform.permission`、`platform.channel`、`platform.web-limit` | [平台插件、权限与平台通道](/guide/part-08/05-platform-plugins-permissions-channels) | Service 接缝、federated plugin、MethodChannel、权限状态与证据标签 |
 | `release.quality`、`release.privacy`、`release.license`、`release.migration` | [发布质量、隐私、许可与升级](/guide/part-08/06-release-quality-privacy-upgrades) | 自动 / 人工证据、第三方请求、许可、依赖与 SDK 分批升级 |
-| `project.neighborhood-exchange` | [项目：邻里资源交换站](/guide/part-08/07-neighborhood-exchange) | Fixture、Drift 幂等、Riverpod、URL、响应式、CI、release 与 Pages 完整流程 |
+| `project.neighborhood-exchange` | [项目：邻里资源交换站](/guide/part-08/07-neighborhood-exchange) | fixture、Drift 幂等、Riverpod、URL、响应式、CI、Web release 构建与 Pages 完整流程 |

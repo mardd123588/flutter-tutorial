@@ -20,6 +20,8 @@ status: verified
 
 搜索框每敲一个字就发请求，会产生大量无意义查询。加上防抖以后，请求数量少了，但已经发出的旧请求仍可能晚到，并覆盖更新的结果。即时书目检索用固定延迟把这个错误稳定复现：`星` 用 850ms 返回，稍后输入的 `河` 只用 120ms。
 
+项目沿用[异步界面状态](/guide/part-04/01-async-ui-state)、[HTTP Service](/guide/part-04/02-http-service)和[手写 JSON 模型](/guide/part-04/03-hand-written-json)。本章新增的是防抖、请求身份和逆序完成测试。
+
 ## 防抖只阻止尚未开始的工作
 
 防抖在每次输入时取消旧 Timer，再安排新 Timer：
@@ -114,7 +116,7 @@ cd examples/focus/instant_book_search
 flutter run -d chrome
 ```
 
-release Web 构建：
+Web release 构建：
 
 ```powershell
 flutter build web --release --base-href /flutter-tutorial/previews/instant-book-search/
@@ -129,7 +131,7 @@ flutter build web --release --base-href /flutter-tutorial/previews/instant-book-
 - [ ] 加载或刷新失败时保留可用旧结果；空结果会替换旧结果。
 - [ ] timeout、generation 和主动取消三个边界没有混写。
 - [ ] `MockClient` 覆盖成功、status、timeout 和坏 JSON。
-- [ ] Unit、Widget、Chrome 关键流程和 release Web build 全部通过。
+- [ ] 单元测试、Widget 测试、Chrome 集成测试和 Web release 构建全部通过。
 
 ## 复习线索
 
