@@ -171,5 +171,5 @@ Service 可以统一业务结果，但不能抹掉平台上确实不同的恢复
 - [`MethodChannel`](https://api.flutter.dev/flutter/services/MethodChannel-class.html)（查阅：2026-08-31）
 - [`AppLifecycleState`](https://api.flutter.dev/flutter/dart-ui/AppLifecycleState.html)（查阅：2026-08-31）
 - [Android permissions](https://developer.android.com/guide/topics/permissions/overview)（查阅：2026-08-31）
-- [Apple: Requesting authorization](https://developer.apple.com/documentation/bundleresources/requesting-authorization-for-media-capture-on-ios)（查阅：2026-08-31）
+- [Apple: Requesting authorization to capture and save media](https://developer.apple.com/documentation/avfoundation/requesting-authorization-to-capture-and-save-media)（查阅：2026-09-01）
 - [Permissions API](https://www.w3.org/TR/permissions/)（查阅：2026-08-31）

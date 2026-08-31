@@ -104,17 +104,19 @@ ref.watch(
 
 ## 生成与检查
 
-一次生成：
+在使用生成器的成员目录运行；对应本部分项目时，先进入 `examples/capstones/community_workshop_scheduler`。一次生成：
 
 ```powershell
-dart run build_runner build --delete-conflicting-outputs
+dart run build_runner build
 ```
 
 持续生成：
 
 ```powershell
-dart run build_runner watch --delete-conflicting-outputs
+dart run build_runner watch
 ```
+
+若命令报告冲突输出，先确认文件确实是旧生成物，再按错误提示决定是否加入 `--delete-conflicting-outputs`；不要把删除冲突当作默认步骤。
 
 遇到问题按顺序检查：
 

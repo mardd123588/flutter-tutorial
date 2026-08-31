@@ -9,6 +9,14 @@ const allowedKinds = new Set(['concept', 'capstone', 'focus-project'])
 const allowedStatuses = new Set(['draft', 'verified'])
 const conceptPattern = /^[a-z0-9]+(?:[.-][a-z0-9]+)*$/
 const projectPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/
+const importLanguages = new Map([
+  ['.dart', 'dart'],
+  ['.js', 'js'],
+  ['.json', 'json'],
+  ['.mjs', 'js'],
+  ['.yaml', 'yaml'],
+  ['.yml', 'yaml'],
+])
 const deprecatedTerms = [
   { pattern: /\brelease Web\b|\bRelease Web\b/, preferred: 'Web release 构建' },
   { pattern: /\bChrome integration\b/, preferred: 'Chrome 集成测试' },
@@ -185,10 +193,18 @@ function validateTerminology(file, source) {
 }
 
 async function validateImports(file, source) {
-  const imports = source.matchAll(/^<<<\s+([^#\s{]+)(?:#([A-Za-z0-9._-]+))?(?:\{[^}]*\})?\s*$/gm)
+  const importLines = source.match(/^<<<.*$/gm) ?? []
+  const imports = [...source.matchAll(
+    /^<<<\s+([^#\s{]+)(?:#([A-Za-z0-9._-]+))?(?:\{([A-Za-z0-9_-]+)\})?\s*$/gm,
+  )]
+  if (imports.length !== importLines.length) {
+    fail(file, '存在无法解析的源码导入语法')
+  }
+
   for (const match of imports) {
     const target = path.resolve(path.dirname(file), match[1])
     const region = match[2]
+    const language = match[3]
 
     if (!staysInsideRoot(target)) {
       fail(file, `源码导入越出仓库：${match[1]}`)
@@ -198,12 +214,22 @@ async function validateImports(file, source) {
       fail(file, `源码导入不存在：${match[1]}`)
       continue
     }
+
+    const expectedLanguage = importLanguages.get(path.extname(target))
+    if (expectedLanguage && language !== expectedLanguage) {
+      fail(
+        file,
+        `源码导入语言标记应为 ${expectedLanguage}：${match[1]}${language ? `{${language}}` : ''}`,
+      )
+    }
     if (!region) continue
 
     const importedSource = await readFile(target, 'utf8')
     const start = new RegExp(`(?:#|#?\\s*)region\\s+${region.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(?:\\s|$)`)
     const end = new RegExp(`(?:#|#?\\s*)endregion\\s+${region.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(?:\\s|$)`)
-    if (!start.test(importedSource) || !end.test(importedSource)) {
+    const startMatch = importedSource.match(start)
+    const endMatch = importedSource.match(end)
+    if (!startMatch || !endMatch || startMatch.index >= endMatch.index) {
       fail(file, `源码 region 不完整：${match[1]}#${region}`)
     }
   }

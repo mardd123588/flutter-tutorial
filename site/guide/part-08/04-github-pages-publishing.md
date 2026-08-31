@@ -110,9 +110,9 @@ Build 脚本不持有部署权限；deploy job 不重新构建。权限和产物
 
 - 站点首页、项目索引和 release manifest；
 - 13 个预览入口；
-- 每个预览的 hash 深链接入口；
+- 每个预览在带 hash fragment 的 URL 下仍落到同一静态入口；
 - Drift 项目的 `sqlite3.wasm` 与 `drift_worker.js`；
-- HTML、JavaScript、JSON、CSS、SVG、PNG 与 Wasm 的 MIME。
+- 上述 HTML、JSON、JavaScript 与 Wasm 响应的 MIME。
 
 Hash fragment 不会传给服务器，所以 smoke 对 `#/listings/r-001` 的 HTTP 请求仍落在预览目录。静态 smoke 只能负责入口和资产；筛选参数、详情恢复、Back / Forward 与非法 ID 还要分别用 Widget、Chrome 或人工浏览器流程验证。
 

@@ -208,6 +208,5 @@ expect(await future, isA<Ok<List<Bulletin>>>());
 
 - [Riverpod testing](https://riverpod.dev/docs/how_to/testing)（查阅：2026-08-30）
 - [ProviderContainer 3.4.2 API](https://pub.dev/documentation/riverpod/3.4.2/riverpod/ProviderContainer-class.html)（查阅：2026-08-30）
-- [Provider overrides 3.4.2 API](https://pub.dev/documentation/riverpod/3.4.2/riverpod/Override-class.html)（查阅：2026-08-30）
+- [Riverpod provider overrides](https://riverpod.dev/docs/concepts2/overrides)（查阅：2026-09-01）
 - [Flutter testing each layer](https://docs.flutter.dev/app-architecture/case-study/testing)（查阅：2026-08-30）
-

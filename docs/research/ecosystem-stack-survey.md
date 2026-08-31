@@ -6,16 +6,16 @@
 
 ## 先看结论边界
 
-- 本轮候选的最新稳定版都能满足 Flutter 3.47 / Dart 3.13 的声明约束。`freezed 4.0.0` 的 Dart 下限正好是 3.13；`go_router 18.0.0` 要求 Flutter 3.44 以上。[freezed 元数据](https://pub.dev/api/packages/freezed) · [go_router 元数据](https://pub.dev/api/packages/go_router)
+- 截至 2026-08-29，本轮候选的稳定版都能满足 Flutter 3.47 / Dart 3.13 的声明约束。`freezed 4.0.0` 的 Dart 下限正好是 3.13；`go_router 18.0.0` 要求 Flutter 3.44 以上。[freezed 4.0.0 元数据](https://pub.dev/api/packages/freezed/versions/4.0.0) · [go_router 元数据](https://pub.dev/api/packages/go_router)
 - Web 不能只看“这个包是不是纯 Dart”。路由要验证浏览器历史与 GitHub Pages 子路径，HTTP 要受 CORS 约束，数据库还涉及 IndexedDB、Wasm、Worker 和响应头。[Flutter Router API](https://api.flutter.dev/flutter/widgets/Router-class.html) · [Dio 的 Web CORS 说明](https://github.com/cfug/dio/tree/main/dio#cross-origin-resource-sharing-on-web-cors) · [Drift Web 文档](https://drift.simonbinder.eu/platforms/web/)
 - Flutter 官方架构指南不绑定状态管理包。官方案例采用 `ChangeNotifier`、`Listenable` 和 `provider`，同时明确说明 Riverpod、`flutter_bloc`、signals 或 Stream 都能遵守同一套分层规则。[Flutter 架构案例](https://docs.flutter.dev/app-architecture/case-study)
 - 教学顺序不应等同于生产主方案。先讲 `InheritedWidget`、`Listenable`、`ChangeNotifier`、`Navigator`、`Router`、手写 JSON 和依赖注入的基本接缝，再引入第三方包，读者才知道它们省掉了什么。[InheritedWidget API](https://api.flutter.dev/flutter/widgets/InheritedWidget-class.html) · [ChangeNotifier API](https://api.flutter.dev/flutter/foundation/ChangeNotifier-class.html) · [Navigator API](https://api.flutter.dev/flutter/widgets/Navigator-class.html) · [Router API](https://api.flutter.dev/flutter/widgets/Router-class.html)
 
 ## 版本、约束与维护主体
 
-表中的“当前稳定版”取自 pub.dev `latest` 元数据；Flutter SDK 自带能力跟随 3.47.0，不另设包版本。
+表中的“查阅版本”取自 2026-08-29 的 pub.dev `latest` 元数据；Flutter SDK 自带能力跟随 3.47.0，不另设包版本。
 
-| 领域 | 候选 | 当前稳定版 | SDK 约束 | Web 与维护主体 |
+| 领域 | 候选 | 查阅版本 | SDK 约束 | Web 与维护主体 |
 | --- | --- | ---: | --- | --- |
 | 状态 | Flutter SDK：`InheritedWidget` / `ChangeNotifier` | 3.47.0 SDK | Dart 3.13 | Flutter SDK 自带，Web 随 Flutter；由 Flutter 项目维护。[API](https://api.flutter.dev/flutter/foundation/ChangeNotifier-class.html) · [源码](https://github.com/flutter/flutter/tree/3.47.0/packages/flutter) |
 | 状态 | `flutter_riverpod` / `riverpod` | 3.4.2 / 3.4.2 | Dart `^3.12.0`；Flutter `>=3.0.0` | verified publisher `dash-overflow.net`，仓库 `rrousselGit/riverpod`。核心 `riverpod` 的 pub.dev 元数据列出 Web；`flutter_riverpod` 当前元数据没有 Web 标签，见后文风险说明。[flutter_riverpod](https://pub.dev/api/packages/flutter_riverpod) · [riverpod](https://pub.dev/api/packages/riverpod) · [publisher](https://pub.dev/publishers/dash-overflow.net) |
@@ -27,7 +27,7 @@
 | HTTP | `dio` | 5.11.0 | Dart `>=2.18.0 <4.0.0` | pub.dev 列出 Web 和 Wasm；verified publisher `flutter.cn`，仓库 `cfug/dio`。[元数据](https://pub.dev/api/packages/dio) · [平台标签](https://pub.dev/api/packages/dio/score) · [publisher](https://pub.dev/publishers/flutter.cn) |
 | 模型 | 手写 `dart:convert` | Dart 3.13 SDK | Dart 3.13 | Dart SDK 自带，Web 可用；由 Dart 项目维护。[dart:convert](https://api.dart.dev/dart-convert/) |
 | 模型 | `json_serializable` | 6.14.1 | Dart `^3.9.0` | 生成器在开发机运行；产物是普通 Dart。verified publisher `google.dev`，仓库 `google/json_serializable.dart`。[元数据](https://pub.dev/api/packages/json_serializable) · [仓库](https://github.com/google/json_serializable.dart/tree/master/json_serializable) · [publisher](https://pub.dev/publishers/google.dev) |
-| 模型 | `freezed` / `freezed_annotation` | 4.0.0 / 3.1.0 | 生成器 Dart `>=3.13.0 <4.0.0`；annotation Dart `>=3.0.0 <4.0.0` | 生成器在开发机运行；运行时 annotation 元数据列出 Web。verified publisher `dash-overflow.net`，仓库 `rrousselGit/freezed`。[freezed](https://pub.dev/api/packages/freezed) · [annotation](https://pub.dev/api/packages/freezed_annotation) · [annotation 平台标签](https://pub.dev/api/packages/freezed_annotation/score) |
+| 模型 | `freezed` / `freezed_annotation` | 4.0.0 / 3.1.0 | 生成器 Dart `>=3.13.0 <4.0.0`；annotation Dart `>=3.0.0 <4.0.0` | 生成器在开发机运行；运行时 annotation 元数据列出 Web。verified publisher `dash-overflow.net`，仓库 `rrousselGit/freezed`。[freezed 4.0.0](https://pub.dev/api/packages/freezed/versions/4.0.0) · [annotation](https://pub.dev/api/packages/freezed_annotation) · [annotation 平台标签](https://pub.dev/api/packages/freezed_annotation/score) |
 | 持久化 | `shared_preferences` | 2.5.5 | Dart `^3.9.0`；Flutter `>=3.35.0` | pub.dev 列出 Web；verified publisher `flutter.dev`，源码位于 Flutter 官方 `packages` 仓库。[元数据](https://pub.dev/api/packages/shared_preferences) · [平台标签](https://pub.dev/api/packages/shared_preferences/score) · [仓库](https://github.com/flutter/packages/tree/main/packages/shared_preferences/shared_preferences) |
 | 持久化 | `drift` / `drift_flutter` | 2.34.3 / 0.3.1 | Dart `>=3.10.0 <4.0.0` | pub.dev 列出 Web 和 Wasm；verified publisher `simonbinder.eu`，仓库 `simolus3/drift`。[drift](https://pub.dev/api/packages/drift) · [drift_flutter](https://pub.dev/api/packages/drift_flutter) · [平台标签](https://pub.dev/api/packages/drift/score) · [publisher](https://pub.dev/publishers/simonbinder.eu) |
 | 持久化备选 | `hive_ce` / `hive_ce_flutter` | 2.19.3 / 2.3.4 | Dart `^3.4.0`；Flutter `>=3.27.0` | pub.dev 列出 Web 和 Wasm；verified publisher `iodesignteam.com`，仓库 `IO-Design-Team/hive_ce`。[hive_ce](https://pub.dev/api/packages/hive_ce) · [Flutter 适配](https://pub.dev/api/packages/hive_ce_flutter) · [平台标签](https://pub.dev/api/packages/hive_ce/score) |
@@ -120,7 +120,7 @@
 #### Freezed
 
 - Freezed 是 data class、tagged union、嵌套模型和 cloning 的代码生成器，可生成不可变字段、值相等、`hashCode`、`toString` 与 `copyWith`；JSON 通常交给 `json_serializable`。[Freezed README](https://github.com/rrousselGit/freezed/tree/master/packages/freezed)
-- Freezed 依赖 `build_runner` 工作流。当前 `freezed 4.0.0` 把 Dart 3.13 设为最低版本，和本教程基线完全贴合。[Freezed README](https://github.com/rrousselGit/freezed/tree/master/packages/freezed) · [元数据](https://pub.dev/api/packages/freezed)
+- Freezed 依赖 `build_runner` 工作流。2026-08-29 查阅的 `freezed 4.0.0` 把 Dart 3.13 设为最低版本，和本教程基线完全贴合。[Freezed README](https://github.com/rrousselGit/freezed/tree/master/packages/freezed) · [4.0.0 元数据](https://pub.dev/api/packages/freezed/versions/4.0.0)
 
 ### 对本教程的设计启示
 

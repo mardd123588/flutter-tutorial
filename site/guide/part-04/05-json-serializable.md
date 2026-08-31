@@ -40,7 +40,7 @@ annotation 留在运行时代码中；生成器只在开发和 CI 阶段执行�
 
 ## 生成命令和 part 必须对齐
 
-一次生成：
+先进入 `examples/capstones/city_event_radar`。一次生成：
 
 ```powershell
 dart run build_runner build

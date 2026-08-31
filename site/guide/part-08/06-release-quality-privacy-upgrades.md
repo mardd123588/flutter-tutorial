@@ -155,5 +155,5 @@ Action 更新与 Flutter / Node 大版本升级分开，失败时更容易定位
 - [`dart pub outdated`](https://dart.dev/tools/pub/cmd/pub-outdated)（查阅：2026-08-31）
 - [`dart pub upgrade`](https://dart.dev/tools/pub/cmd/pub-upgrade)（查阅：2026-08-31）
 - [`dart fix`](https://dart.dev/tools/dart-fix)（查阅：2026-08-31）
-- [Reviewing dependency changes in a pull request](https://docs.github.com/en/code-security/supply-chain-security/understanding-your-software-supply-chain/reviewing-dependency-changes-in-a-pull-request)（查阅：2026-08-31）
+- [GitHub dependency review](https://docs.github.com/en/code-security/concepts/supply-chain-security/dependency-review)（查阅：2026-09-01）
 - [Security hardening for GitHub Actions](https://docs.github.com/en/actions/security-for-github-actions/security-guides/security-hardening-for-github-actions)（查阅：2026-08-31）
