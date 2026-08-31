@@ -177,6 +177,7 @@ const _titlesByEra = <String, List<String>>{
   ],
 };
 
+// #region timeline-fixture-filter
 final List<TimelineEvent> timelineEvents = List.unmodifiable(
   <TimelineEvent>[
     for (final era in timelineEras)
@@ -205,3 +206,4 @@ List<TimelineEvent> filterTimelineEvents(Set<TimelineTopic> selectedTopics) {
     timelineEvents.where((event) => selectedTopics.contains(event.topic)),
   );
 }
+// #endregion timeline-fixture-filter

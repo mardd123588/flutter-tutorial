@@ -20,6 +20,7 @@ enum ArchiveView {
   final String label;
 }
 
+// #region archive-url-query
 class ArchiveQuery {
   const ArchiveQuery({
     this.search = '',
@@ -122,6 +123,7 @@ class ArchiveQuery {
   @override
   int get hashCode => Object.hash(search, era, collection, access, sort, view);
 }
+// #endregion archive-url-query
 
 String? _single(Map<String, List<String>> parameters, String key) {
   final values = parameters[key];

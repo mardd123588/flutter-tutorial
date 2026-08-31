@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'timeline_data.dart';
 
+// #region timeline-provider-graph
 final selectedTopicsProvider =
     NotifierProvider<SelectedTopicsController, Set<TimelineTopic>>(
       SelectedTopicsController.new,
@@ -25,3 +26,4 @@ class SelectedTopicsController extends Notifier<Set<TimelineTopic>> {
     state = const {};
   }
 }
+// #endregion timeline-provider-graph

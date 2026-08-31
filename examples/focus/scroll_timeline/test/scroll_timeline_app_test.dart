@@ -6,6 +6,7 @@ import 'package:scroll_timeline/src/timeline_data.dart';
 import 'package:scroll_timeline/src/timeline_providers.dart';
 
 void main() {
+  // #region timeline-lazy-test
   testWidgets('shows the archive controls without building every event', (
     tester,
   ) async {
@@ -20,6 +21,7 @@ void main() {
     expect(find.text(timelineEras.last.title), findsWidgets);
     expect(find.text(timelineEvents.last.title), findsNothing);
   });
+  // #endregion timeline-lazy-test
 
   testWidgets('combines topic filters and restores the complete archive', (
     tester,
@@ -61,6 +63,7 @@ void main() {
     expect(find.text('共治试验'), findsWidgets);
   });
 
+  // #region timeline-semantics-test
   testWidgets('exposes era and event summaries to assistive technology', (
     tester,
   ) async {
@@ -86,6 +89,7 @@ void main() {
     );
     semantics.dispose();
   });
+  // #endregion timeline-semantics-test
 
   for (final size in const [Size(320, 720), Size(768, 900), Size(1440, 900)]) {
     testWidgets('stays usable at ${size.width} by ${size.height}', (
@@ -115,6 +119,7 @@ void main() {
     expect(tester.takeException(), isNull);
   });
 
+  // #region timeline-golden-tests
   testWidgets('matches the wide opening golden', (tester) async {
     await _setSurface(tester, const Size(1440, 900));
     await _pumpTimeline(tester);
@@ -145,6 +150,7 @@ void main() {
       matchesGoldenFile('goldens/scroll_timeline_compact.png'),
     );
   });
+  // #endregion timeline-golden-tests
 }
 
 Future<void> _pumpTimeline(

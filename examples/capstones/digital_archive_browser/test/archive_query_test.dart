@@ -3,6 +3,7 @@ import 'package:digital_archive_browser/src/domain/archive_query.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
+  // #region archive-query-round-trip-test
   test('normalizes and round-trips every URL-owned field', () {
     final query = ArchiveQuery.fromUri(
       Uri.parse(
@@ -20,6 +21,7 @@ void main() {
     expect(query.view, ArchiveView.grid);
     expect(ArchiveQuery.fromUri(query.toUri()), query);
   });
+  // #endregion archive-query-round-trip-test
 
   test('drops invalid and duplicate values deterministically', () {
     final query = ArchiveQuery.fromUri(

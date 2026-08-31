@@ -101,6 +101,7 @@ class ComparisonResult {
   final ComparisonOutcome outcome;
 }
 
+// #region archive-comparison-rule
 class ArchiveComparison {
   const ArchiveComparison([this.ids = const []]);
 
@@ -125,3 +126,4 @@ class ArchiveComparison {
   ArchiveComparison remove(String id) =>
       ArchiveComparison(List.unmodifiable(ids.where((value) => value != id)));
 }
+// #endregion archive-comparison-rule

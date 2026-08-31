@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'archive_theme.dart';
 
+// #region archive-thumbnail-painter
 class ArchiveThumbnailPainter extends CustomPainter {
   const ArchiveThumbnailPainter({
     required this.seed,
@@ -67,3 +68,4 @@ class ArchiveThumbnailPainter extends CustomPainter {
       oldDelegate.seed != seed ||
       oldDelegate.collectionIndex != collectionIndex;
 }
+// #endregion archive-thumbnail-painter

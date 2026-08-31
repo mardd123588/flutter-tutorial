@@ -5,7 +5,7 @@ description: 首版 58 章的八部分结构与当前完成状态。
 
 # 学习路线
 
-首版规划 58 章，分为八个部分。前六部分共 44 章已经完成正文与项目实现。
+首版规划 58 章，分为八个部分。前七部分共 51 章已经完成正文与项目实现。
 
 | 部分 | 章节 | 当前状态 | 统筹项目 |
 | --- | ---: | --- | --- |
@@ -15,7 +15,7 @@ description: 首版 58 章的八部分结构与当前完成状态。
 | [04 · 异步、网络与本地数据](#part-04) | 8 | `verified` | 城市活动雷达 |
 | [05 · 导航、自适应、可访问性与国际化](#part-05) | 7 | `verified` | 场馆导览册 |
 | [06 · 应用架构与生态主方案](#part-06) | 8 | `verified` | 社区工坊排期台 |
-| [07 · 测试、调试、渲染与性能](#part-07) | 7 | `not-started` | 数字档案浏览器 |
+| [07 · 测试、调试、渲染与性能](#part-07) | 7 | `verified` | 数字档案浏览器 |
 | [08 · 工程化、Web 发布与平台扩展](#part-08) | 7 | `not-started` | 邻里资源交换站 |
 
 ## 第一部分：起步与 Flutter 所需 Dart {#part-01}
@@ -57,6 +57,8 @@ description: 首版 58 章的八部分结构与当前完成状态。
 ## 第七部分：测试、调试、渲染与性能 {#part-07}
 
 覆盖测试策略、Widget 与语义测试、Web 集成测试、Widget—Element—RenderObject、渲染流水线、Sliver 和性能分析。重点项目是长卷时间轴，统筹项目是数字档案浏览器。
+
+[从测试策略开始](/guide/part-07/01-test-strategy-unit) · [查看长卷时间轴](/guide/part-07/06-sliver-performance-scroll-timeline) · [查看数字档案浏览器](/guide/part-07/07-digital-archive-browser)
 
 ## 第八部分：工程化、Web 发布与平台扩展 {#part-08}
 

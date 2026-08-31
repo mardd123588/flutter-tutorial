@@ -114,6 +114,19 @@ export default defineConfig({
             { text: '项目：社区工坊排期台', link: '/guide/part-06/08-community-workshop-scheduler' },
           ],
         },
+        {
+          text: '第七部分 · 测试、调试、渲染与性能',
+          collapsed: false,
+          items: [
+            { text: '测试策略与单元测试', link: '/guide/part-07/01-test-strategy-unit' },
+            { text: 'Widget、语义与视觉测试', link: '/guide/part-07/02-widget-semantics-golden' },
+            { text: 'Web 浏览器关键流程', link: '/guide/part-07/03-web-integration' },
+            { text: 'Widget、Element、RenderObject', link: '/guide/part-07/04-widget-element-renderobject' },
+            { text: '渲染流水线与自绘边界', link: '/guide/part-07/05-rendering-pipeline' },
+            { text: 'Sliver、性能分析与长卷时间轴', link: '/guide/part-07/06-sliver-performance-scroll-timeline' },
+            { text: '项目：数字档案浏览器', link: '/guide/part-07/07-digital-archive-browser' },
+          ],
+        },
       ],
       '/reference/': [
         {

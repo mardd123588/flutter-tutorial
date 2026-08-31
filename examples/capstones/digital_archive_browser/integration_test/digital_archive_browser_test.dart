@@ -9,6 +9,7 @@ import 'package:integration_test/integration_test.dart';
 void main() {
   final binding = IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
+  // #region archive-profile-journey
   testWidgets(
     'restores URL, compares records, and profiles the archive journey',
     (tester) async {
@@ -95,4 +96,5 @@ void main() {
       expect(tester.takeException(), isNull);
     },
   );
+  // #endregion archive-profile-journey
 }

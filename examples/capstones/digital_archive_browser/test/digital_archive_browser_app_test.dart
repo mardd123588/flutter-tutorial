@@ -39,6 +39,7 @@ void main() {
     harness.dispose();
   });
 
+  // #region archive-lazy-test
   testWidgets('uses lazy slivers and preserves stable record identity', (
     tester,
   ) async {
@@ -57,7 +58,9 @@ void main() {
     expect(tester.takeException(), isNull);
     harness.dispose();
   });
+  // #endregion archive-lazy-test
 
+  // #region archive-comparison-semantics-test
   testWidgets('announces and focuses the fourth-comparison rejection', (
     tester,
   ) async {
@@ -94,6 +97,7 @@ void main() {
     semantics.dispose();
     harness.dispose();
   });
+  // #endregion archive-comparison-semantics-test
 
   testWidgets('opens a stable detail link and explains a missing record', (
     tester,

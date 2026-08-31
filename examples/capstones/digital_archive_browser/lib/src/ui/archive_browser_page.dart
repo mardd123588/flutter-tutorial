@@ -142,6 +142,7 @@ class _FilterRail extends StatelessWidget {
   }
 }
 
+// #region archive-mixed-slivers
 class _ArchiveResults extends StatelessWidget {
   const _ArchiveResults({
     required this.query,
@@ -278,7 +279,9 @@ class _ArchiveResults extends StatelessWidget {
     );
   }
 }
+// #endregion archive-mixed-slivers
 
+// #region archive-comparison-feedback
 class _ComparisonLimitBanner extends StatelessWidget {
   const _ComparisonLimitBanner({
     required this.message,
@@ -326,6 +329,7 @@ class _ComparisonLimitBanner extends StatelessWidget {
     );
   }
 }
+// #endregion archive-comparison-feedback
 
 class _ArchiveHeader extends StatelessWidget {
   const _ArchiveHeader({

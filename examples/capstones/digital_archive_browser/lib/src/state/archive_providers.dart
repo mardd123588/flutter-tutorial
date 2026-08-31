@@ -4,6 +4,7 @@ import '../data/archive_repository.dart';
 import '../domain/archive_models.dart';
 import '../domain/archive_query.dart';
 
+// #region archive-provider-graph
 final archiveRepositoryProvider = Provider<ArchiveRepository>(
   (ref) => FixtureArchiveRepository(),
 );
@@ -54,3 +55,4 @@ class ArchiveComparisonController extends Notifier<ArchiveComparison> {
 }
 
 Duration? noArchiveProviderRetry(int retryCount, Object error) => null;
+// #endregion archive-provider-graph

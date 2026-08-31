@@ -80,3 +80,15 @@ description: 按概念查找首次讲解、复习章节、项目和常见错误�
 | `riverpod.override`、`test.provider-container`、`test.fake-repository` | [依赖替换与 Riverpod 测试](/guide/part-06/06-riverpod-testing) | Repository override、auto-dispose 保活、family 参数隔离 |
 | `riverpod.codegen-boundary`、`ecosystem.package-evaluation`、`ecosystem.upgrade-boundary` | [代码生成、包选择与升级边界](/guide/part-06/07-codegen-package-upgrades) | generated provider 默认生命周期、包评估、锁版本与升级验证 |
 | `project.community-workshop-scheduler` | [项目：社区工坊排期台](/guide/part-06/08-community-workshop-scheduler) | 冲突 policy、Riverpod 对象图、Drift、URL、响应式与 Web 测试完整流程 |
+
+## 第七部分
+
+| 概念 ID | 首次讲解 | 复习或错误入口 |
+| --- | --- | --- |
+| `test.strategy`、`test.unit`、`test.determinism` | [测试策略与单元测试](/guide/part-07/01-test-strategy-unit) | 风险表、arrange—act—assert、固定时钟、fake / mock / 真实依赖 |
+| `test.widget`、`test.semantics`、`test.golden-boundary` | [Widget、语义与视觉测试](/guide/part-07/02-widget-semantics-golden) | 精确 pump、lazy finder、用户可感知合同、golden 环境 |
+| `test.integration-web`、`test.webdriver`、`test.failure-artifact` | [Web 浏览器关键流程](/guide/part-07/03-web-integration) | ChromeDriver、URL 恢复、release 子路径与失败证据包 |
+| `internals.widget-element-renderobject`、`internals.update-matching`、`debug.rebuild` | [Widget、Element、RenderObject](/guide/part-07/04-widget-element-renderobject) | 三棵树、canUpdate、build mode、Inspector 与 build tracing |
+| `render.pipeline`、`render.repaint-boundary`、`debug.layout-paint` | [渲染流水线与自绘边界](/guide/part-07/05-rendering-pipeline) | layout / paint / semantics、CustomPainter、Listenable、边界成本 |
+| `performance.frame-budget`、`performance.devtools`、`layout.sliver`、`performance.memory`、`project.scroll-timeline` | [Sliver、性能分析与长卷时间轴](/guide/part-07/06-sliver-performance-scroll-timeline) | SliverConstraints / Geometry、lazy、profile workload、golden 与长卷完整流程 |
+| `project.digital-archive-browser` | [项目：数字档案浏览器](/guide/part-07/07-digital-archive-browser) | 风险表、URL、Riverpod、mixed sliver、自绘、对照错误与 Web profile |

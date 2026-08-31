@@ -7,6 +7,7 @@ import 'package:scroll_timeline/src/scroll_timeline_app.dart';
 void main() {
   final binding = IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
+  // #region timeline-profile-workload
   testWidgets('filters, jumps, and records a long-scroll profile', (
     tester,
   ) async {
@@ -33,4 +34,5 @@ void main() {
     expect(find.text('河岸修复六十年'), findsOneWidget);
     expect(tester.takeException(), isNull);
   });
+  // #endregion timeline-profile-workload
 }

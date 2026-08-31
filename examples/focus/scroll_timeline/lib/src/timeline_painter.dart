@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'timeline_theme.dart';
 
+// #region timeline-progress-painter
 class TimelineProgressPainter extends CustomPainter {
   TimelineProgressPainter({required this.controller})
     : super(repaint: controller);
@@ -47,3 +48,4 @@ class TimelineProgressPainter extends CustomPainter {
     return oldDelegate.controller != controller;
   }
 }
+// #endregion timeline-progress-painter

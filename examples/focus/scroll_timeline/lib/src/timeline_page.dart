@@ -38,6 +38,7 @@ class _TimelinePageState extends ConsumerState<TimelinePage> {
     super.dispose();
   }
 
+  // #region timeline-directory-focus
   Future<void> _jumpToEra(TimelineEra era) async {
     final targetContext = _eraKeys[era.id]!.currentContext;
     if (targetContext == null) return;
@@ -53,6 +54,7 @@ class _TimelinePageState extends ConsumerState<TimelinePage> {
     if (!mounted) return;
     _eraFocusNodes[era.id]!.requestFocus();
   }
+  // #endregion timeline-directory-focus
 
   @override
   Widget build(BuildContext context) {
@@ -194,6 +196,7 @@ class _TimelineScroll extends ConsumerWidget {
             .toList(growable: false),
     };
 
+    // #region timeline-sliver-composition
     return ColoredBox(
       color: archivePaper,
       child: CustomPaint(
@@ -244,6 +247,7 @@ class _TimelineScroll extends ConsumerWidget {
         ),
       ),
     );
+    // #endregion timeline-sliver-composition
   }
 }
 

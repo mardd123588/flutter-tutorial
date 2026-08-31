@@ -21,11 +21,11 @@ description: 8 个统筹项目和 5 个重点项目的实现与测试状态。
 | 路线分享卡 | 重点 | 05-03 | `passing` |
 | 场馆导览册 | 统筹 | 05-07 | `passing` |
 | 社区工坊排期台 | 统筹 | 06-08 | `passing` |
-| 长卷时间轴 | 重点 | 07-06 | `not-started` |
-| 数字档案浏览器 | 统筹 | 07-07 | `not-started` |
+| 长卷时间轴 | 重点 | 07-06 | `passing` |
+| 数字档案浏览器 | 统筹 | 07-07 | `passing` |
 | 邻里资源交换站 | 统筹 | 08-07 | `not-started` |
 
-`passing` 表示项目已有可运行实现，且当前适用的发布检查全部通过。当前完成到第六部分，共有十个项目达到这个状态。
+`passing` 表示项目已有可运行实现，且当前适用的发布检查全部通过。当前完成到第七部分，共有十二个项目达到这个状态。
 
 ## 今日节奏板验收状态
 
@@ -107,6 +107,22 @@ Unit 与 Widget / golden 共 18 项；Chrome 关键流程完成搜索、地点�
 
 Unit 与 Widget 共 25 项；Chrome 关键流程覆盖筛选、详情、三类冲突、修正保存与 Drift 持久化。测试覆盖 320×720、768×900、1440×900 和 200% 文本，冲突摘要另有焦点与 Semantics 断言。`Motion` 为 `not-applicable`：项目没有自定义补间或循环动画。`Visual` 为 `not-applicable`：首版规格不要求该项目维护 golden。
 
-其余 3 个项目的验收列目前均为 `not-started`。
+## 长卷时间轴验收状态
+
+| Analyze | Unit | Widget | Integration | Release Web | Keyboard | Semantics | Responsive | Text scale | Motion | Visual |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `passing` | `passing` | `passing` | `passing` | `passing` | `passing` | `passing` | `passing` | `passing` | `passing` | `passing` |
+
+Unit、Widget 与 golden 共 11 项；Chrome profile 关键流程覆盖主题筛选和长卷往返滚动。测试固定 6 个阶段、72 条事件、4 类主题，覆盖 lazy materialization、目录跳转后的焦点、Semantics、320×720、768×900、1440×900、200% 文本、reduced motion 与两张确定性 golden。Profile 基线记录 595 帧，build p90 为 `1.199ms`，raster p90 为 `1.5ms`。
+
+## 数字档案浏览器验收状态
+
+| Analyze | Unit | Widget | Integration | Release Web | Keyboard | Semantics | Responsive | Text scale | Motion | Visual |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `passing` | `passing` | `passing` | `passing` | `passing` | `passing` | `passing` | `passing` | `passing` | `passing` | `not-applicable` |
+
+Unit、provider 与 Widget 共 16 项；Chrome profile 关键流程覆盖滚动、网格、Unicode 查询、详情返回和三项对照。测试固定 120 条记录、URL 往返、lazy materialization、loading / error / retry / empty、第四条拒绝的 live region 与焦点，以及 320×720、768×900、1440×900、200% 文本、RTL 和 reduced motion。Profile 基线记录 165 帧，build p90 为 `5.801ms`，raster p90 为 `3.801ms`。`Visual` 为 `not-applicable`：本项目不维护 golden，但已完成三档尺寸和实际 Chrome 视觉检查。
+
+邻里资源交换站的验收列目前均为 `not-started`。
 
 完整项目任务、风险和浏览器关键流程见 [首版规格 #1](https://github.com/mardd123588/flutter-tutorial/issues/1)。
