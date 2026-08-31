@@ -101,17 +101,14 @@ void main() {
       venueCapacities: const {'venue-a': 24},
     );
 
-    expect(
-      conflicts.map((conflict) => conflict.kind),
-      const [
-        ScheduleConflictKind.invalidDay,
-        ScheduleConflictKind.invalidTimeRange,
-        ScheduleConflictKind.outsideOperatingHours,
-        ScheduleConflictKind.unknownWorkshop,
-        ScheduleConflictKind.unknownVenue,
-        ScheduleConflictKind.unknownInstructor,
-      ],
-    );
+    expect(conflicts.map((conflict) => conflict.kind), const [
+      ScheduleConflictKind.invalidDay,
+      ScheduleConflictKind.invalidTimeRange,
+      ScheduleConflictKind.outsideOperatingHours,
+      ScheduleConflictKind.unknownWorkshop,
+      ScheduleConflictKind.unknownVenue,
+      ScheduleConflictKind.unknownInstructor,
+    ]);
   });
 
   test('reports capacity without hiding time conflicts', () {
@@ -145,16 +142,14 @@ void main() {
       venueCapacities: const {'venue-a': 24},
     );
 
-    expect(
-      conflicts.map((conflict) => conflict.kind),
-      const [
-        ScheduleConflictKind.capacityExceeded,
-        ScheduleConflictKind.venueOverlap,
-        ScheduleConflictKind.instructorOverlap,
-      ],
-    );
+    expect(conflicts.map((conflict) => conflict.kind), const [
+      ScheduleConflictKind.capacityExceeded,
+      ScheduleConflictKind.venueOverlap,
+      ScheduleConflictKind.instructorOverlap,
+    ]);
   });
 
+  // #region half-open-self-exclusion-test
   test('uses half-open intervals and excludes the edited entry itself', () {
     const policy = ScheduleConflictPolicy();
     final conflicts = policy.evaluate(
@@ -198,6 +193,7 @@ void main() {
 
     expect(conflicts, isEmpty);
   });
+  // #endregion half-open-self-exclusion-test
 
   test('orders overlaps by session time, then by conflict kind', () {
     const policy = ScheduleConflictPolicy();
@@ -240,26 +236,23 @@ void main() {
       venueCapacities: const {'venue-a': 24},
     );
 
-    expect(
-      conflicts,
-      const [
-        ScheduleConflict(
-          kind: ScheduleConflictKind.venueOverlap,
-          relatedEntryId: 'earlier',
-        ),
-        ScheduleConflict(
-          kind: ScheduleConflictKind.instructorOverlap,
-          relatedEntryId: 'earlier',
-        ),
-        ScheduleConflict(
-          kind: ScheduleConflictKind.venueOverlap,
-          relatedEntryId: 'later',
-        ),
-        ScheduleConflict(
-          kind: ScheduleConflictKind.instructorOverlap,
-          relatedEntryId: 'later',
-        ),
-      ],
-    );
+    expect(conflicts, const [
+      ScheduleConflict(
+        kind: ScheduleConflictKind.venueOverlap,
+        relatedEntryId: 'earlier',
+      ),
+      ScheduleConflict(
+        kind: ScheduleConflictKind.instructorOverlap,
+        relatedEntryId: 'earlier',
+      ),
+      ScheduleConflict(
+        kind: ScheduleConflictKind.venueOverlap,
+        relatedEntryId: 'later',
+      ),
+      ScheduleConflict(
+        kind: ScheduleConflictKind.instructorOverlap,
+        relatedEntryId: 'later',
+      ),
+    ]);
   });
 }

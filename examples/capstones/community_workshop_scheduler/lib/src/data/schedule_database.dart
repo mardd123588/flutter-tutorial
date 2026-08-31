@@ -28,6 +28,7 @@ class ScheduleSettings extends Table {
   Set<Column<Object>> get primaryKey => {settingKey};
 }
 
+// #region drift-schedule-storage
 @DriftDatabase(tables: [ScheduleRecords, ScheduleSettings])
 class ScheduleDatabase extends _$ScheduleDatabase
     implements ScheduleStorageService {
@@ -156,3 +157,4 @@ class ScheduleDatabase extends _$ScheduleDatabase
     );
   }
 }
+// #endregion drift-schedule-storage

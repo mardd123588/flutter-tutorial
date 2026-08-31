@@ -100,6 +100,20 @@ export default defineConfig({
             { text: '项目：场馆导览册', link: '/guide/part-05/07-venue-guidebook' },
           ],
         },
+        {
+          text: '第六部分 · 应用架构与生态主方案',
+          collapsed: false,
+          items: [
+            { text: '复杂度从哪里出现', link: '/guide/part-06/01-complexity-signals' },
+            { text: 'View、ViewModel、Repository、Service', link: '/guide/part-06/02-application-layers' },
+            { text: 'Result、错误与命令', link: '/guide/part-06/03-result-command-errors' },
+            { text: 'Riverpod 3 基础', link: '/guide/part-06/04-riverpod-basics' },
+            { text: '异步状态、缓存失效与组合', link: '/guide/part-06/05-riverpod-async-cache' },
+            { text: '依赖替换与 Riverpod 测试', link: '/guide/part-06/06-riverpod-testing' },
+            { text: '代码生成、包选择与升级边界', link: '/guide/part-06/07-codegen-package-upgrades' },
+            { text: '项目：社区工坊排期台', link: '/guide/part-06/08-community-workshop-scheduler' },
+          ],
+        },
       ],
       '/reference/': [
         {

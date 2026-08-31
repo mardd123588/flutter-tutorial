@@ -430,6 +430,7 @@ class _SizedEditorField extends StatelessWidget {
   Widget build(BuildContext context) => SizedBox(width: width, child: child);
 }
 
+// #region conflict-summary
 class _ConflictSummary extends StatelessWidget {
   const _ConflictSummary({
     required this.catalog,
@@ -602,6 +603,7 @@ class _ConflictRow extends StatelessWidget {
     ScheduleConflictKind.unknownInstructor => ('讲师不存在', '重新选择一位讲师。'),
   };
 }
+// #endregion conflict-summary
 
 class SessionDetailPage extends ConsumerWidget {
   const SessionDetailPage({required this.sessionId, super.key});

@@ -132,8 +132,10 @@ Future<void> _selectDropdown(
 }
 
 Finder _mainScrollable() {
-  return find.descendant(
-    of: find.byType(CustomScrollView),
-    matching: find.byType(Scrollable),
-  ).first;
+  return find
+      .descendant(
+        of: find.byType(CustomScrollView),
+        matching: find.byType(Scrollable),
+      )
+      .first;
 }

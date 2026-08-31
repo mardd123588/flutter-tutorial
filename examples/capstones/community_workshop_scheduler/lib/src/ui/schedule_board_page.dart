@@ -390,6 +390,7 @@ class _FilterField extends StatelessWidget {
   }
 }
 
+// #region responsive-schedule-content
 class _ScheduleContent extends StatelessWidget {
   const _ScheduleContent({required this.catalog, required this.entries});
 
@@ -419,6 +420,7 @@ class _ScheduleContent extends StatelessWidget {
     );
   }
 }
+// #endregion responsive-schedule-content
 
 class _WideScheduleWall extends StatelessWidget {
   const _WideScheduleWall({required this.catalog, required this.entries});

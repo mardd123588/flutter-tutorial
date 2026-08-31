@@ -5,6 +5,7 @@ import 'schedule_board_page.dart';
 import 'scheduler_theme.dart';
 import 'session_pages.dart';
 
+// #region workshop-scheduler-router
 GoRouter createWorkshopSchedulerRouter({String initialLocation = '/schedule'}) {
   return GoRouter(
     initialLocation: initialLocation,
@@ -34,6 +35,7 @@ GoRouter createWorkshopSchedulerRouter({String initialLocation = '/schedule'}) {
     errorBuilder: (context, state) => SchedulerRouteErrorPage(uri: state.uri),
   );
 }
+// #endregion workshop-scheduler-router
 
 class CommunityWorkshopSchedulerApp extends StatelessWidget {
   const CommunityWorkshopSchedulerApp({required this.router, super.key});

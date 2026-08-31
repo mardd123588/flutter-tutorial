@@ -9,6 +9,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 
 void main() {
+  // #region scheduler-responsive-test
   testWidgets('switches one schedule between wall and agenda layouts', (
     tester,
   ) async {
@@ -28,7 +29,9 @@ void main() {
     expect(find.text('植物染社区地图'), findsOneWidget);
     compact.dispose();
   });
+  // #endregion scheduler-responsive-test
 
+  // #region scheduler-conflict-focus-test
   testWidgets('shows every save conflict and focuses the summary', (
     tester,
   ) async {
@@ -57,6 +60,7 @@ void main() {
     expect(repository.saveCalls, 1);
     harness.dispose();
   });
+  // #endregion scheduler-conflict-focus-test
 
   testWidgets('explains an unknown session deep link', (tester) async {
     final harness = await _pumpScheduler(

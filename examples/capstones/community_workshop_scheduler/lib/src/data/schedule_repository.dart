@@ -3,6 +3,7 @@ import '../domain/schedule_models.dart';
 import 'schedule_storage_service.dart';
 import 'workshop_catalog_service.dart';
 
+// #region schedule-result-contract
 sealed class ScheduleResult<T> {
   const ScheduleResult();
 }
@@ -62,6 +63,7 @@ abstract interface class ScheduleRepository {
 
   Future<ScheduleResult<void>> restoreDemoData();
 }
+// #endregion schedule-result-contract
 
 class LocalScheduleRepository implements ScheduleRepository {
   LocalScheduleRepository({
@@ -82,13 +84,13 @@ class LocalScheduleRepository implements ScheduleRepository {
       try {
         catalog = await catalogService.load();
         _catalog = catalog;
-      } on Object {
+      } on Exception {
         return const ScheduleFailureResult(ScheduleCatalogFailure());
       }
     }
     try {
       await storage.ensureSeeded(catalog.initialSchedule);
-    } on Object {
+    } on Exception {
       return const ScheduleFailureResult(ScheduleStorageFailure());
     }
     return ScheduleSuccess(catalog);
@@ -107,7 +109,7 @@ class LocalScheduleRepository implements ScheduleRepository {
       await for (final entries in storage.watchEntries(query)) {
         yield ScheduleSuccess(entries);
       }
-    } on Object {
+    } on Exception {
       yield const ScheduleFailureResult(ScheduleStorageFailure());
     }
   }
@@ -123,12 +125,13 @@ class LocalScheduleRepository implements ScheduleRepository {
       return entry == null
           ? ScheduleFailureResult(ScheduleNotFoundFailure(id))
           : ScheduleSuccess(entry);
-    } on Object {
+    } on Exception {
       return const ScheduleFailureResult(ScheduleStorageFailure());
     }
   }
 
   @override
+  // #region schedule-repository-save
   Future<ScheduleResult<ScheduleEntry>> save(ScheduleEntry entry) async {
     final ready = await loadCatalog();
     if (ready case ScheduleFailureResult<WorkshopCatalog>(:final failure)) {
@@ -160,10 +163,11 @@ class LocalScheduleRepository implements ScheduleRepository {
       }
       await storage.upsertEntry(entry);
       return ScheduleSuccess(entry);
-    } on Object {
+    } on Exception {
       return const ScheduleFailureResult(ScheduleStorageFailure());
     }
   }
+  // #endregion schedule-repository-save
 
   @override
   Future<ScheduleResult<void>> restoreDemoData() async {
@@ -175,7 +179,7 @@ class LocalScheduleRepository implements ScheduleRepository {
     try {
       await storage.restoreEntries(catalog.initialSchedule);
       return const ScheduleSuccess(null);
-    } on Object {
+    } on Exception {
       return const ScheduleFailureResult(ScheduleStorageFailure());
     }
   }

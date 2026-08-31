@@ -10,6 +10,7 @@ import '../domain/schedule_models.dart';
 
 part 'schedule_providers.g.dart';
 
+// #region schedule-provider-graph
 final workshopCatalogServiceProvider = Provider<WorkshopCatalogService>(
   (ref) => const FixtureWorkshopCatalogService(),
 );
@@ -64,7 +65,9 @@ Stream<ScheduleResult<List<ScheduleEntry>>> filteredSchedule(
   );
   return ref.watch(scheduleRepositoryProvider).watchSchedule(query);
 }
+// #endregion schedule-provider-graph
 
+// #region workshop-editor-viewmodel
 final workshopEditorProvider =
     NotifierProvider.autoDispose<WorkshopEditorController, WorkshopEditorState>(
       WorkshopEditorController.new,
@@ -123,5 +126,6 @@ class WorkshopEditorController extends Notifier<WorkshopEditorState> {
     return result;
   }
 }
+// #endregion workshop-editor-viewmodel
 
 Duration? noProviderRetry(int retryCount, Object error) => null;

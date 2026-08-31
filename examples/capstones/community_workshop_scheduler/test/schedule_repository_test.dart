@@ -116,6 +116,19 @@ void main() {
     );
     expect(result.toString(), isNot(contains('database password')));
   });
+
+  test('does not turn programming errors into storage failures', () async {
+    final repository = LocalScheduleRepository(
+      catalogService: const FixtureWorkshopCatalogService(),
+      storage: ErrorScheduleStorage(),
+      conflictPolicy: const ScheduleConflictPolicy(),
+    );
+
+    await expectLater(
+      repository.save(fixtureWorkshopCatalog.initialSchedule.first),
+      throwsStateError,
+    );
+  });
 }
 
 class MemoryScheduleStorage implements ScheduleStorageService {
@@ -164,6 +177,13 @@ class MemoryScheduleStorage implements ScheduleStorageService {
 class ThrowingScheduleStorage extends MemoryScheduleStorage {
   @override
   Future<List<ScheduleEntry>> readEntries() {
-    throw StateError('database password should stay private');
+    throw Exception('database password should stay private');
+  }
+}
+
+class ErrorScheduleStorage extends MemoryScheduleStorage {
+  @override
+  Future<List<ScheduleEntry>> readEntries() {
+    throw StateError('broken invariant');
   }
 }

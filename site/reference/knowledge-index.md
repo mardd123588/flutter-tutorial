@@ -67,3 +67,16 @@ description: 按概念查找首次讲解、复习章节、项目和常见错误�
 | `a11y.semantics`、`a11y.keyboard-flow`、`a11y.text-scale`、`a11y.error-feedback`、`a11y.motion-preference` | [可访问性作为功能](/guide/part-05/05-accessibility-as-feature) | 语义分工、完整键盘流程、200% 文本、对比度、错误与减少动画 |
 | `i18n.gen-l10n`、`i18n.arb`、`i18n.format`、`i18n.locale`、`i18n.directionality` | [国际化与本地化](/guide/part-05/06-internationalization-localization) | ARB placeholder/plural、intl、稳定路由与 RTL 测试边界 |
 | `project.venue-guidebook` | [项目：场馆导览册](/guide/part-05/07-venue-guidebook) | ShellRoute、深链接、响应式导航、键盘、语义、本地化与 golden 完整流程 |
+
+## 第六部分
+
+| 概念 ID | 首次讲解 | 复习或错误入口 |
+| --- | --- | --- |
+| `architecture.complexity-signals`、`architecture.ssot`、`architecture.udf` | [复杂度从哪里出现](/guide/part-06/01-complexity-signals) | 分层信号、单一事实来源、状态—事件—更新—渲染 |
+| `architecture.view`、`architecture.viewmodel`、`architecture.repository`、`architecture.service` | [View、ViewModel、Repository、Service](/guide/part-06/02-application-layers) | 普通构造函数注入、层间依赖、domain 层启用条件 |
+| `architecture.result`、`architecture.command`、`error.presentation` | [Result、错误与命令](/guide/part-06/03-result-command-errors) | sealed 结果、命令状态、错误文案、焦点与恢复动作 |
+| `riverpod.provider`、`riverpod.ref`、`riverpod.notifier`、`riverpod.scope` | [Riverpod 3 基础](/guide/part-06/04-riverpod-basics) | container 所有权、watch/read/listen、局部状态边界 |
+| `riverpod.async-notifier`、`riverpod.family`、`riverpod.invalidation`、`riverpod.disposal` | [异步状态、缓存失效与组合](/guide/part-06/05-riverpod-async-cache) | AsyncValue、参数身份、自动释放、invalidate 与 refresh |
+| `riverpod.override`、`test.provider-container`、`test.fake-repository` | [依赖替换与 Riverpod 测试](/guide/part-06/06-riverpod-testing) | Repository override、auto-dispose 保活、family 参数隔离 |
+| `riverpod.codegen-boundary`、`ecosystem.package-evaluation`、`ecosystem.upgrade-boundary` | [代码生成、包选择与升级边界](/guide/part-06/07-codegen-package-upgrades) | generated provider 默认生命周期、包评估、锁版本与升级验证 |
+| `project.community-workshop-scheduler` | [项目：社区工坊排期台](/guide/part-06/08-community-workshop-scheduler) | 冲突 policy、Riverpod 对象图、Drift、URL、响应式与 Web 测试完整流程 |

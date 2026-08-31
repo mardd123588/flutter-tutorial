@@ -1,5 +1,6 @@
 import 'schedule_models.dart';
 
+// #region schedule-conflict-policy
 class ScheduleConflictPolicy {
   const ScheduleConflictPolicy();
 
@@ -89,3 +90,4 @@ class ScheduleConflictPolicy {
     return conflicts;
   }
 }
+// #endregion schedule-conflict-policy
