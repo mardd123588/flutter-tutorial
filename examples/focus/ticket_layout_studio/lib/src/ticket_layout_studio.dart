@@ -305,19 +305,22 @@ class _TravelTicket extends StatelessWidget {
                   const _TicketStub(stacked: true),
                 ],
               )
-            : IntrinsicHeight(
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Expanded(
-                      child: _TicketMain(padding: metrics.horizontalPadding),
-                    ),
-                    const _Perforation(axis: Axis.vertical),
-                    SizedBox(
-                      width: metrics.stubWidth,
-                      child: const _TicketStub(stacked: false),
-                    ),
-                  ],
+            : ConstrainedBox(
+                constraints: const BoxConstraints(minHeight: 220),
+                child: IntrinsicHeight(
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Expanded(
+                        child: _TicketMain(padding: metrics.horizontalPadding),
+                      ),
+                      const _Perforation(axis: Axis.vertical),
+                      SizedBox(
+                        width: metrics.stubWidth,
+                        child: const _TicketStub(stacked: false),
+                      ),
+                    ],
+                  ),
                 ),
               );
 
@@ -357,6 +360,7 @@ class _TicketMain extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.fromLTRB(padding, 26, padding, 24),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Wrap(

@@ -143,13 +143,13 @@ locked install
 
 - 项目 slug、commit SHA、Flutter / Dart / Chrome / ChromeDriver 版本；
 - 实际命令、退出码和完整日志；
-- Widget / integration 失败截图与浏览器控制台；
+- Widget / integration 失败日志；需要截图或浏览器控制台时，另用真实浏览器验收补齐；
 - release 加载失败的 URL、HTTP 状态、响应头和资源请求；
 - 内容搜索失败的查询、实际前 5 与预期页面。
 
 普通 CI 不用绝对帧时间作为唯一通过条件。性能回归需要固定 workload、profile trace 和人工解释，这一边界已在第七部分建立。
 
-**实现核对：** 当前验证脚本会写入项目、commit、工具与浏览器版本、端口、命令、退出码、analyze / test / integration 日志和 ChromeDriver 日志；`flutter drive` 产生失败截图时也会进入 artifact。脚本尚未单独导出浏览器 console、网络请求与 HTTP 响应头，正文不能把这三项写成当前失败 artifact 已经具备。
+**实现核对：** 当前验证脚本会写入项目、commit、工具与浏览器版本、端口、命令、退出码、analyze / test / integration 日志和 ChromeDriver 日志。`flutter drive -d web-server` 不支持失败截图；脚本也没有单独导出浏览器 console、网络请求与 HTTP 响应头，正文不能把这些内容写成当前失败 artifact 已经具备。
 
 ## 4. Flutter Web release、子路径与 PWA 边界
 

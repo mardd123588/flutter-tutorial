@@ -64,8 +64,18 @@ void main() {
     expect(find.text('预计人数超过场馆容量'), findsOneWidget);
 
     await _selectDropdown(tester, key: 'venue-field', option: '共享大厅 · 64 人');
-    await _selectDropdown(tester, key: 'start-time-field', option: '15:00');
-    await _selectDropdown(tester, key: 'end-time-field', option: '16:00');
+    await _selectDropdown(tester, key: 'day-field', option: '周日 · 9月13日');
+    await _selectDropdown(tester, key: 'instructor-field', option: '陈牧');
+    final container = ProviderScope.containerOf(
+      tester.element(find.byKey(const ValueKey('expected-attendees-field'))),
+    );
+    final resolvedDraft = container.read(workshopEditorProvider).draft!;
+    expect(resolvedDraft.venueId, 'venue-hall');
+    expect(resolvedDraft.dayId, 'day-sun');
+    expect(resolvedDraft.instructorId, 'instructor-chen');
+    expect(resolvedDraft.startMinute, 540);
+    expect(resolvedDraft.endMinute, 600);
+    expect(resolvedDraft.expectedAttendees, 30);
     await tester.scrollUntilVisible(
       find.byKey(const ValueKey('save-session')),
       360,
@@ -74,9 +84,21 @@ void main() {
     await tester.tap(find.byKey(const ValueKey('save-session')));
     await tester.pumpAndSettle();
 
+    final savedEntry = (await database.readEntries()).singleWhere(
+      (entry) => entry.id.startsWith('session-local-'),
+    );
+    expect(savedEntry.expectedAttendees, 30);
+    expect(savedEntry.venueId, 'venue-hall');
+    expect(savedEntry.dayId, 'day-sun');
+    expect(savedEntry.instructorId, 'instructor-chen');
+    final savedUri = Uri(path: '/sessions/${savedEntry.id}');
+    expect(
+      find.byKey(ValueKey('session-detail-${savedEntry.id}')),
+      findsOneWidget,
+    );
+    await tester.drag(_mainScrollable(), const Offset(0, -420));
+    await tester.pumpAndSettle();
     expect(find.text('预计 30 人'), findsOneWidget);
-    final savedUri = router.routeInformationProvider.value.uri;
-    expect(savedUri.path, startsWith('/sessions/session-local-'));
 
     await tester.pumpWidget(const SizedBox.shrink());
     await tester.pumpAndSettle();
@@ -85,15 +107,16 @@ void main() {
 
     database = ScheduleDatabase.defaults();
     router = createWorkshopSchedulerRouter(
-      initialLocation: '/schedule?day=day-sat&venue=venue-hall',
+      initialLocation: savedUri.toString(),
     );
     await _pumpApp(tester, database: database, router: router);
-    await tester.scrollUntilVisible(
-      find.text('植物染社区地图'),
-      420,
-      scrollable: _mainScrollable(),
+    expect(
+      find.byKey(ValueKey('session-detail-${savedEntry.id}')),
+      findsOneWidget,
     );
-    expect(find.text('植物染社区地图'), findsOneWidget);
+    await tester.drag(_mainScrollable(), const Offset(0, -420));
+    await tester.pumpAndSettle();
+    expect(find.text('预计 30 人'), findsOneWidget);
 
     router.dispose();
     await database.close();
@@ -127,7 +150,8 @@ Future<void> _selectDropdown(
   );
   await tester.tap(find.byKey(ValueKey(key)));
   await tester.pumpAndSettle();
-  await tester.tap(find.text(option).last);
+  final menuItem = find.widgetWithText(DropdownMenuItem<String>, option);
+  await tester.tap(menuItem.last);
   await tester.pumpAndSettle();
 }
 

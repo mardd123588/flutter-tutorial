@@ -1,7 +1,9 @@
 import { spawn, spawnSync } from 'node:child_process';
+import { existsSync } from 'node:fs';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
+import { readChromeVersion } from './chrome_version.mjs';
 import { findProject, loadProjectCatalog, repositoryRoot } from './project_catalog.mjs';
 import { buildProject } from '../release/build_project.mjs';
 
@@ -12,9 +14,8 @@ const projects = await loadProjectCatalog();
 const project = findProject(projects, slug);
 const projectDirectory = resolve(repositoryRoot, project.path);
 const logDirectory = resolve(repositoryRoot, 'build', 'ci-logs', project.slug);
-const screenshotDirectory = resolve(logDirectory, 'screenshots');
+const chromedriver = resolveChromeDriver();
 await mkdir(logDirectory, { recursive: true });
-await mkdir(screenshotDirectory, { recursive: true });
 
 await writeMetadata();
 
@@ -43,7 +44,6 @@ async function runFlutter(commandArgs, logName) {
 }
 
 async function runIntegration() {
-  const chromedriver = process.platform === 'win32' ? 'chromedriver.exe' : 'chromedriver';
   const driverPort = Number(process.env.CHROMEDRIVER_PORT ?? 4444);
   const webPort = Number(process.env.FLUTTER_WEB_PORT ?? 7357);
   const driver = spawn(chromedriver, [`--port=${driverPort}`], {
@@ -66,7 +66,6 @@ async function runIntegration() {
       '--browser-dimension=1440x900',
       `--driver-port=${driverPort}`,
       `--web-port=${webPort}`,
-      `--screenshot=${screenshotDirectory}`,
     ];
     await runFlutter(flutterArgs, 'integration.log');
   } finally {
@@ -79,17 +78,19 @@ async function writeMetadata() {
   const commands = [
     ['flutter', ['--version']],
     ['dart', ['--version']],
-    [process.env.CHROME_BINARY ?? 'google-chrome', ['--version']],
-    [process.platform === 'win32' ? 'chromedriver.exe' : 'chromedriver', ['--version']],
+    [chromedriver, ['--version']],
   ];
   const lines = [
     `project=${project.slug}`,
     `commit=${process.env.GITHUB_SHA ?? 'working-tree'}`,
     `chromedriver_port=${process.env.CHROMEDRIVER_PORT ?? '4444'}`,
     `flutter_web_port=${process.env.FLUTTER_WEB_PORT ?? '7357'}`,
+    `chrome: ${readChromeVersion()}`,
   ];
   for (const [command, commandArgs] of commands) {
-    const executable = platformCommand(command, commandArgs);
+    const executable = existsSync(command)
+      ? { command, args: commandArgs }
+      : platformCommand(command, commandArgs);
     const result = spawnSync(executable.command, executable.args, {
       cwd: projectDirectory,
       encoding: 'utf8',
@@ -103,6 +104,20 @@ function platformCommand(command, args) {
   return process.platform === 'win32'
     ? { command: 'cmd.exe', args: ['/d', '/s', '/c', command, ...args] }
     : { command, args };
+}
+
+function resolveChromeDriver() {
+  if (process.env.CHROMEDRIVER_BINARY) return process.env.CHROMEDRIVER_BINARY;
+  const executable = process.platform === 'win32' ? 'chromedriver.exe' : 'chromedriver';
+  const platform = process.platform === 'win32' ? 'win64' : 'linux64';
+  const installed = resolve(
+    repositoryRoot,
+    'build',
+    'chromedriver',
+    `chromedriver-${platform}`,
+    executable,
+  );
+  return existsSync(installed) ? installed : executable;
 }
 
 async function waitForDriver(port) {

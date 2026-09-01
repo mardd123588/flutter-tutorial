@@ -9,6 +9,7 @@ environment:
 resolution: workspace
 
 dependencies:
+  cupertino_icons: 1.0.9
   flutter:
     sdk: flutter
   go_router: 18.0.0

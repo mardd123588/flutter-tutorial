@@ -16,6 +16,19 @@ void main() {
     expect(semantics.label, contains('680 mm'));
   });
 
+  testWidgets('fits the pocket ticket in the desktop studio', (tester) async {
+    tester.view.physicalSize = const Size(1440, 900);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.reset);
+
+    await tester.pumpWidget(const TicketLayoutStudioApp());
+    await tester.pumpAndSettle();
+    await tester.tap(find.widgetWithText(OutlinedButton, '窄票'));
+    await tester.pumpAndSettle();
+
+    expect(tester.takeException(), isNull);
+  });
+
   // #region narrow-layout-test
   testWidgets('fits a 320 by 720 viewport at 200 percent text scale', (
     tester,

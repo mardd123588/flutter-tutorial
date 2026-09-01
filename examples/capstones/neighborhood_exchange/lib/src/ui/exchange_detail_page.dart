@@ -105,7 +105,6 @@ class _ListingDetail extends ConsumerWidget {
     final claimSucceeded = claimState.successListingId == listing.id;
     final canClaim = listing.canBeClaimedBy(localUserId);
     return ListView(
-      key: ValueKey('detail-${listing.id}'),
       padding: EdgeInsets.all(standalone ? 24 : 20),
       children: [
         Center(

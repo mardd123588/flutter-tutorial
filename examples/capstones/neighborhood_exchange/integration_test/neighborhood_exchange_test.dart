@@ -33,6 +33,7 @@ void main() {
     await tester.ensureVisible(find.byKey(const ValueKey('submit-listing')));
     await tester.tap(find.byKey(const ValueKey('submit-listing')));
     await tester.pumpAndSettle();
+    expect(tester.takeException(), isNull);
 
     final localPath = router.routeInformationProvider.value.uri.path;
     expect(localPath, startsWith('/listings/local-'));
@@ -47,6 +48,7 @@ void main() {
     database = ExchangeDatabase.defaults();
     router = createExchangeRouter(initialLocation: localPath);
     await _pumpApp(tester, database: database, router: router);
+    expect(tester.takeException(), isNull);
     expect(find.byKey(ValueKey('detail-$localListingId')), findsOneWidget);
 
     router.go('/listings/r-001');
@@ -54,6 +56,7 @@ void main() {
     await tester.ensureVisible(find.byKey(const ValueKey('claim-listing')));
     await tester.tap(find.byKey(const ValueKey('claim-listing')));
     await tester.pumpAndSettle();
+    expect(tester.takeException(), isNull);
     expect(find.byKey(const ValueKey('claim-success')), findsOneWidget);
 
     await tester.pumpWidget(const SizedBox.shrink());
@@ -64,6 +67,7 @@ void main() {
     database = ExchangeDatabase.defaults();
     router = createExchangeRouter(initialLocation: '/listings/r-001');
     await _pumpApp(tester, database: database, router: router);
+    expect(tester.takeException(), isNull);
     expect(find.text('我已认领'), findsWidgets);
 
     router.dispose();

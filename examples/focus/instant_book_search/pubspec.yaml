@@ -9,6 +9,7 @@ environment:
 resolution: workspace
 
 dependencies:
+  cupertino_icons: 1.0.9
   flutter:
     sdk: flutter
   http: 1.6.0

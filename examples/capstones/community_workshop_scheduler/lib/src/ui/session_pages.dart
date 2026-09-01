@@ -657,6 +657,7 @@ class _SessionDetail extends StatelessWidget {
     final venue = catalog.venue(entry.venueId)!;
     final instructor = catalog.instructor(entry.instructorId)!;
     return CustomScrollView(
+      key: ValueKey('session-detail-${entry.id}'),
       slivers: [
         SliverToBoxAdapter(
           child: Container(

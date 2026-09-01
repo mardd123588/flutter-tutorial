@@ -2,10 +2,10 @@ import { execFileSync } from 'node:child_process';
 import { appendFile, chmod, mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
+import { readChromeVersion } from './chrome_version.mjs';
 import { repositoryRoot } from './project_catalog.mjs';
 
-const chrome = process.env.CHROME_BINARY ?? 'google-chrome';
-const versionOutput = execFileSync(chrome, ['--version'], { encoding: 'utf8' });
+const versionOutput = readChromeVersion();
 const version = versionOutput.match(/\d+\.\d+\.\d+\.\d+/)?.[0];
 if (!version) throw new Error(`Cannot parse Chrome version from: ${versionOutput}`);
 const build = version.split('.').slice(0, 3).join('.');
@@ -25,7 +25,11 @@ await mkdir(outputDirectory, { recursive: true });
 const archiveResponse = await fetch(download.url);
 if (!archiveResponse.ok) throw new Error(`Cannot download ${download.url}.`);
 await writeFile(archive, Buffer.from(await archiveResponse.arrayBuffer()));
-execFileSync('unzip', ['-o', archive, '-d', outputDirectory], { stdio: 'inherit' });
+if (process.platform === 'win32') {
+  execFileSync('tar', ['-xf', archive, '-C', outputDirectory], { stdio: 'inherit' });
+} else {
+  execFileSync('unzip', ['-o', archive, '-d', outputDirectory], { stdio: 'inherit' });
+}
 const binaryDirectory = resolve(outputDirectory, `chromedriver-${platform}`);
 if (process.platform !== 'win32') {
   await chmod(resolve(binaryDirectory, 'chromedriver'), 0o755);

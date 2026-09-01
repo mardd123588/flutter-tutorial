@@ -10,6 +10,7 @@ resolution: workspace
 
 dependencies:
   characters: 1.4.1
+  cupertino_icons: 1.0.9
   drift: 2.34.3
   drift_flutter: 0.3.1
   flutter:
