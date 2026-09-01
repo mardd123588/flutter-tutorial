@@ -4,6 +4,8 @@
 > 仓库：`mardd123588/flutter-tutorial`
 > 本次只读取 GitHub API、GitHub CLI 与本地仓库，没有 push，也没有修改 GitHub 设置。
 
+后续已完成首次 production 发布，结果见[首次 production 发布验收](../verification/production-release-acceptance.md)。本文保留发布前状态和决策依据。
+
 ## 结论
 
 本地代码和 Pages artifact 已达到首次发布候选状态，远端尚未达到可部署状态。当前硬门槛有三项：远程仓库仍是 private、远端没有 `main` ref、GitHub Pages 尚未启用并选择 GitHub Actions 作为发布源。

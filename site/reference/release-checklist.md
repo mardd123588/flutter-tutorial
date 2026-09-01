@@ -48,4 +48,4 @@ description: 从可复现安装到 GitHub Pages 验收和回滚的发布检查�
 - [ ] 保存已发布 commit SHA、workflow run 和 artifact 标识。
 - [ ] 回滚使用已知通过的 commit 重新构建，不手工拼接旧产物。
 
-当前仓库已验证 Pages staging，但 production Pages 尚未完成首次验收，因此对应项目不能提前勾选。
+首次 production Pages 已于 2026-09-01 对提交 `6dd4fb2` 完成验收。以后每次发布仍要重新执行本清单；不能用首次发布结果替代新产物的检查。
