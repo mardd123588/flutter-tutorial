@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -126,7 +128,7 @@ void main() {
 
     await expectLater(
       find.byType(ScrollTimelineApp),
-      matchesGoldenFile('goldens/scroll_timeline_wide.png'),
+      matchesGoldenFile(_platformGolden('goldens/scroll_timeline_wide.png')),
     );
   });
 
@@ -147,10 +149,14 @@ void main() {
 
     await expectLater(
       find.byType(ScrollTimelineApp),
-      matchesGoldenFile('goldens/scroll_timeline_compact.png'),
+      matchesGoldenFile(_platformGolden('goldens/scroll_timeline_compact.png')),
     );
   });
   // #endregion timeline-golden-tests
+}
+
+String _platformGolden(String path) {
+  return Platform.isLinux ? path.replaceFirst('.png', '_linux.png') : path;
 }
 
 Future<void> _pumpTimeline(

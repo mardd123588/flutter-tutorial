@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ticket_layout_studio/src/ticket_layout_studio.dart';
@@ -59,8 +61,12 @@ void main() {
 
     await expectLater(
       find.byType(TicketLayoutStudioPage),
-      matchesGoldenFile('goldens/ticket-layout-studio.png'),
+      matchesGoldenFile(_platformGolden('goldens/ticket-layout-studio.png')),
     );
   });
   // #endregion golden-test
+}
+
+String _platformGolden(String path) {
+  return Platform.isLinux ? path.replaceFirst('.png', '_linux.png') : path;
 }

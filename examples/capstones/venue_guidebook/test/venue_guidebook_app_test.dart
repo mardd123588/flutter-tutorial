@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -235,7 +237,7 @@ void main() {
 
     await expectLater(
       find.byType(VenueGuidebookApp),
-      matchesGoldenFile('goldens/venue_guidebook_wide.png'),
+      matchesGoldenFile(_platformGolden('goldens/venue_guidebook_wide.png')),
     );
     harness.dispose();
   });
@@ -249,11 +251,15 @@ void main() {
 
     await expectLater(
       find.byType(VenueGuidebookApp),
-      matchesGoldenFile('goldens/venue_guidebook_compact.png'),
+      matchesGoldenFile(_platformGolden('goldens/venue_guidebook_compact.png')),
     );
     harness.dispose();
   });
   // #endregion venue-golden-tests
+}
+
+String _platformGolden(String path) {
+  return Platform.isLinux ? path.replaceFirst('.png', '_linux.png') : path;
 }
 
 Future<void> _setSurface(WidgetTester tester, Size size) async {
